@@ -28,6 +28,9 @@ or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+For uploading the project and using nodejs projects to eclips see bellow 
+https://github.com/Nodeclipse/nodeclipse-1/tree/master/org.nodeclipse.ui/templates#nodeclipse-cli--installer
+
 ## Documentation
 
 For more information about using Node.js on Heroku, see these Dev Center articles:
