@@ -1,0 +1,28 @@
+Team - 3
+Project - Shopping cart
+Title - Best practices to be followed
+
+Objective - This document intends to define best practices to be followed team wide before committing any code and document artifacts.
+ 
+Javascript practices to be followed:
+
+1. Provide error callback in all modules
+2. Always check for errors in callback
+3. Use try catch in sync code only
+4. Avoid using this and new
+5. Use === Instead of ==
+6. Don’t use Eval on any data provided by user
+7. Although javascript don’t require semicolons but ensure to end each statement with one. Makes reading and understanding code easy
+8. Use tabs (4 spaces width) instead of spaces to indent code. Configure your editor to do this.
+9. For long lines, always split into multiple lines
+10. Each function and variable (closure variables and main variables in module) must have comment in line before declaration, possibly use JSDoc
+11. All variables must be defined, thus avoiding undefiend errors
+12. Variables must be declared outside loops
+13. Wherever possible use native methods rather than library methods
+14. Use shorthand notation to declare objects and arrays by using { } and [ ] operators
+15. Constants and assumptions must be defined at a single place, so could be configured easily in case change is required
+16. Use For in to iterate over iterable objects, insted of while of for.
+17. Use pre-commit hooks in git for jshint (static code analysis), jscs (provides presets - easy to use). Refer to next section for details
+18. Validate that Callbacks are Callable. For eg:
+    callback = (typeof callback === 'function') ? callback : function() {};
+19. Use debug logging (Node-Loggly, Scribe.JS) for logging events and data access. This helps in debugging exceptions and errors
