@@ -20,11 +20,10 @@ Next step was to step up the features used by bootsrap and start a skeleton file
 advanced youtube tutorial called “ Code a Responsive Website with Bootstrap 3” where I used a responsive template that I’m 
 planning to use as a reference for the pet food store website.
 
-4- Application Artchitecutre and design  
-me and my partner in the front end team as well the team memebers in the back end met up and disccused the features we want 
-to have in our application, as well talked about the archictecture of the project, we decided we will have modules to talk 
-to the database (DAO's) we will have modules for the logic layer as well and implement rest apis to implement certain 
-neccesarries features in our application.
+4- Application Architecture and design  
+me and the team memebers in the back end met up and disccused the features we want to have in our application, as well 
+talked about the Architecture of the project, we decided we will have modules to talk to the database (DAO's) we will 
+have modules for the logic layer as well and implement rest apis to implement certain necessary features in our application.
 
 
 5- Front-End design documentation 
