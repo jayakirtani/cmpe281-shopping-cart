@@ -1,0 +1,51 @@
+Front End Phase one requirements 
+Sign up Page
+
+Welcome Page : 
+In the welcome Page we will ask the user to sign up for the system with providing the following fields :
+First Name
+Last Name
+Email address
+password 
+billing address
+
+After that the user will be directed to either home page or fail page.
+
+Sign in Page :
+
+The user will be promoted to enter username and password after that the user will be directed to home page or fail page.
+
+Home Page:
+
+In the home Page user will be able to
+visit product catalog page
+visit products items 
+visit item-details page 
+view items in chart
+view user profile information
+
+Product catalog Page :
+the page will display all the items fetched from the products database where they user can view then and order them from there. 
+
+1- view of products available 
+2- can navigate to item details page
+3- add item to chart
+4. checkout items
+5. directed to order confirmed page if success
+direct to fail page and explain of error
+
+
+Item details page :
+
+the user can view all the details associated with the item clicked 
+1- description 
+2- price 
+
+
+
+
+Phase-two notes 
+user profile Page
+order history  Page
+search functionality 
+
