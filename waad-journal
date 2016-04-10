@@ -1,11 +1,20 @@
 Week #1 :
 
+Task#1 Setup and learn heroku toolbelt
+
 1- Heroku and enviroment set-up :
 In the beginning it was essential to start setting up the environment, I created an account with heroku 
 and I have installed it in my mac as well I deployed the first nodejs sample application and save 
 it in my dash-board.
 next step was using heroku to deploy locally, therefore I downloaded nodejs and npm to install updates and 
 needed packages such as express. after that I was able to deploy locally.
+
+references :
+1- sample app nodejs deployment to heroku and heroku local 
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#declare-app-dependencies 
+https://www.youtube.com/watch?v=AZNFox2CvBk 
+
+Task #3 Bootstrap and welcome page 
 
 2- Bootstrap 
 next step was creating our own git-hub project and start coding in this nodejs project, we were all able to 
@@ -15,17 +24,27 @@ i followed an online tutorial “Bootstrap Tutorial for Beginners” with 6 less
 in waffel for everyone to access . then i was able to deploy it using heroku and kept as a reference since it contained 
 many features that i need. 
 
+References :
+1- download bootstrap 
+2-Bootstrap tutotial for begginers 
+ https://www.youtube.com/watch?v=qIULMnbH2-o
+ 3- Code a Responsive Website with Bootstrap 3 - [Lecture 7] Coding the Navigation Bar
+https://www.youtube.com/watch?v=MNp5I_vO8IU&index=7&list=PLUoqTnNH-2Xz_BUrjcahKWDhPcUj-FTOt&nohtml5=False
+
+
+
 3- Front-End welcome page initial github commit
 Next step was to step up the features used by bootsrap and start a skeleton files for the website this time i used a more 
 advanced youtube tutorial called “ Code a Responsive Website with Bootstrap 3” where I used a responsive template that I’m 
 planning to use as a reference for the pet food store website.
 
+Task #3 : Design and Architecture 
 4- Application Architecture and design  
 me and the team memebers in the back end met up and disccused the features we want to have in our application, as well 
 talked about the Architecture of the project, we decided we will have modules to talk to the database (DAO's) we will 
 have modules for the logic layer as well and implement rest apis to implement certain necessary features in our application.
 
-
+Task #4 : frontend intial Requirments 
 5- Front-End design documentation 
 after meeting up with the team , the front team that includes me and another team member, talked about the essential pages 
 and what fields do we need for each page and I documented all of this discussion in a file commited here to gitub 
