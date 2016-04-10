@@ -1,0 +1,10 @@
+RedisDB
+
+Applicability from Shopping Cart perspective
+
+1. Used for storing User server session information
+2. In case of multiple web servers, user session needs 
+	to be stored at a shared location which is accesible to all web servers.
+	With persistant storage of User sessions in Redis , user requests can be 
+	handled by any web server and can fetched from Redis.
+3. In case of single web server , sessions can be maintained at server itself. 

@@ -1,0 +1,9 @@
+Riak Database Buckets
+
+Cart
+	1) Key : User ID
+	2) Value : 
+			Items (Name , description , Qty , price)
+			
+
+(Note : Its a first draft and needs more clarity)
