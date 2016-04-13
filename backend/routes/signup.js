@@ -6,7 +6,7 @@ function createUser(req,res) {
 	{
 		
 		// check if email exists ? 
-		console.log(checkEmailQuery);
+		
 		mongodb.fetch(function(err, result) {
 			if(err) {
 				console.log('Fetchdata error in create user: ' + err);
