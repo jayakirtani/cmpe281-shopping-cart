@@ -1,0 +1,11 @@
+SCHEMA FOR PRODUCTS:
+
+Schema({
+    title: { type: String, required: true, trim: true },
+    price: { type: Number, required: true, min: 0 },
+    stock: { type: Number, default: 1 },
+    description: String,
+    imageBin: { data: Buffer, contentType: String },
+    imageUrl: String,
+    categories: [{ type: String }]
+})
