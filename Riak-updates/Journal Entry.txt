@@ -1,0 +1,55 @@
+Tasks Assigned (04/06/16):
+1) Learn about Heroku and try out a demo app
+2) Explore the options of Riak and Cassandra, list out the pros and cons. Summarize the best option
+
+Task 1 :
+a) Urls used for learning to deploy apps in Heroku :
+http://readwrite.com/2014/09/23/heroku-for-beginners-app-hosting-101/
+http://scripting.com/2014/02/06/herokuForPoetsBeta.html
+b) Deployed a sample nodejs app on Heroku:
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
+App url : https://rocky-lake-98421.herokuapp.com
+c) Installed Nodejs, npm and Heroku toolbelt with git on local machine
+
+Task 2 :
+Riak Pros :
+1) Two Modes (Eventual Consistency(All Nodes available during partition) or Strongly Consistent(some nodes might be unavailable for writes as it provides most uptodate data))
+2) Masterless
+3) It's best suited if we have distributed database architecture
+4) Available Data Types give us high availability advantage
+5) Uses Vector Clocks to resolve Version Conflicts
+6) Key/Value DB
+7) Accepts Read/Write requests while in partition., but returns the most updated data
+
+Riak Cons:
+1) Best if we use no fewer than 5 Database servers
+2) Query Efficiency drops if we dont use key/value lookup(If we do "Select * from Table")
+
+Cassandra Pros:
+1) Highly Scalable, High Availability with no single point of failure
+2) Masterless
+3) Columnar DB (key/key/value DB)
+4) Suitable for Distributed database architecture
+6) Uses wall clock timestamps to resolve version conflicts
+
+Cassandra Cons:
+1) Accepts Write requests during partition but user won't be able to view the data while in partition
+
+Summary:
+For a shopping cart system, the cart should be visible and it should contain updated info for the user to see. While Cassandra enables the consistency, it couldn't let reads during partition. Riak would be better choice as per this aspect
+
+References Used :
+1) http://docs.basho.com/riak/latest/theory/why-riak/#How-Does-a-Riak-Cluster-Work-
+2) http://www.tutorialspoint.com/cassandra/cassandra_architecture.htm
+3) http://www.planetcassandra.org/what-is-apache-cassandra/
+4) http://basho.com/posts/technical/riak-vs-cassandra/
+
+Tasks Assigned (04/09/2016):
+1) Learn Riak DB Cluster Architecture and Setup Riak DB on AWS
+2) Test Connection from Sample Application to Riak DB Server.
+
+Task 1 : 
+References Used :
+https://hostpresto.com/community/tutorials/how-to-install-riak-on-ubuntu-14.04/
+
+Completed Test Riak DB setup on AWS

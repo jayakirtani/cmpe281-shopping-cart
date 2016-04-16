@@ -1,0 +1,40 @@
+
+==============================
+Region Northern Virginia
+==============================
+
+PEM Key to access the Instances - team3.pem
+
+
+VPC Details
+==============
+
+172.29.0.0/16 (CIDR)
+Team #3-VPC (Name)
+
+
+Subnets
+==============
+(Currently One public subnet under above mentioned VPC )
+
+172.29.1.0/24 (AZ  us-east-1a)
+Team #3 -Subnet1 (Name)
+
+(Other Subnets can be created using below mentioned CIDR:
+172.29.2.0/24 (CIDR)
+172.29.3.0/24 (CIDR)
+)
+
+
+Security Group for our VPC
+==================
+Team #3 SSH-HTTP (22 and 80 Port Open)
+
+
+
+Backend Server
+================
+Team #3 - BackendServer1 (Name)
+52.5.167.238 (Elastic IP Address)
+
+

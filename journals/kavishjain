@@ -1,0 +1,48 @@
+April 12:
+1. Application logo, background image, name
+2. Git should be organized into sensible folders - frontend, backend, docs, ..
+3. Lucid charts changed free account services, using gliffy now to draw layouts
+4. Need to decide on UI layout, colors, fonts etc.
+
+April 9:
+1. Team meeting
+2. More concrete discussion on application architecture
+3. Created best practice guidelines for team
+4. Can try to use tools like lint, static code analyser, docs, unit test in project
+5. Created macro level application architecture diagram, confirms everybody is on same page
+6. Going for a MVP version first, if time permits team will implement more features. First version features are
+	a. Browse catalog
+	b. Add to cart
+	c. Checkout
+	d. User login and signup
+	e. NO guest checkout and browse catalog for now
+7. As per discussion with Waad regarding frontend and other team members about database schema, application can have following front end pages
+	a. Welcome cum login-signup page
+	b. User account page with order history and update profile
+	c. Catalog page - shows all products on one page
+	d. Checkout page
+8. Created wireframe diagram for welcome page
+9. Also created this journal, seems trivial but important :)
+
+April 8:
+1. Explore Angular
+	a. Create sample app with angular
+	b. Beginner tutorials and videos
+2. Formed more clear understanding of app architecture.
+3. Can have seperate frontend and backend. Like two different node apps
+
+
+April 6:
+1. Explore Heroku
+	a. Paas system
+	b. Heroku CLI toolbelt to manage and scale deployments
+	c. Create sample node js app on heroku and play with heroku cli
+2. Explore bootstrap
+	a. Create sample page and explore options to theme
+
+April 5: 
+1. Start up meeting
+2. Seperation of tasks on big level
+3. Working with frontend
+4. Decided to use MEAN stack
+5. Frontend with Angular and bootstrap on Heroku

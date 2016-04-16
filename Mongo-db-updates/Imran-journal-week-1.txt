@@ -1,0 +1,87 @@
+Week #1
+
+1.Created a branch from master named 'mongo-db-imran' for implementing the backend db. All the commits and changes by me will be in this branch.
+2.Created the heroku account and setup the heroku toolchain to deploy the nodejs application. 
+
+references:http://nieldlr.com/2012/03/the-really-absolute-beginners-guide-to-host-node-js-on-heroku/
+
+
+3.Setting Up the Single test instance EC2 server for installing mongo-db.
+reference:https://docs.mongodb.org/v3.0/tutorial/install-mongodb-on-amazon/
+
+a.Create a VPC in Amazon in US East (N. Virgina) and configure it.
+b.Attach Internet-gateway to it.
+c.Attach subnets, and routes and configure it.
+d.Launch an ec2 instance into the VPC and configure the ports, and open 27017(the default port for mongo-db)
+e.SSH into the instance.
+
+
+4.Installing Mongo-db:
+a.Make a pachage in : /etc/yum.repos.d/mongodb-org-3.0.repo
+b.Use the following repo file :
+			[mongodb-org-3.0]
+			name=MongoDB Repository
+			baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/
+			gpgcheck=0
+			enabled=1 
+
+c.Use this to install the latest version : sudo yum install -y mongodb-org
+d.In the /etc/yum.conf file add this: exclude=mongodb-org,mongodb-org-server,mongodb-org-shell,mongodb-org-mongos,mongodb-org-tools
+to exclude the auto update using yum.
+d.The MongoDB instance stores its data files in /var/lib/mongo and its log files in /var/log/mongodb by default, and runs using the mongod user account	
+e.To start the service use: sudo service mongod start
+
+
+5.Configuring Mongo-db configuration file for the remote connection:
+a.In the /etc/mongo.conf file comment out the line #bind 127.0.0.1 to take the connections from anywhere.
+b.Restart the service using : sudo service mongod restart.
+c.verify that mongo-db has started successfully by going to /var/log/mongodb/mongod.log and check for the line 
+waiting for connections on port 27017
+d.Use this command to start the service automatically when system reboots: sudo chkconfig mongod on
+
+
+6.Verifying the mongo-db remote connection.
+a.Make a test database in mongo db using : use test
+b.Add data to the collection: db.test.insert({"a":1})
+c.Add a user for this database using the following code:
+	use test
+	db.createUser(
+    	{
+      		user: "imran",
+     	 	pwd: "imran",
+      		roles: [
+         	{ role: "readWrite", db: "test" }
+     		 ]
+   	 }
+	)
+
+d.Now download the Node.js driver for mongo-db using :npm install mongodb
+e.Add the following code in the index.js to establish a mongo client variable
+		var MongoClient = require('mongodb').MongoClient;
+		var assert = require('assert');
+
+f.Next add the following code to establish a connection with the mongodb on aws, if the connection is established
+then the message "connected correctly to server" is printed in the console.
+
+		var url = 'mongodb://imran:imran@ec2-54-173-134-32.compute-1.amazonaws.com:27017/test';
+		MongoClient.connect(url, function(err, db) {
+  		assert.equal(null, err);
+  		console.log("Connected correctly to server.");
+  		db.close();
+		});
+
+
+
+
+7.Learnings this week:
+By using the current implementation I came to know how to install and configure mongo-db on AWS ec2, and make a
+connection string from the local application server to aws ec2 server running mongo-db.
+
+8.Readings and implementation for the upcoming week:
+
+Establish a mongo-db ecosystem with proper configuration.
+Link to follow: https://mongodb-documentation.readthedocs.org/en/latest/ecosystem/tutorial/install-mongodb-on-amazon-ec2.html
+https://docs.mongodb.org/ecosystem/platforms/amazon-ec2/
+
+Check feasibility and configurations for sharded cluster:http://alexanderwong.me/post/26960965342/settings-up-mongodb-on-ec2-w-replica-sets-in-a
+
