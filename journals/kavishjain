@@ -1,10 +1,17 @@
 April 16:
-1. Team meeting and final app architecture
-2. frontend app skeleton
-3. git branch frontend https://github.com/jayakirtani/cmpe281-shopping-cart.git
-4. added .gitignore file
-5. now creating node app, angular app on heroku frontend
-6. creating database and REST interface to databases on AWS
+1. Team meeting and final app architecture. As per Jaya and professors meeting heroku should have node app with angular code.
+	All Rest calls and database to be hosted on aws infra.
+2. Frontend app skeleton in node js using express created with sample files. Defines initial app structure
+3. Git branch 'frontend' https://github.com/jayakirtani/cmpe281-shopping-cart.git created. This branch is specifically 
+	for frontend heroku app and will be used by me and Waad.
+4. Added .gitignore file, this file mentions patterns of file/folder names to be ignored when pushing local artifacts to git
+	included node_modules, build files, test artifacts etc.
+5. Now creating node app, angular app on heroku frontend
+6. Creating database and REST interface to databases on AWS
+7. The node modules like express-session for session management and passport for authentication is to be used
+8. Application logo, background image and name decided in team meeting
+9. Color scheme to be used is grey and orange.
+10. Mongo to host product catalog, order history, user profiles and Riak to host cart.
 
 April 12:
 1. Application logo, background image, name
