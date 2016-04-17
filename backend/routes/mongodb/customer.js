@@ -1,8 +1,8 @@
-var mongoose    = require('mongoose');
+//var mongoose    = require('mongoose');
 var config      = require('../../config/mongoConnect'); // get db config file
 var customer    = require('../../mongo-models/customer-model');
 
-mongoose.connect(config.database);
+//mongoose.connect(config.database);
 
 var customerRouter = function(app) {
 
