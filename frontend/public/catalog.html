@@ -1,0 +1,15 @@
+﻿<div class="clearfix">
+  <form ng-Submit="search()" ng-show="authenticated">
+    <textarea required class="form-control" maxlength="200" rows="1" placeholder="Search" ng-model="search.text"></textarea>
+    <input class="btn submit-btn pull-right" type="submit" value="Search" />
+  </form>
+</div>
+<div id="catalog-stream">
+    <h4>{{catalog_tags}}</h4>
+        <div class="catalog" ng-repeat="item in search | orderBy:'price':true" ng-class-odd="'odd'" ng-class-even="'even'">
+            <<img src="" href="" alt="{{item.name}} Image"/>
+            <p>{{item.name}} </p>
+            <small>Price USD {{item.price}}</small>
+            <!-- <small class="pull-right">{{item.number}}</small> -->
+        </div>
+</div>

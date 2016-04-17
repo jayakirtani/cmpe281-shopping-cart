@@ -1,0 +1,37 @@
+{
+  "name": "petinc",
+  "version": "0.1.0",
+  "description": "Pet's Mall",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jayakirtani/cmpe281-shopping-cart/tree/frontend"
+  },
+  "keywords": [
+    "pet",
+    "food",
+    "clothes",
+    "health",
+    "dog",
+    "cat",
+    "fish"
+  ],
+  "author": "kavish jain",
+  "license": "AFL-3.0",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "debug": "^2.2.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mocha": "^2.4.5",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.3.0"
+  }
+}
