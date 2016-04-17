@@ -1,3 +1,5 @@
+//dummy starter code for nodejs code modularization
+
 var appRouter1 = function(app) {
 
  app.get("/riakdb", function(req, res) {

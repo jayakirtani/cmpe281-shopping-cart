@@ -43,13 +43,3 @@ References Used :
 2) http://www.tutorialspoint.com/cassandra/cassandra_architecture.htm
 3) http://www.planetcassandra.org/what-is-apache-cassandra/
 4) http://basho.com/posts/technical/riak-vs-cassandra/
-
-Tasks Assigned (04/09/2016):
-1) Learn Riak DB Cluster Architecture and Setup Riak DB on AWS
-2) Test Connection from Sample Application to Riak DB Server.
-
-Task 1 : 
-References Used :
-https://hostpresto.com/community/tutorials/how-to-install-riak-on-ubuntu-14.04/
-
-Completed Test Riak DB setup on AWS

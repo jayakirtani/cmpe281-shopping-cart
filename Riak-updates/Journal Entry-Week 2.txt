@@ -1,0 +1,17 @@
+Tasks Assigned (04/09/2016):
+1) Learn Riak DB Cluster Architecture and Setup Riak DB on AWS
+2) Test Connection from Sample Application to Riak DB Server.
+3) Create 3 Node Riak Cluster on Amazon AWS
+
+Task 1 : 
+References Used :
+http://docs.basho.com/riak/kv/2.1.4/using/
+
+Task 2 :
+References Used:
+http://docs.basho.com/riak/kv/2.1.4/setup/installing/rhel-centos/#installing-with-yum-and-packagecloud
+a) Created a single Node and changed the configurations to create a image file
+b) Checked whether the riak server is running., it is running on port 8098.
+
+Task 3 :
+References Used:
