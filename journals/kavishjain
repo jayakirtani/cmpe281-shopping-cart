@@ -1,3 +1,11 @@
+April 16:
+1. Team meeting and final app architecture
+2. frontend app skeleton
+3. git branch frontend https://github.com/jayakirtani/cmpe281-shopping-cart.git
+4. added .gitignore file
+5. now creating node app, angular app on heroku frontend
+6. creating database and REST interface to databases on AWS
+
 April 12:
 1. Application logo, background image, name
 2. Git should be organized into sensible folders - frontend, backend, docs, ..
