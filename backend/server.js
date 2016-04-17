@@ -1,14 +1,18 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var mongoose    = require('mongoose');
+var config      = require('./config/mongoConnect');
 var app = express();
-var seedDB = true; //for populating the database with data
+var seedDB = false; //for populating the database with data
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+mongoose.connect(config.database);
  
 var mongodb = require("./routes/mongodb.js")(app);
 var riakdb = require("./routes/riakdb.js")(app);
 var customer = require("./routes/mongodb/customer.js")(app);
+var product = require("./routes/mongodb/products.js")(app);
 
 if (seedDB) { require('./config/seed'); }
  
