@@ -12,3 +12,21 @@
 	g)This will become the primary node. To add the other two nodes as secondary use:
 		rs.add("<hostname><:port>")
 	h)We can check the status of the replica set by issuing the command: rs.status()
+
+
+2)Seeding the products database with the dummy data.
+
+	a)Added a seed which can be configured through the server file.
+	b)If the seed is true, then I have written the code to populate the mongodb with some dummy data.
+	c)Have to move this based on the environment setup which can behave differently for dev and prod env.
+
+3)Exposing the GET api for listing of all the products.
+	
+	a) Exposed an API on /products which will provide with the list of all the prodcuts.
+	b) Have to extend this for searching based on the catogeries and tags.
+	
+
+TODO for next week: 
+	a)Expose the API for the featured products.
+	b)Expose the API for searching based on tags.
+	c)Think of the usefull ways for incrementing and decrementing the stocks.
