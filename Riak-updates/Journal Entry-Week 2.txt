@@ -15,3 +15,6 @@ b) Checked whether the riak server is running., it is running on port 8098.
 
 Task 3 :
 References Used:
+http://docs.basho.com/riak/kv/2.1.4/using/running-a-cluster/
+
+Created the Cluster on the AWS Account
