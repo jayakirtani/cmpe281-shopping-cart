@@ -7,6 +7,7 @@ var seedDB = false; //for populating the database with data
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//Connect to Mongo Instance
 mongoose.connect(config.database);
  
 var mongodb = require("./routes/mongodb.js")(app);
