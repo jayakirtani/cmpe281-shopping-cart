@@ -7,6 +7,7 @@ var customerRouter = function(app) {
     res.send("Hello Customer");
   });
 
+  //API call for new Customer Signup
 	app.post('/signup', function(req, res) {
 		console.log('email : ' + req.body.email);
     if (!req.body.email || !req.body.password) {
@@ -14,8 +15,13 @@ var customerRouter = function(app) {
     } else {
       var newCustomer = new customer({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        firstname : req.body.firstname,
+        lastname : req.body.lastname,
+        address : req.body.address,
+        contactnumber : req.body.contactnumber         
       });
+
     // save the user
     newCustomer.save(function(err) {
       if (err) {
