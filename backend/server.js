@@ -14,6 +14,7 @@ var mongodb = require("./routes/mongodb.js")(app);
 var riakdb = require("./routes/riakdb.js")(app);
 var customer = require("./routes/mongodb/customer.js")(app);
 var product = require("./routes/mongodb/products.js")(app);
+var order = require("./routes/mongodb/order.js")(app);
 
 if (seedDB) { require('./config/seed'); }
  
