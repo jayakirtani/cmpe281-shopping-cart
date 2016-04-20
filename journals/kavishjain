@@ -1,3 +1,19 @@
+April 20:
+1. Added code for session and authentication
+2. Added code for cart, catalog, welcome page
+3. More need to be done in these files, see TODO tags
+4. authenticate.js and passport-init.js contains code for authentication
+5. Basic app structure is ready, need to add database rest calls to read and write data
+6. Learned usage of session, passport, mangoose, salt/hash.
+7. More need to be explored on express middleware, sequence of middleware calls matters too much.
+
+April 19:
+1. Added code for welcome page
+2. Explored usage of passport and express-session modules
+3. Authentication and session management to be done by express-session and passport
+4. Angular code will not be usefull as now we are using node app on frontend
+5. Frontend pages to be implemented in EJS
+
 April 16:
 1. Team meeting and final app architecture. As per Jaya and professors meeting heroku should have node app with angular code.
 	All Rest calls and database to be hosted on aws infra.
