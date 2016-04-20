@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var session = require('express-session');
+var fileStore = require('session-file-store')(session);
+var welcome = require('./routes/welcome');
+var catalog = require('./routes/catalog');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -20,10 +23,37 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  name: 'server-session-cookie-id',
+  secret: 'secrets of pets',
+  saveUninitialized: true,
+  resave: true,
+  store: new FileStore()
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Just to debug. can be removed later
+app.use(function printSession(req, res, next) {
+  console.log('req.session', req.session);
+  return next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', welcome);
+app.use('/catalog', catalog);
+
+// // passport config
+// var Account = require('./models/account');
+// passport.use(new LocalStrategy(Account.authenticate()));
+// passport.serializeUser(Account.serializeUser());
+// passport.deserializeUser(Account.deserializeUser());
+
+
+//// Initialize Passport
+var initPassport = require('./passport-init');
+initPassport(passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* Render Login page on welcome*/
-router.route('.')
+router.route('/')
 	.get(function(req, res, next) {
 		res.render('login');
 	})
@@ -24,4 +24,5 @@ router.route('.')
 			res.json({message:"Unregistered email id or wrong password"});
 		}
 	});
+
 module.exports = router;
