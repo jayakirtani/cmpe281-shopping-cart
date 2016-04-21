@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* Render Login page on welcome*/
-router.route('/')
+router.route('/login')
 	.get(function(req, res, next) {
 		res.render('login');
 	})
@@ -25,4 +25,19 @@ router.route('/')
 		}
 	});
 
+router.route('/').get(function(req, res, next) {
+	res.render('welcomePage');
+})
+
+
+
+router.route('/signup').post(function(req, res, next){
+	//read email and password from req object
+	var email = req.params.firstName1;
+	var password = req.params.password;
+	console.log("email :" +email);
+	console.log(req.params);
+})
+
 module.exports = router;
+
