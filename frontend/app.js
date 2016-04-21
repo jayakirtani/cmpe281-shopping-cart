@@ -5,11 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var fileStore = require('session-file-store')(session);
+var FileStore = require('session-file-store')(session);
 var welcome = require('./routes/welcome');
 var catalog = require('./routes/catalog');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 

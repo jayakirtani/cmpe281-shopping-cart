@@ -1,0 +1,56 @@
+week #2 Frontend Progress
+
+ 
+
+Task#1 implement sign up page and login page templates
+
+This week, i have created sign up and sing in pages with the required fields
+
+that we have agreed on among the team the fields were also implemented with
+
+validation properties to ensure correct inputs for email and names.
+
+ 
+
+Task#2 implement sign up and login angular-js code for http post to the backend
+
+I have created a homepage.js file that contains the code for the angualr js
+
+implementation of an app module and controller to post  request for signup
+
+and login functionalities.
+
+ 
+
+Task#3 Layout tasks :add logo , background pictures and About us sections
+
+I have added the logo and background pictures for the welcome page website
+
+and added about us section as well.
+
+ 
+
+Task#4 user athenticatoion frontend nodejs using crypto modules
+
+for security purposes we decided to hash the password for sign-up in the client side and encrypt
+
+it to pass the password to the backend encrypted,I want to enhance this by using user
+
+authentication services afford by angularjs as well
+
+ 
+
+Task#5 products cataloge page
+
+Currently Im working on in the building of products catalog page and add to cart angularjs implementation in the front-end implementation
+
+ 
+
+Task#6 Testing and integration
+
+testing for sign-up and integration fronend and frontend for sign up
+
+
+team github : https://github.com/jayakirtani/cmpe281-shopping-cart
+my personal github showing my full name in the profile  : https://github.com/Waad-DB 
+waffle.io link :   https://waffle.io/jayakirtani/cmpe281-shopping-cart

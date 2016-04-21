@@ -53,7 +53,7 @@ module.exports = function(passport){
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         //Todo save user data to database and return with done()
-        // function(req, username, password, done) {
+         function(req, username, password, done) {
 
         //     // find a user in mongo with provided username
         //     User.findOne({ 'username' :  username }, function(err, user) {
@@ -84,7 +84,7 @@ module.exports = function(passport){
         //                 return done(null, newUser);
         //             });
         //         }
-        //     });
+            }
         )
     );
     
