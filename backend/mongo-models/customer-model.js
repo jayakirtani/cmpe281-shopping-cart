@@ -22,5 +22,13 @@ var CustomerSchema = new Schema({
                 country : String },
     contactnumber : String
 });
+
+CustomerSchema.methods.comparePassword = function (passw, callback) {
+    if (passw === this.password){
+        callback(null, true);
+    } else {
+        callback(null, false);
+    } 
+};
  
 module.exports = mongoose.model('Customer', CustomerSchema);
