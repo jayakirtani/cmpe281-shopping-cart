@@ -32,6 +32,8 @@
 	</head>
 	
 	<body >
+
+	
 		<div class="container" id="main">
 		
 			<div class="navbar navbar-fixed-top">
@@ -160,20 +162,7 @@
 			
 			
 			<div class="row" id="bigCallout">
-				<div class="col-12">
-					
-					<div class="alert alert-success alert-block fade in" id="successAlert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						
-						<h4>Success!</h4>
-						<p>You just made this element display by using jQuery. Click the "x" in the top right corner to close this bad boy.</p>
-					</div><!-- end alert -->
-					
-					<!-- Visible only on small devices -->
-					<div class="well well-small visible-sm">
-						<a href="" class="btn btn-large btn-block btn-default"><span class="glyphicon glyphicon-phone"></span> Give us a call!</a>
-					</div><!-- end well-small -->
-					
+				
 					<div class="well">
 						<div class="page-header">
 							<h1>Our Compan's name <small>where happy families shop </small></h1>
@@ -182,9 +171,11 @@
 						
 						<p class="lead">Join us today and shop at our place for a happier pet :)</p>
 						    <div class="container">
-						   
-						
-
+						     <% signup %>
+						   <% if (signup == false){ %>
+						<div class="alert alert-danger">
+    <strong>Error!</strong> an Error Occured during your signup , please try again</div>   
+ <% }%>
     <form  method="post" action="/signup" validate>
     <table>
         <tr>

@@ -28,7 +28,7 @@ router.route('/login')
 	});
 
 router.route('/').get(function(req, res, next) {
-	res.render('welcomePage',{error:false});
+	res.render('welcomePage',{signup:true});
 })
 
 
@@ -61,7 +61,7 @@ router.route('/signup').post(function(req, res, next){
 	  var post_options = {
 	      host: 'host',
 	      port: '8080',
-	      path: '/',
+	      path: '/signup',
 	      method: 'POST',
 	      headers: {
 	          'Content-Type': 'application/x-www-form-urlencoded',
@@ -74,15 +74,18 @@ router.route('/signup').post(function(req, res, next){
 	      res.setEncoding('utf8');
 	      res.on('data', function (chunk) {
 	          console.log('Response: ' + chunk);
-	          res.render('welcomePage',{signup:true});
-	      
-	          // TODO: read response data :true or false and redirect accordingly 
+	         if( response.statusCode==400){
+	          res.render('welcomePage',{signup:false,emailexist:true});
+	      }else{
+	    	  res.render('login',{error:false});
+	      }
+	         
 	      });
 	      
 	  });
 	  post_req.on('error', function (err) {
 		  console.log("\n on error here \n");
-    	  res.render('welcomePage',{signup:true}); 
+    	  res.render('welcomePage',{signup:false,emailexist:false }); 
       });
 	  // post the data
 	  post_req.write(post_data);
