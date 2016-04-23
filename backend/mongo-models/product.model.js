@@ -8,10 +8,9 @@ var ProductSchema = new Schema({
     description: String,
     imageBin: { data: Buffer, contentType: String },
     imageUrl: String,
-    categories: [{ type: String }]
+    categories: [{ type: String,index:true }]
 }).index({
-    'title': 'text',
-    'description': 'text'
+ "$**": "text"
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

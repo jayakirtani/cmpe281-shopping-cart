@@ -20,6 +20,18 @@ var productRouter = function(app) {
         });
 
     });
+    app.get("/:term/search", function (req,res) {
+        products.find({ $text: { $search: req.params.term }})
+            .exec(function(err, results){
+                if(err)
+                {
+                    return res.status(400).json({success: false, msg: 'search query failed'});
+                }
+                console.log(results);
+                res.send(JSON.parse(JSON.stringify(results)));
+            });
+
+    });
 };
 
 module.exports = productRouter;
