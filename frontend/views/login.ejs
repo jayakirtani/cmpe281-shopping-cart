@@ -126,14 +126,14 @@
 		
 		<div class="row" id="bigCallout">
 			<div class="col-12">
-				
+				 <% if (signup == true ){ %>
 				<div class="alert alert-success alert-block fade in" id="successAlert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					
 					<h4>Success!</h4>
-					<p>You just made this element display by using jQuery. Click the "x" in the top right corner to close this bad boy.</p>
+					<p>you have successfuly signed up ! please login </p>
 				</div><!-- end alert -->
-				
+				 <% } %>
 				<!-- Visible only on small devices -->
 				<div class="well well-small visible-sm">
 					<a href="" class="btn btn-large btn-block btn-default"><span class="glyphicon glyphicon-phone"></span> Give us a call!</a>

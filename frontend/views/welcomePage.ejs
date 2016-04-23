@@ -172,7 +172,7 @@
 						<p class="lead">Join us today and shop at our place for a happier pet :)</p>
 						    <div class="container">
 						     <% signup %>
-						   <% if (signup == false){ %>
+						   <% if (signup == false && emailexist ==false ){ %>
 						<div class="alert alert-danger">
     <strong>Error!</strong> an Error Occured during your signup , please try again</div>   
  <% }%>
@@ -196,7 +196,13 @@
         <tr>
         
                 <td>  <label class="control-label"> Email Id</label> </td>  
-            <td><input type="email" name="email"  required style="margin-bottom:10px"/> </td>
+            <td><input type="email" name="email"  required style="margin-bottom:10px"/> 
+              
+						   <% if (signup == false && emailexist ==true ){ %>
+						<div class="alert alert-danger">
+    <strong>Error!</strong> This email is already used, please try again</div>   
+ <% }%>
+ </td>
         </tr>
         <tr>
          <td>  

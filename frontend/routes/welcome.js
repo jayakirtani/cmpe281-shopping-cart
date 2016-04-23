@@ -1,12 +1,13 @@
 var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
+var crypto = require('crypto');
 var router = express.Router();
 
 /* Render Login page on welcome*/
 router.route('/login')
 	.get(function(req, res, next) {
-		res.render('login');
+		res.render('login',{signup:false});
 	})
 
 	.post(function(req, res, next){
@@ -28,20 +29,23 @@ router.route('/login')
 	});
 
 router.route('/').get(function(req, res, next) {
-	res.render('welcomePage',{signup:true});
+	res.render('welcomePage',{signup:true, emailexist:false});
 })
 
 
 
-router.route('/signup').post(function(req, res, next){
-	//read email and password from req object
-	
-	// make a restcall 
+router.route('/signup').post(function(req, response, next){
 
+// hash password 
+	var hashPassword = crypto
+    .createHash("md5")
+    .update(req.body.password)
+    .digest('hex');
 	
+// prepare parameters to send 	
 	 var post_data = JSON.stringify({
 	      'email' : req.body.email,
-	      'password': req.body.password,
+	      'password': hashPassword,
 	      'firstname': req.body.firstname,
 	      'lastname': req.body.lastname,
 	       'address' :{
@@ -55,29 +59,40 @@ router.route('/signup').post(function(req, res, next){
 	    	 
 	    	  'contactnumber': req.body.contactnumber
 	  });
-	 console.log('here they are ', post_data);
+	 
+	 console.log('JSON request body ', post_data);
 
 	  // add url and host information
 	  var post_options = {
-	      host: 'host',
+	      host: '52.5.167.238',
 	      port: '8080',
 	      path: '/signup',
 	      method: 'POST',
 	      headers: {
-	          'Content-Type': 'application/x-www-form-urlencoded',
+	          'Content-Type': 'application/json',
 	          'Content-Length': Buffer.byteLength(post_data)
 	      }
 	  };
-
+	  
+	  
 	  // Set up the request
 	  var post_req = http.request(post_options, function(res) {
 	      res.setEncoding('utf8');
 	      res.on('data', function (chunk) {
+	    	  var body = JSON.parse(chunk);
 	          console.log('Response: ' + chunk);
-	         if( response.statusCode==400){
-	          res.render('welcomePage',{signup:false,emailexist:true});
-	      }else{
-	    	  res.render('login',{error:false});
+	         if(res.statusCode==400){
+	        	 console.log("\n email already used \n");
+	        	 response.render('welcomePage',{signup:false,emailexist:true,message:chunk.msg});
+	          
+	      }else if( body.success==false){
+	    	  console.log( body.success,"\false sign up \n");
+	    	  console.log("\false sign up \n",body.success );
+	    	  response.render('welcomePage',{signup:false,emailexist:false,message:chunk.msg});
+	      }
+	         else if (res.statusCode==200 && body.success ==true){
+	        	 console.log( "successful signup ", body.success);
+	        	 response.render('login',{signup:true});
 	      }
 	         
 	      });
@@ -85,14 +100,12 @@ router.route('/signup').post(function(req, res, next){
 	  });
 	  post_req.on('error', function (err) {
 		  console.log("\n on error here \n");
-    	  res.render('welcomePage',{signup:false,emailexist:false }); 
+		  response.render('welcomePage',{signup:false,emailexist:false, message:null}); 
       });
 	  // post the data
 	  post_req.write(post_data);
 	  post_req.end();
 	  
-	  
-			
 			
 })
 
