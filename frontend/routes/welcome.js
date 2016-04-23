@@ -29,7 +29,7 @@ router.route('/login')
 	});
 
 router.route('/').get(function(req, res, next) {
-	res.render('welcomePage',{signup:true, emailexist:false});
+	res.render('welcomePage',{signup:true, emailexist:false,data:null});
 })
 
 
@@ -43,22 +43,23 @@ router.route('/signup').post(function(req, response, next){
     .digest('hex');
 	
 // prepare parameters to send 	
-	 var post_data = JSON.stringify({
+	 var data = {
 	      'email' : req.body.email,
 	      'password': hashPassword,
 	      'firstname': req.body.firstname,
 	      'lastname': req.body.lastname,
 	       'address' :{
-	    	 'addrline1':req.body.addressLine1, 
-	    	 'addrline2': req.body.addressLine2,
+	    	 'addrline1':req.body.addrline1, 
+	    	 'addrline2': req.body.addrline2,
 	    	  'city' :req.body.city, 
-	    	  'state': req.body.region,
-	    	  'zip': req.body.postalCode,
+	    	  'state': req.body.state,
+	    	  'zip': req.body.zip,
 	    	  'country': req.body.country,
 	   },
 	    	 
 	    	  'contactnumber': req.body.contactnumber
-	  });
+	  };
+	var post_data = JSON.stringify(data);
 	 
 	 console.log('JSON request body ', post_data);
 
@@ -83,12 +84,12 @@ router.route('/signup').post(function(req, response, next){
 	          console.log('Response: ' + chunk);
 	         if(res.statusCode==400){
 	        	 console.log("\n email already used \n");
-	        	 response.render('welcomePage',{signup:false,emailexist:true,message:chunk.msg});
+	        	 response.render('welcomePage',{signup:false,emailexist:true,message:chunk.msg,data:data});
 	          
 	      }else if( body.success==false){
 	    	  console.log( body.success,"\false sign up \n");
 	    	  console.log("\false sign up \n",body.success );
-	    	  response.render('welcomePage',{signup:false,emailexist:false,message:chunk.msg});
+	    	  response.render('welcomePage',{signup:false,emailexist:false,message:chunk.msg,data:data});
 	      }
 	         else if (res.statusCode==200 && body.success ==true){
 	        	 console.log( "successful signup ", body.success);
@@ -100,7 +101,7 @@ router.route('/signup').post(function(req, response, next){
 	  });
 	  post_req.on('error', function (err) {
 		  console.log("\n on error here \n");
-		  response.render('welcomePage',{signup:false,emailexist:false, message:null}); 
+		  response.render('welcomePage',{signup:false,emailexist:false, message:null,data:data}); 
       });
 	  // post the data
 	  post_req.write(post_data);
