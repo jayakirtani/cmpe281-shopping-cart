@@ -1,0 +1,64 @@
+Week #3 :
+
+Task#1 : change frontend from using angualrjs to nodejs 
+In the first week we have implemented most of our frontend work using angularjs 
+for rest api's implementations and rendering pages.
+
+but after checking with professor Paul and discussion among the forntend team we have decided 
+to re-implement our frontend and instead use nodejs for frontned implementations , restapis and rendering 
+
+Task#2 Test ALl sing-up Scenarios and integrate it with backend
+
+1- successful signup integration
+I was able to complete flow frontend-backend of signup for our system with successful results as well as 
+displaying a confirmation letter and redirecting to login page.
+
+2- Signup Error messages display and keep entered data before 
+In a false signup flow i was able to display warning messages that indicates the error as well keep the data
+entered by the user before and display them again after a false signup attempt.
+the data fields have been validated as well by patterns and required attributes.
+
+3- test keep the data for the user after false signup attempt.
+
+These test results are saved an a pdf document in front-end documents 
+
+Task #3 product catalog implementation 
+
+1- product catalog template
+i prepared a product catalog template that will display each product with the attributes in our system that includes
+img, name, discriptions and rating for this product as well the opportunity to add this product to cart.
+
+2- rest api call to get products in a list of json object.
+I created a fronend get restapi to fetch the products that need to be displayed in the product catalog 
+with the appropriate data required 
+ 
+Task #4 :display reviews and allow rating for products
+after discussion with the team we decided to display reviews and rating as well as allow the user to 
+review and rate a product after order. for now i have implemented displaying a reviews on a star form 
+for each product
+
+Task #5 :add to cart implementation 
+1-I have implemented a post add to cart res api with the backend of a product with name,sku,qty details 
+to be added in the user shopping cart.
+
+Task #6 :testing plans for this week 
+ testing product catalog and add to cart frontend-backend implementation 
+ 
+Task#5: tasks to be completed this week
+1- implement search tags res api for products catalog 
+2- implement a product details page
+
+difficulties : 
+because we had to rebuild some of the things in our frontend we lost a bit of time but we managed to stay on track 
+and this week to start with products catalog page at this point im working on improving the layout I'm trying 
+to search how to display a quantity button that allows user to increment and decrement easily with a fancy UI 
+I have not found a good resource therefore i will continue on that and once the backend 
+are ready to integrate and test some of the desired flows for products catalog and add to cart
+
+
+
+
+ 
+ 
+
+
