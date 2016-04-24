@@ -1,3 +1,9 @@
+April 23:
+1. Login request to mongo server
+2. Using 'request' module to do post request
+3. Some changes to UI required for post request
+4. Integrated changes made by waad
+
 April 20:
 1. Added code for session and authentication
 2. Added code for cart, catalog, welcome page
