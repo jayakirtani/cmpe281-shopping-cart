@@ -1,11 +1,14 @@
-Tasks Assigned (04/09/2016):
+Tasks Assigned (04/20/2016):
 1) Tryout the CRUD operations on sample Riak cluster.
 2) Create 3 Node Riak Cluster on Amazon AWS for Team Project
 3) Start writing the API Calls for Riak DB
 
 Task 1 : 
 References Used :
-http://docs.basho.com/riak/kv/2.1.4/using/
+http://docs.basho.com/riak/1.3.0/tutorials/fast-track/Basic-Riak-API-Operations/
+As the Riak will running on the private IP of each node, we have to expose API calls separately through other server for the frontend.
+Internally, the rest api calls provided by Riak would look like:
+http://127.0.0.1:8091/riak/test/doc2 - This will return doc2 from the server.
 
 Task 2 :
 References Used:

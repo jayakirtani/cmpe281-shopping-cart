@@ -1,4 +1,4 @@
-Tasks Assigned (04/09/2016):
+Tasks Assigned (04/10/2016):
 1) Learn Riak DB Cluster Architecture and Setup Riak DB on AWS
 2) Test Connection from Sample Application to Riak DB Server.
 3) Create 3 Node Riak Cluster on Amazon AWS
