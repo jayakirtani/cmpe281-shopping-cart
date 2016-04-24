@@ -69,10 +69,10 @@ router.route('/catalog').get(function(req, res, next) {
 router.route('/addToCart').post(function(req, res, next) {
 	var data = {
 			
-			name :req.body.name",
+			name :req.body.name,
 			qty:req.body.qty,
 			price:req.body.price,
-			sku:req.body.sku",
+			sku:req.body.sku,
 			description:req.body.description
 			
 
