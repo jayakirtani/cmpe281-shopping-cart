@@ -9,7 +9,6 @@ var FileStore = require('session-file-store')(session);
 var welcome = require('./routes/welcome');
 var catalog = require('./routes/catalog');
 var passport = require('passport');
-//var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -44,13 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', welcome);
 app.use('/catalog', catalog);
 
-// // passport config
-// var Account = require('./models/account');
-// passport.use(new LocalStrategy(Account.authenticate()));
-// passport.serializeUser(Account.serializeUser());
-// passport.deserializeUser(Account.deserializeUser());
-
-
 //// Initialize Passport
 var initPassport = require('./passport-init');
 initPassport(passport);
@@ -64,7 +56,6 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
