@@ -12,30 +12,30 @@ mongoose.connection.on('error', function(err) {
     process.exit(-1);
 });
 
-
-
-
 var newProducts = [{
     title: 'cat food',
     imageUrl: '/assets/uploads/meanbook.jpg',
-    price: 25,
-    stock: 250,
-    categories: ['pet food', 'cat food'],
+    price: 6,
+    stock: 14,
+    rating: 3,
+    categories: ['pet', 'food','cat','eatables'],
     description: 'Food for cats'
 }, {
     title: 'dog clothes',
     imageUrl: '/assets/uploads/meantshirt.jpg',
-    price: 15,
-    stock: 100,
-    categories: ['clothing'],
-    description: 'dog clothes'
+    price: 14,
+    stock: 4,
+    rating: 5,
+    categories: ['clothing','wearables','dog','featured','clothes'],
+    description: 'Dog clothes'
 }, {
     title: 'dog chain',
     imageUrl: '/assets/uploads/meanmug.jpg',
-    price: 8,
-    stock: 50,
-    categories: ['accessories'],
-    description: 'accessories for the animals'
+    price: 3,
+    stock: 9,
+    rating: 2,
+    categories: ['accessories','dog','chain'],
+    description: 'Accessories for the animals'
 }];
 
 product.collection.insert(newProducts,onInsert);
