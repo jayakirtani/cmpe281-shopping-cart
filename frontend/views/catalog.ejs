@@ -130,7 +130,8 @@
 				</div><!-- end container -->
 			</div><!-- end navbar -->
 			
-				
+
+	 <form  method="post" action="/addToCart" validate>		
 	<div class="container">		
 
 <% for (var i = 0; i < products.length; i++) { %>
@@ -146,16 +147,22 @@
                                 <p><%=products[i].description%></p>
                         
                                 <p > reviews</p>
+                                
+                       
                     
 <input type="number" class="rating" id="test" name="test" data-min="1" data-max="5" value="3">
 
- <a href="#">
+
+
+ <a href="#" onclick="$(this).closest('form').submit()">
           <span class="glyphicon glyphicon-shopping-cart">add to Cart</span>
         </a>
-				
-				
-				
-				</button>
+				<input id="demo3_21" type="text" value="" name="demo3_21">
+        <script>
+            $("input[name='demo3_21']").TouchSpin({
+                initval: 40
+            });
+        </script>
                         </div>
                           </div>
                           
@@ -164,16 +171,13 @@
 
   <%  } %>
   
+   <form>  
+  
  </div>
  
-
-		
-  
-  
-  
-   <td valign="top" class="textContent alignRight priceWidth">
-            ${{ordPrice}}
-        </td>
+ <div class="row">
+	<div class="col-sm-2">
+    </div>
     </div>
     		
 		<footer>

@@ -81,6 +81,11 @@
       $('input.rating[type=number]').rating();
     }
   });
+  
 
-}(jQuery));
+
+}
+	
+	(jQuery));
+	
 	

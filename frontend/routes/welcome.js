@@ -34,10 +34,27 @@ router.route('/').get(function(req, res, next) {
 
 router.route('/catalog').get(function(req, res, next) {
 //TODO: rest get call for products array 
+	var url = '/products';
+
+	http.get(url, function(res){
+	    var body = '';
+
+	    res.on('data', function(chunk){
+	        body += chunk;
+	    });
+
+	    res.on('end', function(){
+	        var fbResponse = JSON.parse(body);
+	        console.log("Got a response: ", fbResponse.picture);
+	    });
+	}).on('error', function(e){
+	      console.log("Got an error: ", e);
+	});
+	// var products = fbResponse;
 	var products =[{
 			img :"images/item_psd2html5.jpg",
 			name :"name1",
-			qty:"qty1",
+			qty:1,
 			price:"price1",
 			sku:"sku1",
 			description:"description1"
@@ -47,6 +64,67 @@ router.route('/catalog').get(function(req, res, next) {
 	console.log("\n in catalog \n");
 	res.render('catalog',{products:products});
 })
+
+
+router.route('/addToCart').post(function(req, res, next) {
+	var data = {
+			
+			name :req.body.name",
+			qty:req.body.qty,
+			price:req.body.price,
+			sku:req.body.sku",
+			description:req.body.description
+			
+
+		  };
+		var post_data = JSON.stringify(data);
+		 
+		 console.log('JSON request body ', post_data);
+
+		  // add url and host information
+		  var post_options = {
+		      host: '8',
+		      port: '8080',
+		      path: '/addToCart',
+		      method: 'POST',
+		      headers: {
+		          'Content-Type': 'application/json',
+		          'Content-Length': Buffer.byteLength(post_data)
+		      }
+		  };
+		  
+		  
+		  // Set up the request
+		  var post_req = http.request(post_options, function(res) {
+		      res.setEncoding('utf8');
+		      res.on('data', function (chunk) {
+		    	  var body = JSON.parse(chunk);
+		          console.log('Response: ' + chunk);
+		        if( body.success==false){
+		    	  console.log( body.success,"\false add to cart  \n");
+		    	  console.log("\false add to cart  \n",body.success );
+		    	  response.render('catalog',{products:products, msg:body.msg});
+		      }
+		         else if (res.statusCode==200 && body.success ==true){
+		        	 console.log( "successful add to cart ", body.success);
+		        	 response.render('catalog',{products:products, msg:body.msg});
+		      }
+		         
+		      });
+		      
+		  });
+		  post_req.on('error', function (err) {
+			  console.log("\n on error on add to cart \n");
+			  response.render('catalog',{products:products, msg:body.msg}); 
+	      });
+		  // post the data
+		  post_req.write(post_data);
+		  post_req.end();
+		  
+				
+	})
+	
+	
 
 
 
