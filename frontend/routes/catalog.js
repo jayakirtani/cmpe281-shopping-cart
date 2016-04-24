@@ -22,7 +22,8 @@ function isAuthenticated (req, res, next) {
 };
 
 //Register the authentication middleware
-router.use('/catalog', isAuthenticated);
+//router.use('/catalog', isAuthenticated);
+
 
 router.route('/catalog')
     // Not useful now. Can be later if catalog adding added for admin console
@@ -42,7 +43,10 @@ router.route('/catalog')
     // })
 
     //gets all posts
+
     .get(function(req, res){
+    	
+    	
         // Todo fetch catalog from databse
         // console.log('debug1');
         // Post.find(function(err, posts){
@@ -52,6 +56,8 @@ router.route('/catalog')
         //     }
         //     return res.send(200,posts);
         // });
+    	
+    	res.render('catalog');
     });
 
 //post-specific commands. likely won't be used

@@ -134,22 +134,16 @@
 				<div class="carousel-inner">
 					<div class="item active" id="slide1">
 						<div class="carousel-caption">
-							<h4>Bootstrap 3</h4>
-							<p>Learn how to build your first responsive website with the brand new Twitter Bootstrap 3!</p>
 						</div><!-- end carousel-caption-->
 					</div><!-- end item -->
 					
 					<div class="item" id="slide2">
 						<div class="carousel-caption">
-							<h4>Learn to code a website in 4-hours!</h4>
-							<p>PSD to HTML5 &amp; CSS3 is a popular Udemy course that has helped thousands of aspiring web designers launch their web design career.</p>
 						</div><!-- end carousel-caption-->
 					</div><!-- end item -->
 					
 					<div class="item" id="slide3">
 						<div class="carousel-caption">
-							<h4>Web Hosting 101</h4>
-							<p>Learn how to buy a perfect domain name and hosting package, and get your website live on the web with ease.</p>
 						</div><!-- end carousel-caption-->
 					</div><!-- end item -->
 				</div><!-- carousel-inner -->
@@ -213,6 +207,19 @@
           
             <td> <input type="password"  name="password" required style="margin-bottom:10px"/> </td> 
         </tr>
+        
+         <tr>
+          <td>
+         <div>
+          <label class="control-label"> Contact Number</label>
+    
+ <td> <input type="text" id="contactnumber" name="contactnumber" placeholder="555-555-5555" pattern="\d{3}-?\d{3}-?\d{4}"
+   value="<% if (data){ %> <%-data.contactnumber %> <%  }%>"/></td>
+</div>
+ </td>
+    </tr> 
+    
+    
         <tr>
         <td>    <!-- address-line1 input-->
         <div class="control-group">
@@ -274,48 +281,29 @@
         </td>
         </tr> 
           <tr>
-        <td>
-          
+        <td> 
          <div class="control-group">
            <label class="control-label"> Country</label>
-            <div class="controls">
-                <select id="country" name="country" class="input-xlarge">
+            
+          <td>      <select id="country" name="country" class="input-xlarge">
                     <option value="" selected="selected">(please select a country)</option>
                     <option value="US" selected >United States</option>
                     <option value="CA">Canada</option>
                     <option value="ME">Mexico</option>
                      </select>
-            </div>
+           </td>
         </div>
         </td>
          </tr>
-          <td>
-       
-         <div>
-          <label class="control-label"> Contact Number</label>
-    
-  <input type="text" id="contactnumber" name="contactnumber" placeholder="555-555-5555" pattern="\d{3}-?\d{3}-?\d{4}"
-   value="<% if (data){ %> <%-data.contactnumber %> <%  }%>"/>
-</div>
- </td>
-    
-             
-        <td>           
-        <tr>
-            <td><input  class="btn btn-default btn-xs" value="Signup" type="submit"/> </td>
+       <div class="control-group">
+           <td><input  class="btn btn-default btn-xs" value="Signup" type="submit"/> </td>
            <td> <input class="btn btn-default btn-xs" type="reset" value="Clear" /> </td>
-        </tr>
-        <tr>
-            <td colspan="2" ng-show="message">
-               
-            </td>
-        </tr>
+</div>
     </table>
     </form>
     </div>
 						
-						
-						<a href="" class="btn btn-large btn-link">more info</a>
+<a href="" class="btn btn-large btn-link">more info</a>
 					</div><!-- end well -->
 					
 				</div><!-- end col-12 -->
@@ -328,7 +316,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
-					<h6>Copyright &copy; 2013 {name}</h6>
+					
 					</div><!-- end col-sm-2 -->
 					
 					<div class="col-sm-4">

@@ -7,4 +7,6 @@ router.get('/', function(req, res, next) {
   res.redirect('/welcome');
 });
 
+
+
 module.exports = router;

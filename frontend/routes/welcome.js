@@ -32,6 +32,22 @@ router.route('/').get(function(req, res, next) {
 	res.render('welcomePage',{signup:true, emailexist:false,data:null});
 })
 
+router.route('/catalog').get(function(req, res, next) {
+//TODO: rest get call for products array 
+	var products =[{
+			img :"images/item_psd2html5.jpg",
+			name :"name1",
+			qty:"qty1",
+			price:"price1",
+			sku:"sku1",
+			description:"description1"
+	           
+	        
+	}]
+	console.log("\n in catalog \n");
+	res.render('catalog',{products:products});
+})
+
 
 
 router.route('/signup').post(function(req, response, next){
