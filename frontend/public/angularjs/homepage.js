@@ -4,7 +4,6 @@ var app = angular.module("homePage",[]);
 app.controller('homePagectr',function($scope, $http,$window){
 	$scope.login = function() {
 		console.log($scope.firstName);
-		
 		var hashpassword = md5.createHash($scope.password || '');
 			$http({
 				url:'/login',
