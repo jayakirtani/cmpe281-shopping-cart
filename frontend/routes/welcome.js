@@ -33,13 +33,10 @@ router.route('/login').get(function(req, res, next) {
     });
     /* handle post request - user authentication */
 }).post(function(req, res, next) {
-    console.log("Post /login");
-    console.log(req.params.email);
-    console.log(req.params.password);
     //read email and password from req object
     var hash = crypto.createHash("md5"); //use digest('hex')
-    var email = req.params.email;
-    var password = hash.update(req.params.password).digest('hex');
+    var email = req.body.email;
+    var password = hash.update(req.body.password).digest('hex');
     var URL = "http://ec2-52-5-167-238.compute-1.amazonaws.com:8080";
     request.post(URL + "/login", {
         email: email,
@@ -49,29 +46,32 @@ router.route('/login').get(function(req, res, next) {
             console.log(body);
             var parse = JSON.parse(body);
         } catch (e) {
+            console.log("error in parsing json");
             //error in parsing json
             console.log(e);
             res.render('login', {
                 signup: false,
                 error: true,
-                msg: e.message
+                msg: e.message,
             });
         }
-        if (error) {
-            //error in processing request
-            res.render('login', {
-                signup: false,
-                error: true,
-                msg: error.message
-            });
-        } else if (response.statusCode == 200) {
+        console.log(parse);
+        console.log(email);
+        console.log(password);
+
+		if (response.statusCode == 200 || response.statusCode == 400) {
             //error in authentication
-            if (parse.success === false) res.render('login', {
-                signup: false,
-                error: true,
-                msg: parse.msg
-            });
+            if (parse.success === false){
+            	console.log("error in authentication. " + parse.msg);
+            	var errormessage = parse.msg;
+            	res.render('login', {
+	                signup: false,
+	                error: true,
+	                msg: errormessage,
+            	});
+            }
             else {
+            	console.log("Authentication successcessfull");
                 //authentication successfull
                 //save data in cookie
                 var sess = req.session;
@@ -79,6 +79,14 @@ router.route('/login').get(function(req, res, next) {
                 sess.email = email;
                 res.redirect('/catalog');
             }
+        }
+        else
+        {
+        	res.render('login', {
+	                signup: false,
+	                error: true,
+	                msg: error.message + ", Unexpected error please try again."
+            	});
         }
     });
 });

@@ -6,10 +6,11 @@
 	<meta name="description" content="Learn how to code your first responsive website with the new Twitter Bootstrap 3.">
 	<!-- Mobile viewport optimized -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<!-- Bootstrap CSS -->
+
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<!-- <link rel="stylesheet2" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="includes/css/styles.css">
 </head>
@@ -103,32 +104,27 @@
 						</div><!-- end page-header -->
 						<p class="lead">Join us today and shop at our place for a happier pet :)</p>
 						<div class="container">
-						<% if (error == true){ %>
-	                    	<div class="alert alert-danger">
-	                        <strong>Error!</strong><% msg %></div>
-	                    <% }%>                    
-							<table>
-								<thead>
-									<th>
-									</th>
-								</thead>
-								<tbody>
-									<form method="post" action="/login" validate>
-										<tr>
-											<td class="col-md-3 control-label">Email Id</td>
-											<td><input type="email" name="email" style="margin-bottom:10px" required/></td>
-										</tr>
-										<tr>
-											<td class="col-md-3 control-label">Password</td>
-											<td><input type="password" name="password" style="margin-bottom:10px" required/></td>
-										</tr>
-										<tr>
-											<td><input class="btn btn-default btn-xs pull-right" type="submit" value="Login" style="margin-right:10px"></td>
-											<!-- <td><form> <input class="btn btn-default btn-xs" type="submit" value="Signup" ng-click="signupPage()" /></form> </td>-->
-										</tr>
-									</form>
-								</tbody>
-							</table>
+							<% if (error == true){ %>
+		                    	<div class="alert alert-danger">
+		                    	<strong>Error! <% msg %> </strong>
+		                    	</div>
+		                    <% } %>
+	                    	<form method="post" action="/login" validate>              
+								<table>
+									<tr>
+										<td class="col-md-3"><label class="control-label">Email Id</label></td>
+										<td><input id='email' type="email" name="email" style="margin-bottom:10px" required/></td>
+									</tr>
+									<tr>
+										<td class="col-md-3"><label class="control-label">Password</label></td>
+										<td><input id='password' type="password" name="password" style="margin-bottom:10px" required/></td>
+									</tr>
+									<tr>
+										<td class="col-md-3"><input class="btn btn-default btn-xs pull-right" type="submit" value="Login" style="margin-right:10px"></td>
+										<!-- <td><form> <input class="btn btn-default btn-xs" type="submit" value="Signup" ng-click="signupPage()" /></form> </td>-->
+									</tr>
+								</table>
+							</form>
 						</div>
 						<!-- <a href="" class="btn btn-large btn-link">more info</a> -->
 					</div><!-- end well -->
@@ -170,18 +166,19 @@
 				</div><!-- end container -->
 		</footer>
 	</div>
-	<!-- All Javascript at the bottom of the page for faster page loading -->
 	<!-- First try for the online version of jQuery-->
 	<!-- Include Modernizr in the head, before any other Javascript -->	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"/> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/> -->
 	<!-- If no online access, fallback to our hardcoded version of jQuery -->
-	<script>window.jQuery || document.write('<script src="includes/js/jquery-1.12.2.min.js"><\/script>')</script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+	<script>window.jQuery || document.write('<script src="includes/js/jquery-1.12.2.min.js"><\/script>');</script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"/>
+	<!-- <script src="bootstrap/js/jquery-1.8.2.min.js"/> -->
+	<!-- <script src="bootstrap/js/bootstrap.min.js"/> -->
+	<!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"/> -->
 
 	<!-- Custom JS -->
-	<script src="includes/js/script.js"></script>
+	<script src="includes/js/script.js"/>
 </body>
 </html>

@@ -30,11 +30,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-//Just to debug. can be removed later
-app.use(function printSession(req, res, next) {
-    console.log('req.session', req.session);
-   return next();
-});
+// //Just to debug. can be removed later
+// app.use(function printSession(req, res, next) {
+//     console.log('req.session', req.session);
+//     return next();
+// });
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', welcome);
 app.use('/catalog', catalog);
