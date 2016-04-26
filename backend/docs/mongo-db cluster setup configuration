@@ -1,7 +1,3 @@
-Week #3
-
-A)Configured Mongo three node replica Set using the amazon EC2 instance (Large)
-
 Steps to configure:
 
 1)Pull up a large instance of the the EC2 AMI in a VPC.
@@ -24,20 +20,3 @@ exclude=mongodb-org,mongodb-org-server,mongodb-org-shell,mongodb-org-mongos,mong
 10)Now use rs.add(<internal_ip>) to add the other two nodes to the replica set.
 11)Once added use rs.status() to show the status of the nodes. The output of the status is attached with this file named status.jpg
 12)Now the mongo cluster is configured and is working.
-
-B)Implemented the indexed searching on the mongodb schema for products with a keyword using the api :/search/<text> 
-
-C)Included a tag field 'featured' to show featured products.
-
-B)Updated the schema for Products to include the 'rating' field. The functionality of this field is that whenever the user orders a product he can rate the product.
-
-C)Seeding the mongodb with the dummy data using the new schema.
-
-D)Exposed the PUT API for the rating to be updated, the logic behind updating the rating is that I average out the rating by fetching the previous rating with the new one. API Exposed : /rating/<_id>
-
-
-Next week Implementations and readings:
-
-1)Clean the code for products and send proper erros and response code.
-2)Seed more dummy products into the database.
-3)Explore CDN for storing of the product images and implement the same.

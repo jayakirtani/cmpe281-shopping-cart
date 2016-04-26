@@ -20,7 +20,8 @@ var productRouter = function(app) {
         });
 
     });
-    app.get("/:term/search", function (req,res) {
+
+    app.get("/search/:term", function (req,res) {
         products.find({ $text: { $search: req.params.term }})
             .exec(function(err, results){
                 if(err)
@@ -32,6 +33,35 @@ var productRouter = function(app) {
             });
 
     });
+
+    app.put("/rating/:id",function(req,res){
+
+       var conditions = {_id:req.params.id};
+       var options = { upsert: true };
+
+        //first get the ratings field
+        var newRating = 0;
+        var query = products.findOne({'_id':req.params.id}).select('rating');
+
+          query.exec(function (err, doc) {
+            if (err) return next(err);
+            //res.send(someValue);
+            newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
+            console.log(newRating);
+
+              var update = { $set: { rating: Math.round(newRating)}};
+
+              products.update(conditions,update,options,function(err, results){
+                  if(err)
+                      return res.status(400).json({success: false, msg: 'update failed'});
+                  res.send(JSON.parse(JSON.stringify(results)));
+              });
+
+        });
+
+
+
+        });
 };
 
 module.exports = productRouter;

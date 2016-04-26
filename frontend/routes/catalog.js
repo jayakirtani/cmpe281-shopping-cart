@@ -1,6 +1,7 @@
 var express = require('express');
+var querystring = require('querystring');
+var http = require('http');
 var router = express.Router();
-
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler 
@@ -25,6 +26,102 @@ function isAuthenticated (req, res, next) {
 //router.use('/catalog', isAuthenticated);
 
 
+
+
+router.route('/catalog').get(function(req, response, next) {
+    //TODO: rest get call for products array 
+	
+	var fbResponse = [];
+	 console.log("Im here ");
+    var url = 'http://52.5.167.238:8080/products';
+    http.get(url, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+            
+        });
+        res.on('end', function() {
+        	console.log("body ", body);
+        	 req.session.products = JSON.parse(body);
+            response.render('catalog', {
+                products: req.session.products
+            });
+        });
+    }).on('error', function(e) {
+        console.log("Got an error: ", e);
+    });
+  /*  var products = [{
+        img: "images/item_psd2html5.jpg",
+        name: "name1",
+        qty: 1,
+        price: "price1",
+        sku: "sku1",
+        description: "description1"
+    }]*/
+    console.log("\n in catalog \n");
+    
+   
+})
+router.route('/addToCart').post(function(req, response, next) {
+	console.log("\n in addToCart \n");
+    var data = {
+        qty: req.body.qty,
+        price: req.body.price,
+        _id: req.body._id,
+        email: req.session.email
+    };
+    var post_data = JSON.stringify(data);
+  
+    console.log('JSON request ', data);
+    
+    
+    // add url and host information
+    var post_options = {
+        host: '8',
+        port: '8080',
+        path: '/addToCart',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(post_data)
+        }
+    };
+    // Set up the request
+    var post_req = http.request(post_options, function(res) {
+        res.setEncoding('utf8');
+        
+        res.on('data', function(chunk) {
+            var body = JSON.parse(chunk);
+            console.log('Response: ' + chunk);
+            if (body.success == false) {
+                console.log(body.success, "\false add to cart  \n");
+                console.log("\false add to cart  \n", body.success);
+                response.render('catalog', {
+                    products:  req.session.products,
+                    
+                });
+            } else if (res.statusCode == 200 && body.success == true) {
+                console.log("successful add to cart ", body.success);
+                response.render('catalog', {
+                    products: req.session.products,
+                    
+                });
+            }
+        });
+    });
+    post_req.on('error', function(err) {
+        console.log("\n on error on add to cart \n");
+        response.render('catalog', {
+            products: req.session.products,
+            
+        });
+    });
+    // post the data
+    post_req.write(post_data);
+    post_req.end();
+})
+
+/*
 router.route('/catalog')
     // Not useful now. Can be later if catalog adding added for admin console
     // .post(function(req, res){
@@ -100,5 +197,6 @@ router.route('/catalog/:id')
     //             res.send(err);
     //         res.json("deleted :(");
     //     });
+    */
 
 module.exports = router;

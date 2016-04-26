@@ -37,7 +37,7 @@ app.use(passport.session());
 // });
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', welcome);
-app.use('/catalog', catalog);
+app.use('/', catalog);
 //// Initialize Passport
 var initPassport = require('./passport-init');
 initPassport(passport);
@@ -71,4 +71,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
 module.exports = app;

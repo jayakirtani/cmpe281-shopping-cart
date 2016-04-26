@@ -30,7 +30,6 @@
 		<script src="includes/js/modernizr-2.6.2.min.js"></script>
 		<script src="includes/js/rates.js"></script>
 		
-   
 
     	
     	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
@@ -129,51 +128,134 @@
 				
 				</div><!-- end container -->
 			</div><!-- end navbar -->
-			
+	
+	
+	<div class="spacer30"></div>
 
-	 <form  method="post" action="/addToCart" validate>		
-	<div class="container">		
+<div class="row">
+   <div class="span4">
+       <!-- empty, but using spacer to prevent collapse -->
+       <div class="spacer10"></div>
+   </div>
+   <div class="span4">
+      <p>Some text...</p>
+   </div>
+   <div class="span4">
+       <p>Some text...</p>
+    </div>
+</div>	
 
-<% for (var i = 0; i < products.length; i++) { %>
+
+<%
+function getNumberOfPages() {
+    return Math.ceil(list.length / numberPerPage);
+}
 
 
- <div class="col-sm-4 col-lg-4 col-md-4">
+   var list = products;
+    var ndisabled, pdisabled,fdisabled,ldisabled;
+var pageList = new Array();
+var currentPage = 1;
+var numberPerPage = 10;
+var numberOfPages = 1;
+numberOfPages = getNumberOfPages();
+loadList() 
+function nextPage() {
+    currentPage += 1;
+    loadList();
+}
+function previousPage() {
+    currentPage -= 1;
+    loadList();
+}
+function firstPage() {
+    currentPage = 1;
+    loadList();
+}
+
+function lastPage() {
+    currentPage = numberOfPages;
+    loadList();
+}
+
+function loadList() {
+    var begin = ((currentPage - 1) * numberPerPage);
+    var end = begin + numberPerPage;
+
+    pageList = list.slice(begin, end);
+   
+    check();         // determines the states of the pagination buttons
+}
+function check() {
+     ndisabled = currentPage == numberOfPages ? true : false;
+     pdisabled = currentPage == 1 ? true : false;
+   fdisabled = currentPage == 1 ? true : false;
+     ldisabled = currentPage == numberOfPages ? true : false;
+}
+
+		 %>
+		 
+		 
+
+        		
+<div  class="container ">	
+
+		
+<% for (var i = 0; i < 	 pageList.length; i++) { %>	
+ 
+<form method="post" id="<%=i%>" action="/addToCart" validate>	
+<div class="col-sm-5 col-lg-4 col-md-4 ">
                         <div class="thumbnail">
-                            <img src="<%=products[i].img%>">
-                            <div class="caption"> <%=products[i].name%>
-                                <h4 class="pull-right">$<%=products[i].price%></h4>
-                                <h4><a href="#"> <%=products[i].sku%> </a>
+                            <img src="<%=pageList[i].imageUrl%>">
+                            <div class="caption"> <%=pageList[i].title%>
+                            <input type="hidden" name="title"  value="<%=pageList[i].title%>">
+                                <h4 class="pull-right">$<%=pageList[i].price%></h4>
+                                <input type="hidden" name="price" value="<%=pageList[i].price%>">
+                               
+                                <input type="hidden" name="_id"  value="<%=pageList[i]._id%>">
                                 </h4>
-                                <p><%=products[i].description%></p>
-                        
-                                <p > reviews</p>
-                                
-                       
-                    
-<input type="number" class="rating" id="test" name="test" data-min="1" data-max="5" value="3">
+                                <p><%=pageList[i].description%></p>
+        
+		<div class="col-xs-3 col-xs-offset-3">
+			<div class="input-group number-spinner">
+				<span class="input-group-btn data-dwn">
+					<button  type="button" class="btn btn-default btn-info" data-dir="dwn" ><span class="glyphicon glyphicon-minus"></span></button>
+				</span>
+				<input type="number" name="qty" class="form-control text-center" value="1" min="1" max="<%=pageList[i].stock%>">
+				<span class="input-group-btn data-up">
+					<button  type="button" class="btn btn-default btn-info" data-dir="up" ><span class="glyphicon glyphicon-plus"></span></button>
+				</span>
+			</div>
+		</div> <p > reviews</p>
+		<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="<%=pageList[i].rating%>">
+		
+		
+		
+ 
+                             
+                                      
 
 
-
- <a href="#" onclick="$(this).closest('form').submit()">
+ <a href="#" onclick="$(this).closest('form').submit();" >
           <span class="glyphicon glyphicon-shopping-cart">add to Cart</span>
         </a>
-				<input id="demo3_21" type="text" value="" name="demo3_21">
-        <script>
-            $("input[name='demo3_21']").TouchSpin({
-                initval: 40
-            });
-        </script>
-                        </div>
-                          </div>
-                          
-                    </div>
-                    
 
+      </div>
+       </div>
+        </div>
+       
+  </form>
+
+ 
+                 
   <%  } %>
-  
-   <form>  
-  
+	
  </div>
+ 
+<input type="button" id="first" onclick="firstPage()" value="first" disabled="<%=fdisabled%> />
+<input type="button" id="next" onclick="nextPage()" value="next" disabled="<%=ndisabled%> />
+<input type="button" id="previous" onclick="previousPage()" value="previous"  disabled="<%=pdisabled%>/>
+<input type="button" id="last" onclick="lastPage()" value="last" disabled="<%=ldisabled%> />
  
  <div class="row">
 	<div class="col-sm-2">
