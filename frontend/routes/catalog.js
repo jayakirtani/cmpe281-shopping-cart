@@ -1,7 +1,9 @@
 var express = require('express');
 var querystring = require('querystring');
+
 var http = require('http');
 var router = express.Router();
+
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler 
@@ -30,7 +32,17 @@ function isAuthenticated (req, res, next) {
 
 router.route('/catalog').get(function(req, response, next) {
     //TODO: rest get call for products array 
+	var url = require('url');
+	var pageNumber = 1;
+	var url_parts = url.parse(req.url, true);
+	console.log(url_parts);
+	var query = url_parts.query;
+	console.log("url paramters ", query);
 	
+	
+	if(query.p){
+		pageNumber = query.p;
+	}
 	var fbResponse = [];
 	 console.log("Im here ");
     var url = 'http://52.5.167.238:8080/products';
@@ -44,7 +56,8 @@ router.route('/catalog').get(function(req, response, next) {
         	console.log("body ", body);
         	 req.session.products = JSON.parse(body);
             response.render('catalog', {
-                products: req.session.products
+                products: req.session.products,
+                p : pageNumber
             });
         });
     }).on('error', function(e) {
@@ -63,8 +76,18 @@ router.route('/catalog').get(function(req, response, next) {
    
 })
 router.route('/addToCart').post(function(req, response, next) {
+	var url = require('url');
+	var pageNumber = 1;
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	console.log("url paramters ", query.p)
+	if(query.p){
+		pageNumber = query.p;
+	}
+	
 	console.log("\n in addToCart \n");
     var data = {
+    		
         qty: req.body.qty,
         price: req.body.price,
         _id: req.body._id,
@@ -104,7 +127,7 @@ router.route('/addToCart').post(function(req, response, next) {
                 console.log("successful add to cart ", body.success);
                 response.render('catalog', {
                     products: req.session.products,
-                    
+                    p : pageNumber
                 });
             }
         });
@@ -113,7 +136,7 @@ router.route('/addToCart').post(function(req, response, next) {
         console.log("\n on error on add to cart \n");
         response.render('catalog', {
             products: req.session.products,
-            
+            p : pageNumber
         });
     });
     // post the data
