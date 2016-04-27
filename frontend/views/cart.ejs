@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Website Title & Description for Search Engine purposes -->
+    <title>Code a Responsive Website with Twitter Bootstrap 3</title>
+    <meta name="description" content="Learn how to code your first responsive website with the new Twitter Bootstrap 3.">
+
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+    <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <!-- <link rel="stylesheet2" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="includes/css/styles.css">
+
+    <!-- Include Modernizr in the head, before any other Javascript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"/> -->
+    <!-- <script src="includes/js/modernizr-2.6.2.min.js"></script> -->
+    <script src="includes/js/cart.js" type="text/javascript" charset="utf-8" async defer></script>
+</head>
+<body>
+    <div class="container" id="main">
+        <div class="navbar navbar-fixed-top">
+            <div class="container">
+
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Your Logo"></a>
+
+                <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <strong class="caret"></strong></a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">Web Development</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">SEO</a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li class="dropdown-header">More Services</li>
+
+                                <li>
+                                    <a href="#">Content Creation</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">Social Media Marketing</a>
+                                </li>
+                            </ul><!-- end dropdown-menu -->
+                        </li>
+                    </ul>
+
+                    <form class="navbar-form pull-left">
+                        <input type="text" class="form-control" placeholder="Search this site..." id="searchInput">
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </form><!-- end navbar-form -->
+
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+                                </li>
+
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Profile</a>
+                                </li>
+
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-briefcase"></span> Billing</a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul><!-- end nav pull-right -->
+                </div><!-- end nav-collapse -->
+
+            </div><!-- end container -->
+        </div><!-- end navbar -->
+
+        <div class="spacer30"></div>
+        <div class="row">
+            <div class="span4">
+                <!-- empty, but using spacer to prevent collapse -->
+                <div class="spacer10"></div>
+            </div>
+            <div class="span4">
+                <p>Some text...</p>
+            </div>
+            <div class="span4">
+                <p>Some text...</p>
+            </div>
+        </div>
+
+        <div id="cartdata" class="container">
+            <table>
+            <%for(var i = 0; i < cartItems.length; ++i) { %>
+                <tr class="cartItem<%=cartItems[i].id%>">
+                  <td>
+                  <a class="cartItemImageContainer">
+                    <img alt="Thumbnail for <%=cartItems[i].name%>" class="cartItemThumbnail" src="<%=cartItems[i].imageURL%>">
+                  </a>
+                </td>
+                <td class="itemInfo">
+                    <a class="cartItemName">
+                    <%= cartItems[i].name %>
+                  </a>
+                  </td>
+                  <td>
+                  <div class="itemUnitPrice">
+                    <%= cartItems[i].price %>
+                  </div>
+                  </td>
+                  <td>
+                <div class="cartItemOptions">
+                  <a type="button" class="md-primary md-button md-ink-ripple" onclick="removeItemFromCart(<%= cartItems[i].id %>)">Remove</button>
+                </div>
+                  </td>
+                  <td class="itemQuantity">
+                    <div class="cartItemQuantity">    
+                      <%= cartItems[i].price %>
+                    </div>
+                </td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+
+<!--    <input type="button" id="first" onclick="firstPage()" value="first" />
+        <input type="button" id="next" onclick="nextPage()" value="next" />
+        <input type="button" id="previous" onclick="previousPage()" value="previous" />
+        <input type="button" id="last" onclick="lastPage()" value="last" />
+ -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h6>About Us</h6>
+                        <p>
+                            we are passionate about pet health and nutrition.food is the essential element for pets' health. we provide variety of diet option that would be hard to find in regular stores.our mission is to provide  pet owners with healthier, natural nutrition options And we genuinely enjoy helping pet owners to make well informed healthy choices.
+                        </p>
+                    </div><!-- end col-sm-4 -->
+
+                    <div class="col-sm-2">
+                        <h6>Navigation</h6>
+                        <ul class="unstyled">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Links</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div><!-- end col-sm-2 -->
+
+                    <div class="col-sm-2">
+                        <h6>Follow Us</h6>
+                        <ul class="unstyled">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Google Plus</a></li>
+                        </ul>
+                    </div><!-- end col-sm-2 -->
+
+                    <div class="col-sm-2">
+                        <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Brad</h6>
+                    </div><!-- end col-sm-2 -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </footer>
+    </div> <!-- main container div end -->
+
+    <!-- All Javascript at the bottom of the page for faster page loading -->
+    <!-- First try for the online version of jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/> -->
+    <!-- If no online access, fallback to our hardcoded version of jQuery -->
+    <script>window.jQuery || document.write('<script src="includes/js/jquery-1.12.2.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"/>
+    <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script> -->
+    <!-- Custom JS -->
+    <script src="includes/js/script.js"/>
+    <script src="includes/js/rates.js"/>
+</body>
+</html>

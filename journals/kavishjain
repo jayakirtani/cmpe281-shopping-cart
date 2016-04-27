@@ -1,3 +1,23 @@
+April 27:
+1. Created cart.ejs - template for rendering users cart info
+2. Created cart.js - contains js code related to cart.ejs
+3. Using ajax delete to remove item from cart
+4. Ajax itself sends session cookie with request, no need to add any session data manually
+5. If ajax call made to different domain, results in cross domain problem. because browsers restrics cookie sharing to
+	only single domain that is related to that cookie
+
+April 24:
+1. Testing login module
+2. Problem with ejs template solved, value not being substituted
+3. EJS requires <%= %> tags for value substitution, not <% %>
+4. Login module test cases 
+	a. Negative test case 1: username not found
+	b. Negative test case 2: username found but password wrong
+	c. Negative test case 3: email not valid
+	d. Negative test case 4: password not entered
+	e. Negative test case 5: email not enterd
+	c. Positive test case 1: username and password matches
+
 April 23:
 1. Login request to mongo server
 2. Using 'request' module to do post request
