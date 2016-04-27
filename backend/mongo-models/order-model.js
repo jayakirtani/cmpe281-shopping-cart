@@ -9,9 +9,12 @@ var OrderSchema = new Schema({
     },
     orderdate: {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now
     },
-    totalamount : Number,
+    totalamount : {type : Number ,
+                    required : true
+    },
     products : [
                 {   productid : String ,
                     productname : String,
