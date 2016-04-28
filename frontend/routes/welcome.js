@@ -37,11 +37,13 @@ router.route('/login').get(function(req, res, next) {
     var hash = crypto.createHash("md5"); //use digest('hex')
     var email = req.body.email;
     var password = hash.update(req.body.password).digest('hex');
+    console.log(password);
     var URL = "http://ec2-52-5-167-238.compute-1.amazonaws.com:8080";
-    request.post(URL + "/login", {
-        email: email,
-        password: password
-    }, function(error, response, body) {
+    request.post({
+            headers: {'content-type' : 'application/x-www-form-urlencoded'},
+            url: URL + "/login",
+            form: {email: email, password: password},
+        }, function(error, response, body) {
         try {
             console.log(body);
             var parse = JSON.parse(body);
@@ -102,7 +104,8 @@ router.route('/signup').post(function(req, response, next) {
     // hash password
     var hash = crypto.createHash("md5"); //use digest('hex')
     var hashPassword = hash.update(req.body.password).digest('hex');
-    // prepare parameters to send 	
+    console.log(hashPassword);
+    // prepare parameters to send
     var data = {
         'email': req.body.email,
         'password': hashPassword,
