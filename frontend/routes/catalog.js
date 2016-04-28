@@ -1,6 +1,6 @@
 var express = require('express');
 var querystring = require('querystring');
-
+var url = require('url');
 var http = require('http');
 var router = express.Router();
 
@@ -32,21 +32,30 @@ function isAuthenticated (req, res, next) {
 
 router.route('/catalog').get(function(req, response, next) {
     //TODO: rest get call for products array 
-	var url = require('url');
+	
 	var pageNumber = 1;
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
 	var query = url_parts.query;
 	console.log("url paramters ", query);
-	
-	
 	if(query.p){
 		pageNumber = query.p;
-	}
+		 response.render('catalog', {
+	            products: req.session.products,
+	            p : pageNumber
+	        });
+		 
+	}else{
+	if(query.s){
+		 response.render('catalog', {
+            products: req.session.products,
+            p : pageNumber
+        });
+	}else {
 	var fbResponse = [];
-	 console.log("Im here ");
-    var url = 'http://52.5.167.238:8080/products';
-    http.get(url, function(res) {
+	 
+    var ProductUrl = 'http://52.5.167.238:8080/products';
+    http.get(ProductUrl, function(res) {
         var body = '';
         res.on('data', function(chunk) {
             body += chunk;
@@ -63,14 +72,9 @@ router.route('/catalog').get(function(req, response, next) {
     }).on('error', function(e) {
         console.log("Got an error: ", e);
     });
-  /*  var products = [{
-        img: "images/item_psd2html5.jpg",
-        name: "name1",
-        qty: 1,
-        price: "price1",
-        sku: "sku1",
-        description: "description1"
-    }]*/
+	}
+	}
+  
     console.log("\n in catalog \n");
     
    
@@ -121,7 +125,7 @@ router.route('/addToCart').post(function(req, response, next) {
                 console.log("\false add to cart  \n", body.success);
                 response.render('catalog', {
                     products:  req.session.products,
-                    
+                    p : pageNumber
                 });
             } else if (res.statusCode == 200 && body.success == true) {
                 console.log("successful add to cart ", body.success);
