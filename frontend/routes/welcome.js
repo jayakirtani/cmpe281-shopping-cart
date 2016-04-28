@@ -1,6 +1,7 @@
 var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
+var url = require('url');
 var request = require("request");
 var crypto = require('crypto');
 var router = express.Router();
@@ -38,10 +39,10 @@ router.route('/login').get(function(req, res, next) {
     var email = req.body.email;
     var password = hash.update(req.body.password).digest('hex');
     console.log(password);
-    var URL = "http://ec2-52-5-167-238.compute-1.amazonaws.com:8080";
+    var SigninURL = "http://ec2-52-5-167-238.compute-1.amazonaws.com:8080";
     request.post({
             headers: {'content-type' : 'application/x-www-form-urlencoded'},
-            url: URL + "/login",
+            url: SigninURL + "/login",
             form: {email: email, password: password},
         }, function(error, response, body) {
         try {
@@ -179,5 +180,71 @@ router.route('/signup').post(function(req, response, next) {
     // post the data
     post_req.write(post_data);
     post_req.end();
+});
+
+// Search API
+
+router.route('/search').post(function(req, response, next) {
+	console.log("in Search");
+	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
+
+    var serachInput =  req.body.searchInput;
+    var Searchurl ="http://52.5.167.238:8080/search/"+serachInput;
+    console.log(Searchurl);
+    http.get(Searchurl, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+        res.on('end', function() {
+        	console.log("body ", body);
+        	 req.session.products = JSON.parse(body);
+        	 response.redirect('/catalog?s=1');
+        });
+
+    }).on('error', function(e) {
+        console.log("Got an error: ", e);
+        response.redirect('/catalog');
+    });
+	}
+})
+router.route('/search').get(function(req, response, next) {
+ 	console.log("in Search");
+ 	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
+	var url_parts = url.parse(req.url, true);
+	console.log(url_parts);
+	var query = url_parts.query;
+	if(query.f){
+		var Searchurl ="http://52.5.167.238:8080/search/featured";
+	}else{
+		var Searchurl ="http://52.5.167.238:8080/search/"+query.s;
+	}
+
+
+    console.log(Searchurl);
+    http.get(Searchurl, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+        res.on('end', function() {
+        	console.log("body ", body);
+        	 req.session.products = JSON.parse(body);
+        	 response.redirect('/catalog?s=1');
+        });
+
+    }).on('error', function(e) {
+        console.log("Got an error: ", e);
+        response.redirect('/catalog');
+    });
+	}
+
+
 })
 module.exports = router;
