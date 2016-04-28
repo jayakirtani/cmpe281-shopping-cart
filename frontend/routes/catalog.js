@@ -32,7 +32,6 @@ function isAuthenticated (req, res, next) {
 
 router.route('/catalog').get(function(req, response, next) {
     //TODO: rest get call for products array 
-	
 	var pageNumber = 1;
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);

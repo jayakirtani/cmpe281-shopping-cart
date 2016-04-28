@@ -87,6 +87,10 @@
 
   <a href="/search?f=1"><span class="glyphicon glyphicon-heart">  featured</span></a>
     <a href="/catalog"><span class="glyphicon glyphicon-asterisk">  All products</span></a>
+    
+     <div id ="NoSearch" class="alert alert-danger">
+                        <strong>Error!</strong> No results were found, please try again!</div>
+                        
 
         <div id="container" class="container" ></div>
 
@@ -98,6 +102,10 @@
 
         <script>
             var list = <%- JSON.stringify(products) %>;
+            if(list.length==0){
+            document.getElementById("NoSearch").style.display =  'block'; 
+            } else{
+             document.getElementById("NoSearch").style.display = 'none'; 
             console.log(list);
             var ndisabled, pdisabled,fdisabled,ldisabled;
             var pageList = new Array();
@@ -105,6 +113,7 @@
             var numberPerPage = 5;
             numberOfPages = getNumberOfPages();
             loadList() ;
+            }
             function drawList()
             {
 

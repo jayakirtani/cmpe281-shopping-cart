@@ -182,7 +182,12 @@ router.route('/signup').post(function(req, response, next) {
 // Search API
 
 router.route('/search').post(function(req, response, next) {
- 	console.log("in Search");
+	console.log("in Search");
+	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
+ 	
     var serachInput =  req.body.searchInput;
     var Searchurl ="http://52.5.167.238:8080/search/"+serachInput;
     console.log(Searchurl);
@@ -201,12 +206,15 @@ router.route('/search').post(function(req, response, next) {
         console.log("Got an error: ", e);
         response.redirect('/catalog');
     });
-  
+	}
 })
 
 router.route('/search').get(function(req, response, next) {
  	console.log("in Search");
- 
+ 	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
 	var query = url_parts.query;
@@ -233,7 +241,7 @@ router.route('/search').get(function(req, response, next) {
         console.log("Got an error: ", e);
         response.redirect('/catalog');
     });
-    
+	}
         
     
 })
