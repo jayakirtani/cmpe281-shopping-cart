@@ -9,6 +9,7 @@ var FileStore = require('session-file-store')(session);
 var welcome = require('./routes/welcome');
 var catalog = require('./routes/catalog');
 var passport = require('passport');
+var order = require('./routes/order');
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +41,8 @@ app.use('/', welcome);
 app.use('/welcome', welcome);
 app.use('/', catalog);
 app.use('/catalog', catalog);
-app.use('/orderHis', order);
+app.use('/', order);
+//app.use('/orderHis', order);
 //// Initialize Passport
 var initPassport = require('./passport-init');
 initPassport(passport);
