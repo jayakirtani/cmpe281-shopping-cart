@@ -16,10 +16,10 @@ var OrderSchema = new Schema({
                     required : true
     },
     products : [
-                {   productid : String ,
-                    productname : String,
-                    quantity : Number,
-                    price : Number
+                {   productid : {type : String , required : true} , 
+                    productname : {type: String ,required : true},
+                    quantity : {type : Number , required : true},
+                    price : {type : Number ,required : true }
                 }
             ]
 });
