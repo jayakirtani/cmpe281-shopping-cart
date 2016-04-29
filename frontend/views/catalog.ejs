@@ -46,28 +46,28 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Your Logo"></a>
-                
+
                 <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
                     <ul class="nav navbar-nav">
                         <li class="">
                             <a href="/logout">logout</a>
                         </li>
-                        
+
                     </ul>
                     </div>
-                               
+
 	<form  id="searchForm" class ="navbar-form pull-left" method ="post" action="/search">
-      <input type="text" class="form-control" placeholder="Search this site..." name="searchInput" /> 
+      <input type="text" class="form-control" placeholder="Search this site..." name="searchInput" />
  </form><!-- end navbar-form -->
 
-        
+
   <div class=" navbar-form nav-collapse">
                     <ul class="nav navbar-nav">
                         <li class="">
                             <button type="button" class="btn btn-default" onclick="document.getElementById('searchForm').submit();" >
                             <span class="glyphicon glyphicon-search"></span></button>
                         </li>
-                        
+
                     </ul>
                     </div>
                 </div><!-- end nav-collapse -->
@@ -82,15 +82,15 @@
             <div class="span4">
                 <p></p>
             </div>
-            
+
         </div>
 
   <a href="/search?f=1"><span class="glyphicon glyphicon-heart">  featured</span></a>
     <a href="/catalog"><span class="glyphicon glyphicon-asterisk">  All products</span></a>
-    
+
      <div id ="NoSearch" class="alert alert-danger">
                         <strong>Error!</strong> No results were found, please try again!</div>
-                        
+
 
         <div id="container" class="container" ></div>
 
@@ -103,16 +103,16 @@
         <script>
             var list = <%- JSON.stringify(products) %>;
             if(list.length==0){
-            document.getElementById("NoSearch").style.display =  'block'; 
+            document.getElementById("NoSearch").style.display =  'block';
             } else{
-             document.getElementById("NoSearch").style.display = 'none'; 
+             document.getElementById("NoSearch").style.display = 'none';
             console.log(list);
             var ndisabled, pdisabled,fdisabled,ldisabled;
             var pageList = new Array();
-            currentPage=  <%- p%>? <%-p%>:1;
+            currentPage=  <%-p%>? <%-p%>:1;
             var numberPerPage = 5;
             numberOfPages = getNumberOfPages();
-            loadList() ;
+            loadList();
             }
             function drawList()
             {
@@ -146,19 +146,19 @@
             '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="'+pageList[i].rating+'">'+
             '<a href="#" onclick="document.getElementById('+i+').submit();" >'+
             ' <span class="glyphicon glyphicon-shopping-cart">add to Cart</span></a>';
-            
-            
+
+
  if(pageList[i].categories){
              block = block+ '<div>';
               for(var j=0;j< pageList[i].categories.length; j++){
-              
+
      block = block+ '<a href="/search?s='+pageList[i].categories[j]+'"?p='+currentPage+'" >'+pageList[i].categories[j]+'</a><h> </h>';
-       
+
    }
    block = block+ '</div>';
-      
+
    };
-   
+
   block = block+' </div>'+
             '</div>'+
             ' </div>'+
@@ -166,11 +166,11 @@
             ' </form>';
 
         }
-        
+
         document.getElementById("container").innerHTML=block;
     };
-    
-    
+
+
     function getNumberOfPages() {
     return Math.ceil(list.length / numberPerPage);
 }

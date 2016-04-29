@@ -8,19 +8,23 @@ var router = express.Router();
 /*Handle logout request*/
 router.route('/logout').get(function(req, res, next) {
     console.log("GET /logout");
+
     req.session.destroy(function(err) {
+        console.log("1")
         if (err) {
+            console.log("2")
             req.session.authorised = false;
             req.session.email = 'guest';
             console.log(err);
         } else {
-            res.redirect('/');
+            console.log("3")
+            res.render('login', {
+                signup: false,
+                error: false,
+                msg: ''
+            });
         }
-    });
-    res.render('login', {
-        signup: false,
-        error: false,
-        msg: ''
+        console.log("4")
     });
     /* handle post request - user authentication */
 });
@@ -57,6 +61,7 @@ router.route('/login').get(function(req, res, next) {
                 error: true,
                 msg: e.message,
             });
+            return;
         }
         console.log(parse);
         console.log(email);
@@ -244,7 +249,5 @@ router.route('/search').get(function(req, response, next) {
         response.redirect('/catalog');
     });
 	}
-
-
 })
 module.exports = router;
