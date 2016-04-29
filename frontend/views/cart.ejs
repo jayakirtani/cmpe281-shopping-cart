@@ -7,7 +7,7 @@
 
     <!-- Mobile viewport optimized -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
     <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
     <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
@@ -24,6 +24,8 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"/> -->
     <!-- <script src="includes/js/modernizr-2.6.2.min.js"></script> -->
     <script src="includes/js/cart.js" type="text/javascript" charset="utf-8" async defer></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container" id="main">
@@ -121,45 +123,56 @@
             </div>
         </div>
 
-        <div id="cartdata" class="container">
-            <table>
-            <%for(var i = 0; i < cartItems.length; ++i) { %>
-                <tr class="cartItem<%=cartItems[i].id%>">
-                  <td>
-                  <a class="cartItemImageContainer">
-                    <img alt="Thumbnail for <%=cartItems[i].name%>" class="cartItemThumbnail" src="<%=cartItems[i].imageURL%>">
-                  </a>
-                </td>
-                <td class="itemInfo">
-                    <a class="cartItemName">
-                    <%= cartItems[i].name %>
-                  </a>
-                  </td>
-                  <td>
-                  <div class="itemUnitPrice">
-                    <%= cartItems[i].price %>
-                  </div>
-                  </td>
-                  <td>
-                <div class="cartItemOptions">
-                  <a type="button" class="md-primary md-button md-ink-ripple" onclick="removeItemFromCart(<%= cartItems[i].id %>)">Remove</button>
-                </div>
-                  </td>
-                  <td class="itemQuantity">
-                    <div class="cartItemQuantity">    
-                      <%= cartItems[i].price %>
-                    </div>
-                </td>
-                </tr>
-                <% } %>
+        <div class="container">
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Product</th>
+                        <th style="width:10%">Price</th>
+                        <th style="width:8%">Quantity</th>
+                        <th style="width:22%" class="text-center">Subtotal</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < cartItems.length; ++i) { %>
+                        <tr>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs">
+                                        <img src="%<=cartItems[i].imageURL%>" alt="Thumbnail for <%=cartItems[i].name%>" class="img-responsive"/>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4 class="nomargin"><%=cartItems[i].name%></h4>
+                                        <p><%=cartItems[i].description%></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th="Price">$<%=cartItems[i].price%></td>
+                            <td data-th="Quantity">
+                                <input type="number" class="form-control text-center" value="1">
+                            </td>
+                            <td data-th="Subtotal" class="text-center"><%cartItems[i].price * cartItems[i].quantity%></td>
+                            <td class="actions" data-th="">
+                                <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+                <tfoot>
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong>Total <%=cartItems.totalprice%></strong></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/catalog" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center"><strong>Total $<%=cartItems.totalprice%></strong></td>
+                        <td><a href="/checkout" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-
-<!--    <input type="button" id="first" onclick="firstPage()" value="first" />
-        <input type="button" id="next" onclick="nextPage()" value="next" />
-        <input type="button" id="previous" onclick="previousPage()" value="previous" />
-        <input type="button" id="last" onclick="lastPage()" value="last" />
- -->
         <footer>
             <div class="container">
                 <div class="row">
@@ -203,7 +216,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/> -->
     <!-- If no online access, fallback to our hardcoded version of jQuery -->
     <script>window.jQuery || document.write('<script src="includes/js/jquery-1.12.2.min.js"><\/script>')</script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"/>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
     <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script> -->
     <!-- Custom JS -->
     <script src="includes/js/script.js"/>

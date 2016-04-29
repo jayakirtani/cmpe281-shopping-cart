@@ -1,3 +1,9 @@
+April 29:
+1. Using page reload in place of ajax for cart addition and removal.
+2. Added methods Post, Get, and Delete for cart
+3. Updated code in cart.ejs and cart.js file
+4. Cart layout update using botstrap.
+
 April 27:
 1. Created cart.ejs - template for rendering users cart info
 2. Created cart.js - contains js code related to cart.ejs
@@ -10,7 +16,7 @@ April 24:
 1. Testing login module
 2. Problem with ejs template solved, value not being substituted
 3. EJS requires <%= %> tags for value substitution, not <% %>
-4. Login module test cases 
+4. Login module test cases
 	a. Negative test case 1: username not found
 	b. Negative test case 2: username found but password wrong
 	c. Negative test case 3: email not valid
@@ -44,7 +50,7 @@ April 16:
 1. Team meeting and final app architecture. As per Jaya and professors meeting heroku should have node app with angular code.
 	All Rest calls and database to be hosted on aws infra.
 2. Frontend app skeleton in node js using express created with sample files. Defines initial app structure
-3. Git branch 'frontend' https://github.com/jayakirtani/cmpe281-shopping-cart.git created. This branch is specifically 
+3. Git branch 'frontend' https://github.com/jayakirtani/cmpe281-shopping-cart.git created. This branch is specifically
 	for frontend heroku app and will be used by me and Waad.
 4. Added .gitignore file, this file mentions patterns of file/folder names to be ignored when pushing local artifacts to git
 	included node_modules, build files, test artifacts etc.
@@ -97,7 +103,7 @@ April 6:
 2. Explore bootstrap
 	a. Create sample page and explore options to theme
 
-April 5: 
+April 5:
 1. Start up meeting
 2. Seperation of tasks on big level
 3. Working with frontend
