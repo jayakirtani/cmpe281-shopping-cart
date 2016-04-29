@@ -1,8 +1,5 @@
-//var mongoose    = require('mongoose');
 var config      = require('../../config/mongoConnect'); // get db config file
 var products    = require('../../mongo-models/product.model');
-
-//mongoose.createConnection(config.database);
 
 var productRouter = function(app) {
 
@@ -15,7 +12,6 @@ var productRouter = function(app) {
                 console.log('error :' +err);
                 return res.status(400).json({success: false, msg: 'Could not fetch products from database'});
             }
-            //return res.end(JSON.stringify(product));
             res.send(JSON.parse(JSON.stringify(docs)));
         });
 
@@ -26,7 +22,7 @@ var productRouter = function(app) {
             .exec(function(err, results){
                 if(err)
                 {
-                    return res.status(400).json({success: false, msg: 'search query failed'});
+                    return res.status(400).json({success: false, msg: 'Search query failed'});
                 }
                 console.log(results);
                 res.send(JSON.parse(JSON.stringify(results)));
@@ -45,21 +41,18 @@ var productRouter = function(app) {
 
           query.exec(function (err, doc) {
             if (err) return next(err);
-            //res.send(someValue);
-            newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
-            console.log(newRating);
-
+              if(err)
+                  return res.status(400).json({success: false, msg: 'Fetch failed for updating the rating'});
+              newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
               var update = { $set: { rating: Math.round(newRating)}};
 
               products.update(conditions,update,options,function(err, results){
                   if(err)
-                      return res.status(400).json({success: false, msg: 'update failed'});
+                      return res.status(400).json({success: false, msg: 'Update for ratings failed'});
                   res.send(JSON.parse(JSON.stringify(results)));
               });
 
-        });
-
-
+            });
 
         });
 };
