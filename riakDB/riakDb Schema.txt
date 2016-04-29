@@ -1,0 +1,19 @@
+a)API GET Call for GetCart : /getCart?userId=
+  Request Type : GET
+  Response Type : JSON
+	1) If the cart has entries, the response is : 
+	{"userId" : "testUser@shopping.com","cartInfo" : [
+							{"productId" : "id","productName":"name","productQuantity":"quantity","productCost":"cost","productImage":"pathToImage"},
+							{"productId" : "id1","productName":"name1","productQuantity":"quantity1","productCost":"cost1","productImage":"pathToImage1"}]}
+	2) If the cart is empty, the response is :
+	{"userId" : "testUser@shopping.com","cartInfo" : []}
+
+b)API POST Call for addToCart : /addToCart
+ Request Type : POST
+ Object Type to be passed with Request : JSON
+ Example : 
+ {"userId" : "testUser@shopping.com","cartInfo" : [{"productId" : "id","productName":"name","productQuantity":"quantity","productCost":"cost","productImage":"pathToImage"}]
+ Response Type : String
+ Example :
+ "Success" - Success Transaction
+ "Failure" - Failed Transaction
