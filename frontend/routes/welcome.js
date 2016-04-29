@@ -1,4 +1,5 @@
 var express = require('express');
+
 var querystring = require('querystring');
 var http = require('http');
 var url = require('url');
@@ -14,14 +15,14 @@ router.route('/logout').get(function(req, res, next) {
             req.session.email = 'guest';
             console.log(err);
         } else {
-            res.redirect('/');
+        	 res.render('login', {
+        	        signup: false,
+        	        error: false,
+        	        msg: ''
+        	    });
         }
     });
-    res.render('login', {
-        signup: false,
-        error: false,
-        msg: ''
-    });
+   
     /* handle post request - user authentication */
 });
 /* Render Login page on welcome*/
@@ -186,6 +187,7 @@ router.route('/signup').post(function(req, response, next) {
 
 router.route('/search').post(function(req, response, next) {
 	console.log("in Search");
+	 var sess = req.session;
 	if(!sess.authorised){
 		console.log("Not authorized user");
         response.redirect('/welcome');
@@ -213,6 +215,7 @@ router.route('/search').post(function(req, response, next) {
 })
 router.route('/search').get(function(req, response, next) {
  	console.log("in Search");
+ 	 var sess = req.session;
  	if(!sess.authorised){
 		console.log("Not authorized user");
         response.redirect('/welcome');

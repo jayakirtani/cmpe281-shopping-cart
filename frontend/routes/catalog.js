@@ -31,6 +31,11 @@ function isAuthenticated (req, res, next) {
 
 
 router.route('/catalog').get(function(req, response, next) {
+	 var sess = req.session;
+		if(!sess.authorised){
+			console.log("Not authorized user");
+	        response.redirect('/welcome');
+		}else{
     //TODO: rest get call for products array 
 	var pageNumber = 1;
 	var url_parts = url.parse(req.url, true);
@@ -73,12 +78,18 @@ router.route('/catalog').get(function(req, response, next) {
     });
 	}
 	}
+		}
   
     console.log("\n in catalog \n");
     
    
 })
 router.route('/addToCart').post(function(req, response, next) {
+	var sess = req.session;
+	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
 	var url = require('url');
 	var pageNumber = 1;
 	var url_parts = url.parse(req.url, true);
@@ -145,7 +156,9 @@ router.route('/addToCart').post(function(req, response, next) {
     // post the data
     post_req.write(post_data);
     post_req.end();
+	}
 })
+
 
 /*
 router.route('/catalog')
@@ -224,5 +237,48 @@ router.route('/catalog/:id')
     //         res.json("deleted :(");
     //     });
     */
+
+
+router.route('/pay').get(function(req, response, next) {
+ 	console.log("in pay");
+ 	 var sess = req.session;
+ 	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
+/*	var url_parts = url.parse(req.url, true);
+	console.log(url_parts);
+	var query = url_parts.query;
+	if(query.f){
+		var Searchurl ="http://52.5.167.238:8080/search/featured";
+	}else{
+		var Searchurl ="http://52.5.167.238:8080/search/"+query.s;
+	}
+
+
+    console.log(Searchurl);
+    http.get(Searchurl, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+        res.on('end', function() {
+        	console.log("body ", body);
+        	 req.session.products = JSON.parse(body);
+        	 response.redirect('/catalog?s=1');
+        });
+
+    }).on('error', function(e) {
+        console.log("Got an error: ", e);
+        response.redirect('/catalog');
+    });
+	}
+*/
+		
+		response.render('payment');
+	}
+})
+
+
 
 module.exports = router;
