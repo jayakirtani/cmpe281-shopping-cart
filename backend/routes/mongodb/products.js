@@ -1,8 +1,10 @@
 var config      = require('../../config/mongoConnect'); // get db config file
 var products    = require('../../mongo-models/product.model');
+var mongoose    = require('mongoose');
 
 var productRouter = function(app) {
 
+    //Get All the products
     app.get("/products", function(req, res) {
         //res.send("Hello Customer");
         products.find({}, function(err, docs) {
@@ -17,6 +19,7 @@ var productRouter = function(app) {
 
     });
 
+    //Search product catalogue based on the word
     app.get("/search/:term", function (req,res) {
         products.find({ $text: { $search: req.params.term }})
             .exec(function(err, results){
@@ -30,6 +33,25 @@ var productRouter = function(app) {
 
     });
 
+    //Get Product based on its id
+    app.get("/products/:id", function(req, res) {
+        try {
+            var _id = mongoose.Types.ObjectId(req.params.id);
+            products.findById(_id, function (err, docs) {
+                if (err) {
+                    console.log('error :' + err);
+                    return res.status(400).json({success: false, msg: 'Could not fetch the product from database'});
+                }
+                else {
+                    res.send(JSON.parse(JSON.stringify(docs)));
+                }
+            });
+        }catch (err){return res.status(400).json({success: false, msg: 'Could not fetch the product, check the id'});}
+
+    });
+
+
+    //Update the ratings
     app.put("/rating/:id",function(req,res){
 
        var conditions = {_id:req.params.id};
@@ -40,7 +62,6 @@ var productRouter = function(app) {
         var query = products.findOne({'_id':req.params.id}).select('rating');
 
           query.exec(function (err, doc) {
-            if (err) return next(err);
               if(err)
                   return res.status(400).json({success: false, msg: 'Fetch failed for updating the rating'});
               newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
