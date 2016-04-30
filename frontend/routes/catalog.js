@@ -46,14 +46,16 @@ router.route('/catalog').get(function(req, response, next) {
 		pageNumber = query.p;
 		 response.render('catalog', {
 	            products: req.session.products,
-	            p : pageNumber
+	            p : pageNumber,
+	            addtoCart:2
 	        });
 		 
 	}else{
 	if(query.s){
 		 response.render('catalog', {
             products: req.session.products,
-            p : pageNumber
+            p : pageNumber,
+            addtoCart:2
         });
 	}else {
 	var fbResponse = [];
@@ -70,7 +72,8 @@ router.route('/catalog').get(function(req, response, next) {
         	 req.session.products = JSON.parse(body);
             response.render('catalog', {
                 products: req.session.products,
-                p : pageNumber
+                p : pageNumber,
+                addtoCart:2
             });
         });
     }).on('error', function(e) {
@@ -101,11 +104,13 @@ router.route('/addToCart').post(function(req, response, next) {
 	
 	console.log("\n in addToCart \n");
     var data = {
-    		
-        qty: req.body.qty,
-        price: req.body.price,
-        _id: req.body._id,
-        email: req.session.email
+	userId:	req.session.email,
+	productInfo: [{
+		productId:req.body._id,
+		quantity: req.body.qty
+	}
+		]
+  
     };
     var post_data = JSON.stringify(data);
   
@@ -135,13 +140,15 @@ router.route('/addToCart').post(function(req, response, next) {
                 console.log("\false add to cart  \n", body.success);
                 response.render('catalog', {
                     products:  req.session.products,
-                    p : pageNumber
+                    p : pageNumber,
+                    addtoCart:0
                 });
             } else if (res.statusCode == 200 && body.success == true) {
                 console.log("successful add to cart ", body.success);
                 response.render('catalog', {
                     products: req.session.products,
-                    p : pageNumber
+                    p : pageNumber,
+                    addtoCart:1
                 });
             }
         });
@@ -150,7 +157,8 @@ router.route('/addToCart').post(function(req, response, next) {
         console.log("\n on error on add to cart \n");
         response.render('catalog', {
             products: req.session.products,
-            p : pageNumber
+            p : pageNumber,
+            addtoCart:0
         });
     });
     // post the data
