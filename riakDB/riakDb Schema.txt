@@ -7,6 +7,8 @@ a)API GET Call for GetCart : /getCart?userId=
 							{"productId" : "id1","productName":"name1","productQuantity":"quantity1","productCost":"cost1","productImage":"pathToImage1"}]}
 	2) If the cart is empty, the response is :
 	{"userId" : "testUser@shopping.com","cartInfo" : []}
+	3) If the user is not found, the response is :
+	{"userId" : "testUser@shopping.com","cartInfo" : []}
 
 b)API POST Call for addToCart : /addToCart
  Request Type : POST
