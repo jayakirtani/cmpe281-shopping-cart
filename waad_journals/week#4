@@ -1,0 +1,55 @@
+Week #4 :
+
+Task#1 : Implement Pagination for products in catalog page 
+I have implemented pagination to view 10 products per page and with four directions as appropriate (first,last
+next , previous ) to go through the products. 
+
+
+Task#2 Implement search functionality complete flow 
+
+1- I have implemented Search for a text functionality that looks up products associated with a text
+and then views these searched results also in pages of results products
+
+2- I have also implemented tags search where user can see key words that are related or associated with 
+certain product such as categories and click on the tag and it will return products related to the text 
+
+3-warning message if search results are 9
+
+
+4- I have implemented search on featured products and all products option as well
+
+Task #4 view rates of product and allow rating for a product 
+i have implemented javascript file that helps view rates on shape of stars for user in the catalog page and allows user 
+to rate a product in the orderHisotry page.
+
+Task #3 add to cart complete flow 
+1- I have added add to cart button that fires a rest call to add the product to cart and goes back to the same page of 
+product
+2- warning messages that fades away with time if product was not added to cart for any reason
+
+ Task #3 orderHistory Page 
+1- I have prepared the frontend impelenation for orderHistory that fires a get api call to ger orders from user and 
+display the orders and their product information
+
+
+task#5 complete test for all catalog related functionalities and backend integration 
+  testing results of catalog page and paginations in a pdf file in github
+
+
+Task #6 :testing plans for this week 
+1- Integration of orderHistory 
+2- Payment page for creating an order
+ 
+difficulties : 
+pagination was a little bit tricky to implement as i needed to maintain the page number when i refresh to another page and 
+offset the index of the list of products
+implementing payment at this moment if we want to effect the status of orders or just create a confirmed order at once
+these questions for this week to solve
+ 
+
+
+
+ 
+ 
+
+

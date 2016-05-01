@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Website Title & Description for Search Engine purposes -->
+	<title>Code a Responsive Website with Twitter Bootstrap 3</title>
+	<meta name="description" content="Learn how to code your first responsive website with the new Twitter Bootstrap 3.">
+	<!-- Mobile viewport optimized -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<!-- <link rel="stylesheet2" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="includes/css/styles.css">
+
+<style>
+.panel-order .row {
+	border-bottom: 1px solid #ccc;
+}
+.panel-order .row:last-child {
+	border: 0px;
+}
+.panel-order .row .col-md-1  {
+	text-align: center;
+	padding-top: 15px;
+}
+.panel-order .row .col-md-1 img {
+	width: 50px;
+	max-height: 50px;
+}
+.panel-order .row .row {
+	border-bottom: 0;
+}
+.panel-order .row .col-md-11 {
+	border-left: 1px solid #ccc;
+}
+.panel-order .row .row .col-md-12 {
+	padding-top: 7px;
+	padding-bottom: 7px; 
+}
+.panel-order .row .row .col-md-12:last-child {
+	font-size: 11px; 
+	color: #555;  
+	background: #efefef;
+}
+.panel-order .btn-group {
+	margin: 0px;
+	padding: 0px;
+}
+.panel-order .panel-body {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+</style>
+</head>
+<body>
+	<div class="container" id="main">
+		<div class="navbar navbar-fixed-top">
+			<div class="container">
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img src="images/logo.png" alt="Your Logo" ></a>
+				<div class="nav-collapse collapse navbar-responsive-collapse">
+					<ul class="nav navbar-nav">
+						<li class="">
+							<a href="/" >signup</a>
+						</li>
+					</ul>
+					
+				</div><!-- end nav-collapse -->
+			</div><!-- end container -->
+		</div><!-- end navbar -->
+ <div class="carousel slide" id="myCarousel"></div>
+        <div class="row">
+            <div class="span4">
+                <!-- empty, but using spacer to prevent collapse -->
+                <div class="spacer10"></div>
+            </div>
+            <div class="span4">
+                <p></p>
+            </div>
+
+        </div>
+
+<div class="panel panel-default panel-order" >
+  <div class="panel-heading">
+      <strong>Order history</strong>
+      <div class="btn-group pull-right">
+          <div class="btn-group">
+			<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+			  Filter history <i class="fa fa-filter"></i>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right">
+			  <li><a href="#">Approved orders</a></li>
+			  <li><a href="#">Pending orders</a></li>
+			</ul>
+		  </div>
+		</div>
+  </div>
+  
+    <div id="container">  </div>
+    <script>
+  var block ='';
+ var orders =<%- JSON.stringify(orders) %>;
+ 
+  for (var i=0;i<orders.length;i++){
+ var date =  new Date(orders[i].orderdate).toISOString().replace(/T/, ' ').replace(/\..+/, '') ;
+  block = block+
+  	'<div class="panel-body">'+
+  	'<div class="row">'+
+	 ' <div class="col-md-1"><img src="http://bootdey.com/img/Content/user_3.jpg" class="media-object img-thumbnail"></div>'+
+		  '<div class="col-md-12">'+
+			'<div class="pull-right"><label class="label label-danger">Status :'+orders[i].status+'</label> </div>'+
+			'<span><strong>Order Id</strong></span> <span class="label label-info">'+orders[i]._id+'</span><br>'+
+			'Quantity : '+orders[i].products.length+', Price: $'+orders[i].totalamount+'</br>'+
+			'<br>Order made on:' +date+'</br>'+
+			'<a data-placement="top" class="btn btn-danger  btn-xs glyphicon glyphicon-trash pull-right" href="#" title="Danger"></a>'+
+		 +'</div>';
+		 
+		 
+		 for (var j=0 ; j<orders[i].products.length;j++){
+		 block = block+j+
+		'<div> Product name :'+
+			'<a href="/productDetails>'+orders[i].products[j].productname +'</a>'+
+			'<br><span> Quantity'+orders[i].products[j].quantity+''+
+			' Price: $'+orders[i].products[j].price +'</span></br>'+
+		  '</div>';
+  }
+
+block = block+ '</div></div>';
+			
+			}
+document.getElementById("container").innerHTML=block;
+			
+</script>
+  	
+  	 </div><!-- end well -->
+				</div><!-- end col-12 -->
+			</div><!-- end bigCallout -->
+  	<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-2">
+							<h6>Copyright &copy; 2013 {name}</h6>
+						</div><!-- end col-sm-2 -->
+						<div class="col-sm-4">
+							<h6>About Us</h6>
+							<p>
+								we are passionate about pet health and nutrition.food is the essential element for pets' health. we provide variety of diet option that would be hard to find in regular stores.our mission is to provide  pet owners with healthier, natural nutrition options And we genuinely enjoy helping pet owners to make well informed healthy choices.
+							</p>
+						</div><!-- end col-sm-4 -->
+						<div class="col-sm-2">
+							<h6>Navigation</h6>
+							<ul class="unstyled">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Services</a></li>
+								<li><a href="#">Links</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div><!-- end col-sm-2 -->
+						<div class="col-sm-2">
+							<h6>Follow Us</h6>
+							<ul class="unstyled">
+								<li><a href="#">Twitter</a></li>
+								<li><a href="#">Facebook</a></li>
+								<li><a href="#">Google Plus</a></li>
+							</ul>
+						</div><!-- end col-sm-2 -->
+						<div class="col-sm-2">
+							<h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Brad</h6>
+						</div><!-- end col-sm-2 -->
+					</div><!-- end row -->
+				</div><!-- end container -->
+		</footer>
+	</div>
+	<!-- First try for the online version of jQuery-->
+	<!-- Include Modernizr in the head, before any other Javascript -->	
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"/> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/> -->
+	<!-- If no online access, fallback to our hardcoded version of jQuery -->
+	<script>window.jQuery || document.write('<script src="includes/js/jquery-1.12.2.min.js"><\/script>');</script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"/>
+	<!-- <script src="bootstrap/js/jquery-1.8.2.min.js"/> -->
+	<!-- <script src="bootstrap/js/bootstrap.min.js"/> -->
+	<!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"/> -->
+
+	<!-- Custom JS -->
+	<script src="includes/js/script.js"/>
+	
+	
+	
+
+  	
+  	
+</body>
+</html>
+
