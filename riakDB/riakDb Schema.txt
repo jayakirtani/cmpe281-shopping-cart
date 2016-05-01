@@ -28,3 +28,9 @@ c)API POST Call for removeItem : /removeItem
  Example :
  "Success" - Success Transaction
  "Failure" - Failed Transaction
+d)API GET Call for removeAll : /removeALL?userId=
+ Request Type : GET
+ Response Type : String
+ Example :
+ "Success" - Success Transaction
+ "Failure" - Failed Transaction
