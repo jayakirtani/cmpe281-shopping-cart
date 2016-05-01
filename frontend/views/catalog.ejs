@@ -155,6 +155,7 @@
 
             var block = '';
             for (var i = 0; i < pageList.length; i++) {
+            
             block =block +'<form method="post" id='+i+' action="/addToCart?p='+currentPage+'" validate>'+
             '<div class="col-sm-5 col-lg-4 col-md-4 ">'+
             ' <div class="thumbnail">'+
@@ -181,11 +182,12 @@
             '</div> <p > reviews</p>'+
             '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="'+pageList[i].rating+'">'+
             '<a href="#" onclick="document.getElementById('+i+').submit();" >'+
-            ' <span class="glyphicon glyphicon-shopping-cart">add to Cart</span></a>';
-
+            ' <span>add to Cart</span></a>'+
+'<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png"></div>';
 
  if(pageList[i].categories){
-             block = block+ '<div>';
+ 
+             block = block+ '<div>search tags: ';
               for(var j=0;j< pageList[i].categories.length; j++){
 
      block = block+ '<a href="/search?s='+pageList[i].categories[j]+'"?p='+currentPage+'" >'+pageList[i].categories[j]+'</a><h> </h>';
