@@ -19,3 +19,12 @@ b)API POST Call for addToCart : /addToCart
  Example :
  "Success" - Success Transaction
  "Failure" - Failed Transaction
+c)API POST Call for removeItem : /removeItem
+ Request Type : POST
+ Object Type to be passed with Request : JSON
+ Example :
+ {"userId" : "testUser@shopping.com","cartInfo" : [{"productId" : "id","productName":"name","productQuantity":"quantity","productCost":"cost","productImage":"pathToImage"}]
+ Response Type : String
+ Example :
+ "Success" - Success Transaction
+ "Failure" - Failed Transaction
