@@ -34,3 +34,15 @@ d)API GET Call for removeAll : /removeALL?userId=
  Example :
  "Success" - Success Transaction
  "Failure" - Failed Transaction
+e)API POST Call for updateItem : /updateItem
+ Request Type : POST
+ Object Type to be passed with Request : JSON
+ Example:
+ {"userId" : "testUser@shopping.com","cartInfo" : [{"productId" : "id","productName":"name","productQuantity":"quantity","productCost":"cost","productImage":"pathToImage"}]
+ Response Type : JSON
+ 1) If the cart has entries, the response is : 
+	{"userId" : "testUser@shopping.com","cartInfo" : [
+							{"productId" : "id","productName":"name","productQuantity":"quantity","productCost":"cost","productImage":"pathToImage"},
+							{"productId" : "id1","productName":"name1","productQuantity":"quantity1","productCost":"cost1","productImage":"pathToImage1"}]}
+ 2) If the cart is empty, the response is :
+	{"userId" : "testUser@shopping.com","cartInfo" : []}
