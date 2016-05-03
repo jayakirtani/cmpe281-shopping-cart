@@ -28,14 +28,86 @@ function isAuthenticated (req, res, next) {
 //router.use('/catalog', isAuthenticated);
 
 
+router.route('/rate').post(function(req, response, next) {
+	console.log("in rate");
+	 var sess = req.session;
+	 var pageNumber;
+	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/welcome');
+	}else{
+		
+		var url_parts = url.parse(req.url, true);
+		var query = url_parts.query;
+		if(query.p){
+			pageNumber = query.p;
+		} else{
+			pageNumber = 1;
+		}
+		if(query.id){
+			console.log(query.id);
+			rateInput = req.body.rate;
+			console.log(rateInput);
+		var options = {
+				  "host": "52.5.167.238",
+				  "port": "8080",
+				  "path": "/rating/"+query.id,
+				  "method": "PUT",
+				  "headers": { 
+					  "Accept": "application/json",
+				    "Content-Type" : "application/json",
+				  }
+		}
+				var req = http.request(options, function(res) {
+				  console.log('STATUS: ' + res.statusCode);
+				  console.log('HEADERS: ' + JSON.stringify(res.headers));
+				  res.setEncoding('utf8');
+				  
+				  res.on('data', function (chunk) {
+				    console.log('BODY: ' + chunk);
+				    console.log("success");
+		        	response.render('orderHistory',{orders:sess.orders, p :pageNumber});
+				  });
+				});
 
+				req.on('error', function(e) {
+					console.log("Error");
+					console.log(e);
+					
+			        	response.render('orderHistory',{orders:sess.orders, p :pageNumber});
+				});
+				var body = JSON.stringify({
+					  "rating": rateInput
+					});
+
+				
+				req.write(body);
+				req.end();
+
+				
+	
+		}else{
+    response.redirect('/orderHis');
+		}
+	}
+})
 
 router.route('/orderHis').get(function(req, response, next) {
 	 var sess = req.session;
+	 var pageNumber;
+	 var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
 		if(!sess.authorised){
 			console.log("Not authorized user");
 	        response.redirect('/welcome');
 		}else{
+			if(query.p){
+				pageNumber = query.p;
+				response.render('orderHistory',{orders:req.session.orders, p:pageNumber});
+				
+			} else{
+				pageNumber = 1;
+			
 			var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/Sara@test.com';//+req.session.email;
 		    http.get(orderHisUrl, function(res) {
 		        var body = '';
@@ -46,56 +118,13 @@ router.route('/orderHis').get(function(req, response, next) {
 		        res.on('end', function() {
 		        	console.log("body ", body);
 		        	 req.session.orders = JSON.parse(body);
-		        	 response.render('orderHistory',{orders:req.session.orders});
+		        	response.render('orderHistory',{orders:req.session.orders, p:pageNumber});
+		        	//response.render('test');
 		        });
 		    }).on('error', function(e) {
 		        console.log("Got an error: ", e);
 		    });
-			
-			
-    //TODO: rest get call for products array 
-/*	var pageNumber = 1;
-	var url_parts = url.parse(req.url, true);
-	console.log(url_parts);
-	var query = url_parts.query;
-	console.log("url paramters ", query);
-	if(query.p){
-		pageNumber = query.p;
-		 response.render('catalog', {
-	            products: req.session.products,
-	            p : pageNumber
-	        });
-		 
-	}else{
-	if(query.s){
-		 response.render('catalog', {
-            products: req.session.products,
-            p : pageNumber
-        });
-	}else {
-	var fbResponse = [];
-	 
-    var ProductUrl = 'http://52.5.167.238:8080/products';
-    http.get(ProductUrl, function(res) {
-        var body = '';
-        res.on('data', function(chunk) {
-            body += chunk;
-            
-        });
-        res.on('end', function() {
-        	console.log("body ", body);
-        	 req.session.products = JSON.parse(body);
-            response.render('catalog', {
-                products: req.session.products,
-                p : pageNumber
-            });
-        });
-    }).on('error', function(e) {
-        console.log("Got an error: ", e);
-    });
-	}
-	}
-	  */
+			}
 		}
 
     console.log("\n in Order History \n");

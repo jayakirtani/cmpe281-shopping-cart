@@ -187,13 +187,13 @@
 
  if(pageList[i].categories){
  
-             block = block+ '<div>search tags: ';
+             block = block+ '<div>search tags:<br> ';
               for(var j=0;j< pageList[i].categories.length; j++){
 
      block = block+ '<a href="/search?s='+pageList[i].categories[j]+'"?p='+currentPage+'" >'+pageList[i].categories[j]+'</a><h> </h>';
 
    }
-   block = block+ '</div>';
+   block = block+ '</br></div>';
 
    };
 

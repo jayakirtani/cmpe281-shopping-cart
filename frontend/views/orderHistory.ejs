@@ -17,46 +17,10 @@
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="includes/css/styles.css">
+	<link rel="stylesheet" href="includes/css/orderstyles.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="includes/js/doRate.js"></script>
 
-<style>
-.panel-order .row {
-	border-bottom: 1px solid #ccc;
-}
-.panel-order .row:last-child {
-	border: 0px;
-}
-.panel-order .row .col-md-1  {
-	text-align: center;
-	padding-top: 15px;
-}
-.panel-order .row .col-md-1 img {
-	width: 50px;
-	max-height: 50px;
-}
-.panel-order .row .row {
-	border-bottom: 0;
-}
-.panel-order .row .col-md-11 {
-	border-left: 1px solid #ccc;
-}
-.panel-order .row .row .col-md-12 {
-	padding-top: 7px;
-	padding-bottom: 7px; 
-}
-.panel-order .row .row .col-md-12:last-child {
-	font-size: 11px; 
-	color: #555;  
-	background: #efefef;
-}
-.panel-order .btn-group {
-	margin: 0px;
-	padding: 0px;
-}
-.panel-order .panel-body {
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-</style>
 </head>
 <body>
 	<div class="container" id="main">
@@ -91,55 +55,129 @@
 
         </div>
 
+
 <div class="panel panel-default panel-order" >
   <div class="panel-heading">
       <strong>Order history</strong>
       <div class="btn-group pull-right">
-          <div class="btn-group">
-			<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-			  Filter history <i class="fa fa-filter"></i>
+          
+			<button type="button" class="btn btn-default dropdown-toggle" >
+			<i>Total : </b></i>
+			   <i id="ordersNum"></i>
 			</button>
-			<ul class="dropdown-menu dropdown-menu-right">
-			  <li><a href="#">Approved orders</a></li>
-			  <li><a href="#">Pending orders</a></li>
-			</ul>
-		  </div>
+			
+		  
 		</div>
   </div>
   
     <div id="container">  </div>
+     <input type="button" id="first" onclick="firstPage()" value="first"  />
+        <input type="button" id="next" onclick="nextPage()" value="next" />
+        <input type="button" id="previous" onclick="previousPage()" value="previous" />
+        <input type="button" id="last" onclick="lastPage()" value="last" />
+        
     <script>
-  var block ='';
- var orders =<%- JSON.stringify(orders) %>;
- 
-  for (var i=0;i<orders.length;i++){
- var date =  new Date(orders[i].orderdate).toISOString().replace(/T/, ' ').replace(/\..+/, '') ;
-  block = block+
-  	'<div class="panel-body">'+
-  	'<div class="row">'+
-	 ' <div class="col-md-1"><img src="http://bootdey.com/img/Content/user_3.jpg" class="media-object img-thumbnail"></div>'+
-		  '<div class="col-md-12">'+
-			'<div class="pull-right"><label class="label label-danger">Status :'+orders[i].status+'</label> </div>'+
-			'<span><strong>Order Id</strong></span> <span class="label label-info">'+orders[i]._id+'</span><br>'+
-			'Quantity : '+orders[i].products.length+', Price: $'+orders[i].totalamount+'</br>'+
-			'<br>Order made on:' +date+'</br>'+
-			'<a data-placement="top" class="btn btn-danger  btn-xs glyphicon glyphicon-trash pull-right" href="#" title="Danger"></a>'+
-		 +'</div>';
-		 
-		 
-		 for (var j=0 ; j<orders[i].products.length;j++){
-		 block = block+j+
-		'<div> Product name :'+
-			'<a href="/productDetails>'+orders[i].products[j].productname +'</a>'+
-			'<br><span> Quantity'+orders[i].products[j].quantity+''+
-			' Price: $'+orders[i].products[j].price +'</span></br>'+
-		  '</div>';
-  }
+    
+    var ndisabled, pdisabled,fdisabled,ldisabled;
+     var orders =<%- JSON.stringify(orders) %>;
+            var pageList = new Array();
+            currentPage=  <%-p%>? <%-p%>:1;
+            var numberPerPage = 1;
+            numberOfPages = getNumberOfPages();
+            loadList();
+       document.getElementById("ordersNum").innerHTML=" "+ orders.length; 
+       
+       function getNumberOfPages() {
+    return Math.ceil(orders.length / numberPerPage);
+}
+function nextPage() {
+console.log("here Next");
+currentPage += 1;
+var theUrl = "/orderHis"+"?p="+currentPage;
+window.location=theUrl;
 
-block = block+ '</div></div>';
-			
-			}
+}
+function previousPage() {
+currentPage = 1;
+var theUrl = "/orderHis"+"?p="+currentPage;
+window.location=theUrl;
+}
+function firstPage() {
+currentPage = 1;
+var theUrl = "/orderHis"+"?p="+currentPage;
+window.location=theUrl;
+}
+function lastPage() {
+currentPage = numberOfPages;
+var theUrl = "/orderHis"+"?p="+currentPage;
+window.location=theUrl;
+}
+function loadList() {
+var begin = ((currentPage - 1) * numberPerPage);
+var end = begin + numberPerPage;
+console.log("here In loadList" )
+pageList = orders.slice(begin, end);
+console.log("done Loading");
+console.log(pageList);
+drawList();
+check();
+// determines the states of the pagination buttons
+}
+function check() {
+
+document.getElementById("next").disabled = currentPage == numberOfPages ? true : false;
+document.getElementById("previous").disabled = currentPage == 1 ? true : false;
+document.getElementById("first").disabled = currentPage == 1 ? true : false;
+document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
+}
+      
+   
+ function drawList()
+            {  
+  var block ='';
+
+
+  for (var i=0;i<pageList.length;i++){
+ var date =  new Date(pageList[i].orderdate).toISOString().replace(/T/, ' ').replace(/\..+/, '') ;
+  block = block+
+  	'<div class="row"><div class="container">'+
+	 	'<table>'+
+  '<thead>'+
+    '<tr>'+
+      '<th colspan="4"> order id  :'+pageList[i]._id +'</th>'+
+    '</tr>'+
+    '<tr>'+
+    '<th> <br>Items:</br> </th>'+
+    '<th>    </th>'+
+       '<th colspan="2" > Date :'+date+'</th>'+
+    '</tr>'+
+  '</thead>';
+  for (var j=0 ; j<pageList[i].products.length;j++){
+  
+		 block =block+
+  '<tbody>'+
+    '<tr>'+
+     ' <td>#'+(j+1)+'</td>'+
+      '<td>'+pageList[i].products[j].productname+ '</td>'+
+      '<td><div class="col-md-1"><img src="http://bootdey.com/img/Content/user_3.jpg" class="media-object img-thumbnail"></div></td>'+
+     ' <td>'+
+        '<i> Quantity :'+ pageList[i].products[j].quantity +'</i>'+
+        '<i> Price: '+pageList[i].products[j].price +'$</i>'+
+        '<i> <form id="rateform" method="post" action="/rate?id='+pageList[i].products[j].productid+'&p='+currentPage+'">'+
+       ' <input type="number" class="rating" id="rate" name="rate" data-min="1" data-max="5" value="'+3+'"/></form></i>'+
+      '</td>'+
+    '</tr>'+
+  '</tbody>';
+  }
+block = block+'</table></div></div>';
+
+}
+
+	 
+	 
 document.getElementById("container").innerHTML=block;
+
+}
 			
 </script>
   	

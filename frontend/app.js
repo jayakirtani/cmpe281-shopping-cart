@@ -42,6 +42,7 @@ app.use('/welcome', welcome);
 app.use('/', catalog);
 app.use('/catalog', catalog);
 app.use('/', order);
+app.use('/rate', order);
 //app.use('/orderHis', order);
 //// Initialize Passport
 var initPassport = require('./passport-init');
