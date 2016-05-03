@@ -4,7 +4,7 @@ var orderRouter = function(app) {
 
       //To create customer order
 	app.post('/createOrder', function(req, res) {
-	     if (!req.body.customerid || !req.body.totalamount || !req.body.products) {
+	     if (!req.body.customerid || !req.body.totalamount || !req.body.products || !req.body.paymentdetails) {
 			res.status(400).json({
 				success: false,
 				msg: 'Incorrect Order Information.'
@@ -15,7 +15,8 @@ var orderRouter = function(app) {
 			var newOrder = new Order({
 				customerid: req.body.customerid,
 				totalamount: req.body.totalamount,
-				products: req.body.products
+				products: req.body.products,
+                        paymentdetails : req.body.paymentdetails
 			});
 
       		// save the order
@@ -37,8 +38,8 @@ var orderRouter = function(app) {
 
       // To retrive customers order history
       app.get ('/getOrderHistory/:customerid' , function(req, res){
-            
-            Order.find({customerid : req.params.customerid} , function (err, orders){
+            //find order history for customerid provided and exclude paymentdetails and some other fields from output
+            Order.find({customerid : req.params.customerid} ,{"products._id" : 0 , paymentdetails :0 , __v :0} , function (err, orders){
                   if (err){
                         console.log('Error :' + err);
                         res.status(400).json({success : false , msg : 'Error fetching Customer Order History' });
