@@ -55,6 +55,15 @@
 
                     </ul>
                     </div>
+                     <div class="nav-collapse collapse navbar-responsive-collapse pull-left">
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="/cart">Cart</a>
+                        </li>
+
+                    </ul>
+                    </div>
+                    
 
 	<form  id="searchForm" class ="navbar-form pull-left" method ="post" action="/search">
       <input type="text" class="form-control" placeholder="Search this site..." name="searchInput" />
@@ -155,7 +164,10 @@
 
             var block = '';
             for (var i = 0; i < pageList.length; i++) {
-            
+            var check = true;
+            if(pageList[i].stock<=0){
+            check = false;
+            };
             block =block +'<form method="post" id='+i+' action="/addToCart?p='+currentPage+'" validate>'+
             '<div class="col-sm-5 col-lg-4 col-md-4 ">'+
             ' <div class="thumbnail">'+
@@ -183,8 +195,15 @@
             '</div> <p > reviews</p>'+
             '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="'+pageList[i].rating+'">'+
             '<a href="#" onclick="document.getElementById('+i+').submit();" >'+
-            ' <span>add to Cart</span></a>'+
-'<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png"></div>';
+            ' <span id="cartSpan" >add to Cart</span></a>'+
+'<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png" ' ;
+if(check ==false) {
+block =block+"disabled";
+document.getElementById("cartSpan").style.visibility = "hidden";
+
+}
+
+block =block+'></div>';
 
  if(pageList[i].categories){
  
