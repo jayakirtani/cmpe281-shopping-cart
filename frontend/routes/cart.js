@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var request = require("request");
 //Used for routes that must be authenticated.
 function isAuthenticated(req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -21,45 +22,40 @@ function isAuthenticated(req, res, next) {
 };
 //Register the authentication middleware
 //router.use('/cart', isAuthenticated);
-var SigninURL = "http://ec2-52-5-167-238.compute-1.amazonaws.com:8080";
-router.route('/cart').get(function(req, res) {
+var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com/";
+router.route('/').get(function(req, res) {
     if (!req.session.authorised) {
         res.redirect('/welcome');
         return;
     }
+    console.log("/cart get");
+
     var email = req.session.email;
     request.get({
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        url: SigninURL + "/cart",
-        form: {
-            email: email
-        },
+        url: SigninURL + "/getCart?userId=" + email,
     }, function(error, response, body) {
-        try {
-            console.log(body);
-            var parse = JSON.parse(body);
-        } catch (e) {
-            console.log("error in parsing json");
-            //error in parsing json
-            console.log(e);
-            res.redirect('/catalog');
-            return;
-        }
-        console.log(parse);
-        console.log(email);
         if (response.statusCode == 200 || response.statusCode == 400) {
-            //error in fetching data
-            if (parse.success === false) {
-                console.log("error in fetching data " + parse);
-                var errormessage = parse.msg;
+            try {
+                console.log(body);
+                var parse = JSON.parse(body);
+            } catch (e) {
+                console.log("error in parsing json");
+                //error in parsing json
+                console.log(e);
                 res.redirect('/catalog');
-            } else {
-                console.log("successcessfull");
+                return;
+            }
+            console.log(parse);
+            console.log(email);
+            //error in fetching data
+            if (parse.userId === email) {
+                console.log("successcesfull");
                 res.render('/cart', {
-                    cartItems: parse,
+                    cartItems: parse.cartInfo,
                 });
+            } else {
+                console.log("error in fetching data ");
+                res.redirect('/welcome');
             }
         } else {
             res.redirect('/catalog');
@@ -70,67 +66,86 @@ router.route('/cart').get(function(req, res) {
         res.redirect('/welcome');
         return;
     }
+    console.log("/cart post");
     var email = req.session.email;
     var productID = req.body.productID;
     var quatity = req.body.quatity;
+    var productName = req.body.productName;
+    var productCost = req.body.productCost;
+    var productImage = req.body.productImage;
+
     request.post({
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
-        url: SigninURL + "/cart",
+        url: SigninURL + "/addToCart",
         form: {
-            email: email,
-            productID: productID,
-            quantity: quatity,
+            "userId": email,
+            "cartInfo": [{
+                "productId": productID,
+                "productQuantity": quatity,
+                "productName": productName,
+                "productCost": productCost,
+                "productImage": productImage,
+            }, ],
         },
     }, function(error, response, body) {
-        //TODO
-        // try {
-        //     console.log(body);
-        //     var parse = JSON.parse(body);
-        // } catch (e) {
-        //     console.log("error in parsing json");
-        //     //error in parsing json
-        //     console.log(e);
-        //     res.redirect('/catalog');
-        //     return;
-        // }
-        // console.log(parse);
-        // console.log(email);
-        // if (response.statusCode == 200 || response.statusCode == 400) {
-        //     //error in fetching data
-        //     if (parse.success === false) {
-        //         console.log("error in fetching data " + parse);
-        //         var errormessage = parse.msg;
-        //         res.redirect('/catalog');
-        //     } else {
-        //         console.log("successcessfull");
-        //         res.render('/cart', {
-        //             cartItems: parse,
-        //         });
-        //     }
-        // } else {
-        //     res.redirect('/catalog');
-        // }
+         if (body == "Success") {
+            res.redirect('/catalog')
+        } else {
+            res.redirect('/catalog', {errorMsg:"Could not add product to cart. Please try again."});
+        }
     });
-}).delete(function(req.res) {
+}).delete(function(req,res) {
     if (!req.session.authorised) {
         res.redirect('/welcome');
         return;
     }
     var email = req.session.email;
     var productID = req.body.productID;
-    request.delete({
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        url: SigninURL + "/cart",
-        form: {
-            email: email,
-            productID: productID,
-        },
-    }, function(error, response, body) {
-        //todo
-    });
+    var productQuantity = req.body.quatity;
+
+    if(productQuantity==0){
+        request.post({
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            url: SigninURL + "/removeItem",
+            form: {
+                "userId": email,
+                "cartInfo": [{
+                    "productId": productID,
+                }, ],
+            },
+        }, function(error, response, body) {
+             if (body == "Success") {
+                res.redirect('/cart')
+            } else {
+                res.redirect('/cart', {errorMsg:"Could not add product to cart. Please try again."});
+            }
+        });
+    }
+    else{
+         request.post({
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            url: SigninURL + "/updateItem",
+            form: {
+                "userId": email,
+                "cartInfo": [{
+                    "productId": productID,
+                    "productQuantity": quatity,
+                }, ],
+            },
+        }, function(error, response, body) {
+             if (body == "Success") {
+                res.redirect('/cart')
+            } else {
+                res.redirect('/cart', {errorMsg:"Could not add product to cart. Please try again."});
+            }
+        });
+    }
 });
+
 module.exports = router;
