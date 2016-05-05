@@ -28,8 +28,6 @@ function isAuthenticated (req, res, next) {
 //router.use('/catalog', isAuthenticated);
 
 
-
-
 router.route('/catalog').get(function(req, response, next) {
 	 var sess = req.session;
 		if(!sess.authorised){
@@ -105,27 +103,32 @@ router.route('/addToCart').post(function(req, response, next) {
 	console.log("\n in addToCart \n");
     var data = {
 	userId:	req.session.email,
-	productInfo: [{
+	cartInfo: [{
 		productId:req.body._id,
-		quantity: req.body.qty
+		productQuantity: req.body.qty,
+		productName : req.body.title,
+		productCost : req.body.price,
+		productImage :req.body.imageUrl
+			
 	}
 		]
   
     };
+
     var post_data = JSON.stringify(data);
   
-    console.log('JSON request ', data);
+    console.log('JSON request ', post_data);
     
     
     // add url and host information
     var post_options = {
-        host: '8',
-        port: '8080',
+        host: 'spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com',
+        port: '80',
         path: '/addToCart',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(post_data)
+           'Accept' : 'application/json'
         }
     };
     // Set up the request
@@ -135,15 +138,15 @@ router.route('/addToCart').post(function(req, response, next) {
         res.on('data', function(chunk) {
             var body = JSON.parse(chunk);
             console.log('Response: ' + chunk);
-            if (body.success == false) {
+            if (body ="Failure") {
                 console.log(body.success, "\false add to cart  \n");
-                console.log("\false add to cart  \n", body.success);
+                console.log("\false add to cart  \n", body);
                 response.render('catalog', {
                     products:  req.session.products,
                     p : pageNumber,
                     addtoCart:0
                 });
-            } else if (res.statusCode == 200 && body.success == true) {
+            } else if (res.statusCode == 200 && body=="Success") {
                 console.log("successful add to cart ", body.success);
                 response.render('catalog', {
                     products: req.session.products,

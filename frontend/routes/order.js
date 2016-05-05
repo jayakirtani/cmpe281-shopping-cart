@@ -66,7 +66,33 @@ router.route('/rate').post(function(req, response, next) {
 				  res.on('data', function (chunk) {
 				    console.log('BODY: ' + chunk);
 				    console.log("success");
-		        	response.render('orderHistory',{orders:sess.orders, p :pageNumber});
+		        	
+				    
+					var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/Sara@test.com';//+req.session.email;
+				    http.get(orderHisUrl, function(res) {
+				        var body = '';
+				        res.on('data', function(chunk) {
+				            body += chunk;
+				            
+				        });
+				        res.on('end', function() {
+				        	console.log("body ", body);
+				        	sess.orders= JSON.parse(body);
+				        	//response.render('orderHistory',{orders:req.session.orders, p:pageNumber});
+				        	response.render('orderHistory',{orders:sess.orders, p :pageNumber});
+				        	//response.render('test');
+				        });
+				    }).on('error', function(e) {
+				        console.log("Got an error: ", e);
+				    });
+				    
+				    
+				    
+				    
+				    
+				    
+				    
+				    
 				  });
 				});
 
