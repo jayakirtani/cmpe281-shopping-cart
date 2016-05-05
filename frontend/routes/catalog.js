@@ -6,7 +6,7 @@ var router = express.Router();
 
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
-    // if user is authenticated in the session, call the next() to call the next request handler 
+    // if user is authenticated in the session, call the next() to call the next request handler
     // Passport adds this method to request object. A middleware is allowed to add properties to
     // request and response objects
 
@@ -30,13 +30,13 @@ function isAuthenticated (req, res, next) {
 
 
 
-router.route('/catalog').get(function(req, response, next) {
+router.route('/').get(function(req, response, next) {
 	 var sess = req.session;
 		if(!sess.authorised){
 			console.log("Not authorized user");
 	        response.redirect('/welcome');
 		}else{
-    //TODO: rest get call for products array 
+    //TODO: rest get call for products array
 	var pageNumber = 1;
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
@@ -49,7 +49,7 @@ router.route('/catalog').get(function(req, response, next) {
 	            p : pageNumber,
 	            addtoCart:2
 	        });
-		 
+
 	}else{
 	if(query.s){
 		 response.render('catalog', {
@@ -59,13 +59,13 @@ router.route('/catalog').get(function(req, response, next) {
         });
 	}else {
 	var fbResponse = [];
-	 
+
     var ProductUrl = 'http://52.5.167.238:8080/products';
     http.get(ProductUrl, function(res) {
         var body = '';
         res.on('data', function(chunk) {
             body += chunk;
-            
+
         });
         res.on('end', function() {
         	console.log("body ", body);
@@ -82,10 +82,10 @@ router.route('/catalog').get(function(req, response, next) {
 	}
 	}
 		}
-  
+
     console.log("\n in catalog \n");
-    
-   
+
+
 })
 router.route('/addToCart').post(function(req, response, next) {
 	var sess = req.session;
@@ -101,7 +101,7 @@ router.route('/addToCart').post(function(req, response, next) {
 	if(query.p){
 		pageNumber = query.p;
 	}
-	
+
 	console.log("\n in addToCart \n");
     var data = {
 	userId:	req.session.email,
@@ -110,13 +110,13 @@ router.route('/addToCart').post(function(req, response, next) {
 		quantity: req.body.qty
 	}
 		]
-  
+
     };
     var post_data = JSON.stringify(data);
-  
+
     console.log('JSON request ', data);
-    
-    
+
+
     // add url and host information
     var post_options = {
         host: '8',
@@ -131,7 +131,7 @@ router.route('/addToCart').post(function(req, response, next) {
     // Set up the request
     var post_req = http.request(post_options, function(res) {
         res.setEncoding('utf8');
-        
+
         res.on('data', function(chunk) {
             var body = JSON.parse(chunk);
             console.log('Response: ' + chunk);
@@ -189,8 +189,8 @@ router.route('/catalog')
     //gets all posts
 
     .get(function(req, res){
-    	
-    	
+
+
         // Todo fetch catalog from databse
         // console.log('debug1');
         // Post.find(function(err, posts){
@@ -200,7 +200,7 @@ router.route('/catalog')
         //     }
         //     return res.send(200,posts);
         // });
-    	
+
     	res.render('catalog');
     });
 
@@ -217,7 +217,7 @@ router.route('/catalog/:id')
     });
 
     // Not useful now. Can be later if catalog adding added for admin console
-    // 
+    //
     // //updates specified post
     // .put(function(req, res){
     //     Post.findById(req.params.id, function(err, post){
@@ -282,7 +282,7 @@ router.route('/pay').get(function(req, response, next) {
     });
 	}
 */
-		
+
 		response.render('payment');
 	}
 })

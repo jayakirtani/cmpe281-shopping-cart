@@ -85,23 +85,24 @@
 
         </div>
 
-  <a href="/search?f=1"><span class="glyphicon glyphicon-heart">  featured</span></a>
-    <a href="/catalog"><span class="glyphicon glyphicon-asterisk">  All products</span></a>
-    
+    <a href="/search?f=1"><span class="glyphicon glyphicon-heart">Featured</span></a>
+    <a href="/catalog"><span class="glyphicon glyphicon-asterisk">All products</span></a>
+    <a href="/cart"><span class="glyphicon glyphicon-asterisk">My Cart</span></a>
+
      <div id ="NoSearch" class="alert alert-danger alert-block fade in" >
 
                         <strong>Error!</strong> No results were found, please try again!</div>
-                        
+
  <div id ="addedToCart" class="alert alert-success alert-block fade in " >
 
                        <span class="glyphicon glyphicon-ok"/> Item was Successfully added to Cart  !</div>
-                        
-                        
-                        
+
+
+
 <div id ="notAddedToCart" class="alert alert-danger alert-block fade in" alert="close">
 
                         <strong>Error!</strong>There was an Error in adding the Item to Cart, please try again!</div>
-                        
+
 
 <script>
                         $("#notAddedToCart").fadeTo(2000, 500).slideUp(3000, function(){
@@ -125,7 +126,7 @@
 
         <script>
             var list = <%- JSON.stringify(products) %>;
-            
+
             if(<%-addtoCart%> == 1){
             document.getElementById("addedToCart").style.display =  'block';
 
@@ -136,7 +137,7 @@
             document.getElementById("notAddedToCart").style.display =  'block';
             }else{
               document.getElementById("notAddedToCart").style.display =  'none';
-             
+
             }
             if(list.length==0){
             document.getElementById("NoSearch").style.display =  'block';
@@ -155,7 +156,7 @@
 
             var block = '';
             for (var i = 0; i < pageList.length; i++) {
-            
+
             block =block +'<form method="post" id='+i+' action="/addToCart?p='+currentPage+'" validate>'+
             '<div class="col-sm-5 col-lg-4 col-md-4 ">'+
             ' <div class="thumbnail">'+
@@ -186,7 +187,7 @@
 '<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png"></div>';
 
  if(pageList[i].categories){
- 
+
              block = block+ '<div>search tags:<br> ';
               for(var j=0;j< pageList[i].categories.length; j++){
 

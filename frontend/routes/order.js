@@ -6,7 +6,7 @@ var router = express.Router();
 
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
-    // if user is authenticated in the session, call the next() to call the next request handler 
+    // if user is authenticated in the session, call the next() to call the next request handler
     // Passport adds this method to request object. A middleware is allowed to add properties to
     // request and response objects
 
@@ -28,7 +28,7 @@ function isAuthenticated (req, res, next) {
 //router.use('/catalog', isAuthenticated);
 
 
-router.route('/rate').post(function(req, response, next) {
+router.route('/').post(function(req, response, next) {
 	console.log("in rate");
 	 var sess = req.session;
 	 var pageNumber;
@@ -36,7 +36,7 @@ router.route('/rate').post(function(req, response, next) {
 		console.log("Not authorized user");
         response.redirect('/welcome');
 	}else{
-		
+
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
 		if(query.p){
@@ -53,7 +53,7 @@ router.route('/rate').post(function(req, response, next) {
 				  "port": "8080",
 				  "path": "/rating/"+query.id,
 				  "method": "PUT",
-				  "headers": { 
+				  "headers": {
 					  "Accept": "application/json",
 				    "Content-Type" : "application/json",
 				  }
@@ -62,7 +62,7 @@ router.route('/rate').post(function(req, response, next) {
 				  console.log('STATUS: ' + res.statusCode);
 				  console.log('HEADERS: ' + JSON.stringify(res.headers));
 				  res.setEncoding('utf8');
-				  
+
 				  res.on('data', function (chunk) {
 				    console.log('BODY: ' + chunk);
 				    console.log("success");
@@ -73,19 +73,19 @@ router.route('/rate').post(function(req, response, next) {
 				req.on('error', function(e) {
 					console.log("Error");
 					console.log(e);
-					
+
 			        	response.render('orderHistory',{orders:sess.orders, p :pageNumber});
 				});
 				var body = JSON.stringify({
 					  "rating": rateInput
 					});
 
-				
+
 				req.write(body);
 				req.end();
 
-				
-	
+
+
 		}else{
     response.redirect('/orderHis');
 		}
@@ -104,16 +104,16 @@ router.route('/orderHis').get(function(req, response, next) {
 			if(query.p){
 				pageNumber = query.p;
 				response.render('orderHistory',{orders:req.session.orders, p:pageNumber});
-				
+
 			} else{
 				pageNumber = 1;
-			
+
 			var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/Sara@test.com';//+req.session.email;
 		    http.get(orderHisUrl, function(res) {
 		        var body = '';
 		        res.on('data', function(chunk) {
 		            body += chunk;
-		            
+
 		        });
 		        res.on('end', function() {
 		        	console.log("body ", body);
@@ -128,7 +128,7 @@ router.route('/orderHis').get(function(req, response, next) {
 		}
 
     console.log("\n in Order History \n");
-    
-   
+
+
 })
 module.exports = router;
