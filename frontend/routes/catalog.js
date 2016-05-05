@@ -139,7 +139,7 @@ router.route('/addToCart').post(function(req, response, next) {
             var body = JSON.parse(chunk);
             console.log('Response: ' + chunk);
             if (body ="Failure") {
-                console.log(body.success, "\false add to cart  \n");
+                console.log("\false add to cart  \n");
                 console.log("\false add to cart  \n", body);
                 response.render('catalog', {
                     products:  req.session.products,
@@ -147,7 +147,7 @@ router.route('/addToCart').post(function(req, response, next) {
                     addtoCart:0
                 });
             } else if (res.statusCode == 200 && body=="Success") {
-                console.log("successful add to cart ", body.success);
+                console.log("successful add to cart ",body);
                 response.render('catalog', {
                     products: req.session.products,
                     p : pageNumber,
