@@ -76,6 +76,34 @@ var productRouter = function(app) {
             });
 
         });
+
+
+    //update the stock after order purchase
+    app.put("/stock",function(req,res){
+
+        var conditions = {_id:req.body._id};
+        var options = { upsert: true };
+
+        //first get the ratings field
+        var newStock = 0;
+        var query = products.findOne({'_id':req.body._id}).select('stock');
+
+        query.exec(function (err, doc) {
+            if(err)
+                return res.status(400).json({success: false, msg: 'Fetch failed for updating the stock'});
+            newStock =  (Number(doc.stock) - Number(req.body.stock));
+            var update = { $set: { stock: Math.round(newStock)}};
+
+            products.update(conditions,update,options,function(err, results){
+                if(err)
+                    return res.status(400).json({success: false, msg: 'Update for stock failed'});
+                res.send(JSON.parse(JSON.stringify(results)));
+            });
+
+        });
+
+    });
+
 };
 
 module.exports = productRouter;
