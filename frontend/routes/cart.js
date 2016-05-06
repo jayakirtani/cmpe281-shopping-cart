@@ -50,7 +50,7 @@ router.route('/').get(function(req, res) {
             //error in fetching data
             if (parse.userId === email) {
                 console.log("successcesfull");
-                res.render('/cart', {
+                res.render('cart', {
                     cartItems: parse.cartInfo,
                 });
             } else {
