@@ -11,6 +11,16 @@ var orderRouter = function(app) {
 
            } ;
 
+           var producturl = { host : '52.5.167.238',
+                              port: '8080',
+                              path : '/stock',
+                              method : 'PUT',
+                              json : true,
+                              headers: {
+                                    "content-type": "application/json",
+                                    }
+                              };
+
 	     if (!req.body.customerid || !req.body.totalamount || !req.body.products || !req.body.paymentdetails) {
 			res.status(400).json({
 				success: false,
@@ -41,11 +51,11 @@ var orderRouter = function(app) {
       			});
 
                         //delete all items from cart
-                        var req = http.get(carturl , function (response){
+                        var reqCart = http.get(carturl , function (response){
                               var body ='';
                               response.setEncoding('utf8');
 
-                              //console.log(response.statusCode);
+                              console.log(response.statusCode);
                               response.on('data',function(data){
                                     body = body + data;
                               });
@@ -56,9 +66,30 @@ var orderRouter = function(app) {
 
                               
                         });
-                        req.on('error', function(e) {
+                        reqCart.on('error', function(e) {
                               console.log('ERROR: ' + e.message);
-});
+                        });
+
+                        //reduce inventory 
+
+                        (req.body.products).forEach(function(product){
+                              console.log ('productid : '+product.productid + ' count : ' + product.quantity);
+                              var productdetail = {"_id" : product.productid , "stock" : product.quantity };
+                              var reqProduct = http.request(producturl,function (response){
+                                    var body ='';
+                                    response.setEncoding('utf8');
+                                    response.on('data',function(data){
+                                          body = body + data;
+                                    });
+
+                                    response.on('end',function(data){
+                                          console.log ('Product Inventory Update : ' + body);
+                                    });
+                              });
+                              reqProduct.write(JSON.stringify(productdetail));
+                              reqProduct.end ();
+                        });
+
       		});
       	}
       });
