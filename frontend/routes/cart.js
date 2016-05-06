@@ -19,11 +19,13 @@ function isAuthenticated(req, res, next) {
     // }
     // if the user is not authenticated then redirect him to the login page
     return res.redirect('/welcome');
-};
+}
+
 //Register the authentication middleware
 //router.use('/cart', isAuthenticated);
 var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com/";
-router.route('/').get(function(req, res) {
+
+router.route('/').get(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/welcome');
         return;
@@ -33,7 +35,7 @@ router.route('/').get(function(req, res) {
     var email = req.session.email;
     request.get({
         url: SigninURL + "/getCart?userId=" + email,
-    }, function(error, response, body) {
+    }, function (error, response, body) {
         if (response.statusCode == 200 || response.statusCode == 400) {
             try {
                 console.log(body);
@@ -49,7 +51,7 @@ router.route('/').get(function(req, res) {
             console.log(email);
             //error in fetching data
             if (parse.userId === email) {
-                console.log("successcesfull");
+                console.log("successful");
                 res.render('cart', {
                     cartItems: parse.cartInfo,
                 });
@@ -61,7 +63,7 @@ router.route('/').get(function(req, res) {
             res.redirect('/catalog');
         }
     });
-}).post(function(req, res) {
+}).post(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/welcome');
         return;
@@ -87,16 +89,16 @@ router.route('/').get(function(req, res) {
                 "productName": productName,
                 "productCost": productCost,
                 "productImage": productImage,
-            }, ],
+            },],
         },
-    }, function(error, response, body) {
-         if (body == "Success") {
+    }, function (error, response, body) {
+        if (body == "Success") {
             res.redirect('/catalog')
         } else {
-            res.redirect('/catalog', {errorMsg:"Could not add product to cart. Please try again."});
+            res.redirect('/catalog', {errorMsg: "Could not add product to cart. Please try again."});
         }
     });
-}).delete(function(req,res) {
+}).delete(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/welcome');
         return;
@@ -105,7 +107,7 @@ router.route('/').get(function(req, res) {
     var productID = req.body.productID;
     var productQuantity = req.body.quatity;
 
-    if(productQuantity==0){
+    if (productQuantity == 0) {
         request.post({
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -115,18 +117,18 @@ router.route('/').get(function(req, res) {
                 "userId": email,
                 "cartInfo": [{
                     "productId": productID,
-                }, ],
+                },],
             },
-        }, function(error, response, body) {
-             if (body == "Success") {
+        }, function (error, response, body) {
+            if (body == "Success") {
                 res.redirect('/cart')
             } else {
-                res.redirect('/cart', {errorMsg:"Could not add product to cart. Please try again."});
+                res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
             }
         });
     }
-    else{
-         request.post({
+    else {
+        request.post({
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
             },
@@ -136,13 +138,13 @@ router.route('/').get(function(req, res) {
                 "cartInfo": [{
                     "productId": productID,
                     "productQuantity": quatity,
-                }, ],
+                },],
             },
-        }, function(error, response, body) {
-             if (body == "Success") {
+        }, function (error, response, body) {
+            if (body == "Success") {
                 res.redirect('/cart')
             } else {
-                res.redirect('/cart', {errorMsg:"Could not add product to cart. Please try again."});
+                res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
             }
         });
     }

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 
     <!-- Website Title & Description for Search Engine purposes -->
     <title>Code a Responsive Website with Twitter Bootstrap 3</title>
-    <meta name="description" content="Learn how to code your first responsive website with the new Twitter Bootstrap 3.">
+    <meta name="description"
+          content="Learn how to code your first responsive website with the new Twitter Bootstrap 3.">
 
     <!-- Mobile viewport optimized -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -31,272 +31,278 @@
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 
 
-
 </head>
 
-<body >
+<body>
 
-    <div class="container" id="main">
-        <div class="navbar navbar-fixed-top">
-            <div class="container">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Your Logo"></a>
+<div class="container" id="main">
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse"
+                    type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Your Logo"></a>
 
-                <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
-                    <ul class="nav navbar-nav">
-                        <li class="">
-                            <a href="/logout">logout</a>
-                        </li>
+            <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="/logout">logout</a>
+                    </li>
 
-                    </ul>
-                    </div>
-
-                    
-                     <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
-                    <ul class="nav navbar-nav">
-                        <li class="">
-                            <a href="/orderhis">Order History</a>
-                        </li>
-
-                    </ul>
-                    </div>
-                    
-
-	<form  id="searchForm" class ="navbar-form pull-left" method ="post" action="/search">
-      <input type="text" class="form-control" placeholder="Search this site..." name="searchInput" />
- </form><!-- end navbar-form -->
+                </ul>
+            </div>
 
 
-  <div class=" navbar-form nav-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="">
-                            <button type="button" class="btn btn-default" onclick="document.getElementById('searchForm').submit();" >
+            <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="/orderhis">Order History</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <form id="searchForm" class="navbar-form pull-left" method="post" action="/search">
+                <input type="text" class="form-control" placeholder="Search this site..." name="searchInput"/>
+            </form><!-- end navbar-form -->
+
+
+            <div class=" navbar-form nav-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <button type="button" class="btn btn-default"
+                                onclick="document.getElementById('searchForm').submit();">
                             <span class="glyphicon glyphicon-search"></span></button>
-                        </li>
+                    </li>
 
-                    </ul>
-                    </div>
-                </div><!-- end nav-collapse -->
-            </div><!-- end container -->
-        </div><!-- end navbar -->
- <div class="carousel slide" id="myCarousel"></div>
-        <div class="row">
-            <div class="span4">
-                <!-- empty, but using spacer to prevent collapse -->
-                <div class="spacer10"></div>
+                </ul>
             </div>
-            <div class="span4">
-                <p></p>
-            </div>
+        </div><!-- end nav-collapse -->
+    </div><!-- end container -->
+</div><!-- end navbar -->
+<div class="carousel slide" id="myCarousel"></div>
+<div class="row">
+    <div class="span4">
+        <!-- empty, but using spacer to prevent collapse -->
+        <div class="spacer10"></div>
+    </div>
+    <div class="span4">
+        <p></p>
+    </div>
 
-        </div>
+</div>
 
-  <a href="/search?f=1"><span class="glyphicon glyphicon-heart">  featured</span></a>
-    <a href="/catalog"><span class="glyphicon glyphicon-asterisk">  All products</span></a>
-    <a href="/cart"><span class="glyphicon glyphicon-asterisk">My Cart</span></a>
-     <div id ="NoSearch" class="alert alert-danger alert-block fade in" >
+<a href="/search?f=1"><span class="glyphicon glyphicon-heart">  featured</span></a>
+<a href="/catalog"><span class="glyphicon glyphicon-asterisk">  All products</span></a>
+<a href="/cart"><span class="glyphicon glyphicon-asterisk">My Cart</span></a>
+<div id="NoSearch" class="alert alert-danger alert-block fade in">
 
-                        <strong>Error!</strong> No results were found, please try again!</div>
+    <strong>Error!</strong> No results were found, please try again!
+</div>
 
- <div id ="addedToCart" class="alert alert-success alert-block fade in " >
+<div id="addedToCart" class="alert alert-success alert-block fade in ">
 
-                       <span class="glyphicon glyphicon-ok"/> Item was Successfully added to Cart  !</div>
+    <span class="glyphicon glyphicon-ok"/> Item was Successfully added to Cart !
+</div>
 
 
+<div id="notAddedToCart" class="alert alert-danger alert-block fade in" alert="close">
 
-<div id ="notAddedToCart" class="alert alert-danger alert-block fade in" alert="close">
-
-                        <strong>Error!</strong>There was an Error in adding the Item to Cart, please try again!</div>
+    <strong>Error!</strong>There was an Error in adding the Item to Cart, please try again!
+</div>
 
 
 <script>
-                        $("#notAddedToCart").fadeTo(2000, 500).slideUp(3000, function(){
-    $("#notAddedToCart").alert('close');
-});
+    $("#notAddedToCart").fadeTo(2000, 500).slideUp(3000, function () {
+        $("#notAddedToCart").alert('close');
+    });
 
- $("#addedToCart").fadeTo(2000, 500).slideUp(3000, function(){
-    $("#addedToCart").alert('close');
-});
+    $("#addedToCart").fadeTo(2000, 500).slideUp(3000, function () {
+        $("#addedToCart").alert('close');
+    });
 
 
 </script>
 
-        <div id="container" class="container" ></div>
+<div id="container" class="container"></div>
 
-        <input type="button" id="first" onclick="firstPage()" value="first"  />
-        <input type="button" id="next" onclick="nextPage()" value="next" />
-        <input type="button" id="previous" onclick="previousPage()" value="previous" />
-        <input type="button" id="last" onclick="lastPage()" value="last" />
+<input type="button" id="first" onclick="firstPage()" value="first"/>
+<input type="button" id="next" onclick="nextPage()" value="next"/>
+<input type="button" id="previous" onclick="previousPage()" value="previous"/>
+<input type="button" id="last" onclick="lastPage()" value="last"/>
 
 
-        <script>
-            var list = <%- JSON.stringify(products) %>;
 
-            if(<%-addtoCart%> == 1){
-            document.getElementById("addedToCart").style.display =  'block';
+<script>
+    var list = <%- JSON.stringify(products) %>;
 
-            }else{
-             document.getElementById("addedToCart").style.display =  'none';
-             }
-             if(<%-addtoCart%> == 0) {
-            document.getElementById("notAddedToCart").style.display =  'block';
-            }else{
-              document.getElementById("notAddedToCart").style.display =  'none';
+    if (<%- addtoCart %> == 1)
+    {
+        document.getElementById("addedToCart").style.display = 'block';
 
-            }
-            if(list.length==0){
-            document.getElementById("NoSearch").style.display =  'block';
-            } else{
-             document.getElementById("NoSearch").style.display = 'none';
-            console.log(list);
-            var ndisabled, pdisabled,fdisabled,ldisabled;
-            var pageList = new Array();
-            currentPage=  <%-p%>? <%-p%>:1;
-            var numberPerPage = 5;
-            numberOfPages = getNumberOfPages();
-            loadList();
-            }
-            function drawList()
-            {
+    }
+    else
+    {
+        document.getElementById("addedToCart").style.display = 'none';
+    }
+    if (<%- addtoCart %> == 0)
+    {
+        document.getElementById("notAddedToCart").style.display = 'block';
+    }
+    else
+    {
+        document.getElementById("notAddedToCart").style.display = 'none';
 
-            var block = '';
-            for (var i = 0; i < pageList.length; i++) {
+    }
+    if (list.length == 0) {
+        document.getElementById("NoSearch").style.display = 'block';
+    } else {
+        document.getElementById("NoSearch").style.display = 'none';
+        console.log(list);
+        var ndisabled, pdisabled, fdisabled, ldisabled;
+        var pageList = new Array();
+        currentPage = <%- p %>? <%- p %>: 1;
+        var numberPerPage = 5;
+        numberOfPages = getNumberOfPages();
+        loadList();
+    }
+    function drawList() {
+
+        var block = '';
+        for (var i = 0; i < pageList.length; i++) {
             var check = true;
-            if(pageList[i].stock<=0){
-            check = false;
-            };
-            block =block +'<form method="post" id='+i+' action="/addToCart?p='+currentPage+'" validate>'+
-            '<div class="col-sm-5 col-lg-4 col-md-4 ">'+
-            ' <div class="thumbnail">'+
-          //  ' <img src="http://www.petsmart.com/gsi/static/WFS/PETNA-PETUS-Site/-/PETNA-PETUS/en_US/2016/May/Supermenus/050216-NAVTILE-CAT-SuperMenu.jpg">'+
-           ' <img src='+pageList[i].imageUrl+'>'+
-            ' <input type="hidden" name="imageUrl"  value="'+pageList[i].imageUrl+'">'+
-            ' <div class="caption">'+pageList[i].title+
-            ' <input type="hidden" name="title"  value="'+pageList[i].title+'">'+
-            '  <h4 class="pull-right">$'+pageList[i].price+'</h4>'+
-            '<input type="hidden" name="price" value="'+pageList[i].price+'">'+
-
-            ' <input type="hidden" name="_id"  value="'+pageList[i]._id+'">'+
-            ' </h4>'+
-            ' <p>'+pageList[i].description+'</p>'+
-
-            '<div class="col-xs-3 col-xs-offset-3">'+
-            '<div class="input-group number-spinner">'+
-            '<span class="input-group-btn data-dwn">'+
-            '<button  type="button" class="btn btn-default btn-info" data-dir="dwn"';
-                        if(check ==false) {
-block =block+'disabled';
-}
-block=block+' ><span class="glyphicon glyphicon-minus"></span></button>'
-            +'</span>'+
-            '<input type="number" name="qty" class="form-control text-center" value="';
-            if(check) {
-            block =block +'1';
-            }else
-            {
-            block=block+'0';
+            if (pageList[i].stock <= 0) {
+                check = false;
             }
-          block=block+  '" min="1" max="'+pageList[i].stock+'">'+
-            '<span class="input-group-btn data-up">'+
-            '   <button  type="button" class="btn btn-default btn-info" data-dir="up" ';
+            ;
+            block = block + '<form method="post" id=' + i + ' action="/addToCart?p=' + currentPage + '" validate>' +
+                    '<div class="col-sm-5 col-lg-4 col-md-4 ">' +
+                    ' <div class="thumbnail">' +
+                    //  ' <img src="http://www.petsmart.com/gsi/static/WFS/PETNA-PETUS-Site/-/PETNA-PETUS/en_US/2016/May/Supermenus/050216-NAVTILE-CAT-SuperMenu.jpg">'+
+                    ' <img src=' + pageList[i].imageUrl + '>' +
+                    ' <input type="hidden" name="imageUrl"  value="' + pageList[i].imageUrl + '">' +
+                    ' <div class="caption">' + pageList[i].title +
+                    ' <input type="hidden" name="title"  value="' + pageList[i].title + '">' +
+                    '  <h4 class="pull-right">$' + pageList[i].price + '</h4>' +
+                    '<input type="hidden" name="price" value="' + pageList[i].price + '">' +
 
-            if(check ==false) {
-block =block+'disabled';
-}
-block =block+'><span class="glyphicon glyphicon-plus"></span></button>'+
-            '</span>'+
-            '</div>'+
-            '</div> <p > reviews</p>'+
-            '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="'+pageList[i].rating+'">';
+                    ' <input type="hidden" name="_id"  value="' + pageList[i]._id + '">' +
+                    ' </h4>' +
+                    ' <p>' + pageList[i].description + '</p>' +
 
-            if(check ==true) {
-            block =block +'<a href="#" onclick="document.getElementById('+i+').submit();" ><span>add to Cart</span></a>';
+                    '<div class="col-xs-3 col-xs-offset-3">' +
+                    '<div class="input-group number-spinner">' +
+                    '<span class="input-group-btn data-dwn">' +
+                    '<button  type="button" class="btn btn-default btn-info" data-dir="dwn"';
+            if (check == false) {
+                block = block + 'disabled';
+            }
+            block = block + ' ><span class="glyphicon glyphicon-minus"></span></button>'
+                    + '</span>' +
+                    '<input type="number" name="qty" class="form-control text-center" value="';
+            if (check) {
+                block = block + '1';
+            } else {
+                block = block + '0';
+            }
+            block = block + '" min="1" max="' + pageList[i].stock + '">' +
+                    '<span class="input-group-btn data-up">' +
+                    '   <button  type="button" class="btn btn-default btn-info" data-dir="up" ';
+
+            if (check == false) {
+                block = block + 'disabled';
+            }
+            block = block + '><span class="glyphicon glyphicon-plus"></span></button>' +
+                    '</span>' +
+                    '</div>' +
+                    '</div> <p > reviews</p>' +
+                    '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="' + pageList[i].rating + '">';
+
+            if (check == true) {
+                block = block + '<a href="#" onclick="document.getElementById(' + i + ').submit();" ><span>add to Cart</span></a>';
             }
 
-         else {
-          block=block+'<span>out Of Stock</span></a>';
-          }
-block=block+'<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png" ' ;
-if(check ==false) {
-block =block+'disabled';
-}
+            else {
+                block = block + '<span>out Of Stock</span></a>';
+            }
+            block = block + '<div><input type="image" style="height:50px;width:50px;" src="images/shopping_cart_button.png" ';
+            if (check == false) {
+                block = block + 'disabled';
+            }
 
-block =block+'></div>';
+            block = block + '></div>';
 
- if(pageList[i].categories){
+            if (pageList[i].categories) {
 
-             block = block+ '<div>search tags:<br> ';
-              for(var j=0;j< pageList[i].categories.length; j++){
+                block = block + '<div>search tags:<br> ';
+                for (var j = 0; j < pageList[i].categories.length; j++) {
 
-     block = block+ '<a href="/search?s='+pageList[i].categories[j]+'"?p='+currentPage+'" >'+pageList[i].categories[j]+'</a><h> </h>';
+                    block = block + '<a href="/search?s=' + pageList[i].categories[j] + '"?p=' + currentPage + '" >' + pageList[i].categories[j] + '</a><h> </h>';
 
-   }
-   block = block+ '</br></div>';
+                }
+                block = block + '</br></div>';
 
-   };
+            }
 
-  block = block+' </div>'+
-            '</div>'+
-            ' </div>'+
+            block = block + ' </div>' +
+                    '</div>' +
+                    ' </div>' +
 
-            ' </form>';
-
+                    ' </form>';
         }
 
-        document.getElementById("container").innerHTML=block;
-    };
-
+        document.getElementById("container").innerHTML = block;
+    }
 
     function getNumberOfPages() {
-    return Math.ceil(list.length / numberPerPage);
-}
-function nextPage() {
-console.log("here Next");
-currentPage += 1;
-var theUrl = "/catalog"+"?p="+currentPage;
-window.location=theUrl;
+        return Math.ceil(list.length / numberPerPage);
+    }
+    function nextPage() {
+        console.log("here Next");
+        currentPage += 1;
+        var theUrl = "/catalog" + "?p=" + currentPage;
+        window.location = theUrl;
 
-}
-function previousPage() {
-currentPage -= 1;
-var theUrl = "/catalog"+"?p="+currentPage;
-window.location=theUrl;
-}
-function firstPage() {
-currentPage = 1;
-var theUrl = "/catalog"+"?p="+currentPage;
-window.location=theUrl;
-}
-function lastPage() {
-currentPage = numberOfPages;
-var theUrl = "/catalog"+"?p="+currentPage;
-window.location=theUrl;
-}
-function loadList() {
-var begin = ((currentPage - 1) * numberPerPage);
-var end = begin + numberPerPage;
-console.log("here In loadList" )
-pageList = list.slice(begin, end);
-console.log("done Loading");
-console.log(pageList);
-drawList();
-check();
+    }
+    function previousPage() {
+        currentPage -= 1;
+        var theUrl = "/catalog" + "?p=" + currentPage;
+        window.location = theUrl;
+    }
+    function firstPage() {
+        currentPage = 1;
+        var theUrl = "/catalog" + "?p=" + currentPage;
+        window.location = theUrl;
+    }
+    function lastPage() {
+        currentPage = numberOfPages;
+        var theUrl = "/catalog" + "?p=" + currentPage;
+        window.location = theUrl;
+    }
+    function loadList() {
+        var begin = ((currentPage - 1) * numberPerPage);
+        var end = begin + numberPerPage;
+        console.log("here In loadList")
+        pageList = list.slice(begin, end);
+        console.log("done Loading");
+        console.log(pageList);
+        drawList();
+        check();
 // determines the states of the pagination buttons
-}
-function check() {
+    }
+    function check() {
 
-document.getElementById("next").disabled = currentPage == numberOfPages ? true : false;
-document.getElementById("previous").disabled = currentPage == 1 ? true : false;
-document.getElementById("first").disabled = currentPage == 1 ? true : false;
-document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
-}
+        document.getElementById("next").disabled = currentPage == numberOfPages ? true : false;
+        document.getElementById("previous").disabled = currentPage == 1 ? true : false;
+        document.getElementById("first").disabled = currentPage == 1 ? true : false;
+        document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
+    }
 </script>
-
 
 
 <div class="row">
@@ -314,7 +320,10 @@ document.getElementById("last").disabled = currentPage == numberOfPages ? true :
             <div class="col-sm-4">
                 <h6>About Us</h6>
                 <p>
-                    we are passionate about pet health and nutrition.food is the essential element for pets' health. we provide variety of diet option that would be hard to find in regular stores.our mission is to provide  pet owners with healthier, natural nutrition options And we genuinely enjoy helping pet owners to make well informed healthy choices.
+                    we are passionate about pet health and nutrition.food is the essential element for pets' health. we
+                    provide variety of diet option that would be hard to find in regular stores.our mission is to
+                    provide pet owners with healthier, natural nutrition options And we genuinely enjoy helping pet
+                    owners to make well informed healthy choices.
                 </p>
             </div><!-- end col-sm-4 -->
 
