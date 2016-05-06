@@ -55,7 +55,7 @@
 
                     </ul>
                     </div>
-                    
+
 
 	<form  id="searchForm" class ="navbar-form pull-left" method ="post" action="/search">
       <input type="text" class="form-control" placeholder="Search this site..." name="searchInput" />
@@ -92,17 +92,17 @@
      <div id ="NoSearch" class="alert alert-danger alert-block fade in" >
 
                         <strong>Error!</strong> No results were found, please try again!</div>
-                        
+
  <div id ="addedToCart" class="alert alert-success alert-block fade in " >
 
                        <span class="glyphicon glyphicon-ok"/> Item was Successfully added to Cart  !</div>
-                        
-                        
-                        
+
+
+
 <div id ="notAddedToCart" class="alert alert-danger alert-block fade in" alert="close">
 
                         <strong>Error!</strong>There was an Error in adding the Item to Cart, please try again!</div>
-                        
+
 
 <script>
                         $("#notAddedToCart").fadeTo(2000, 500).slideUp(3000, function(){
@@ -126,7 +126,7 @@
 
         <script>
             var list = <%- JSON.stringify(products) %>;
-            
+
             if(<%-addtoCart%> == 1){
             document.getElementById("addedToCart").style.display =  'block';
 
@@ -137,7 +137,7 @@
             document.getElementById("notAddedToCart").style.display =  'block';
             }else{
               document.getElementById("notAddedToCart").style.display =  'none';
-             
+
             }
             if(list.length==0){
             document.getElementById("NoSearch").style.display =  'block';
@@ -186,14 +186,14 @@ block=block+' ><span class="glyphicon glyphicon-minus"></span></button>'
             '<input type="number" name="qty" class="form-control text-center" value="';
             if(check) {
             block =block +'1';
-            }else 
+            }else
             {
             block=block+'0';
             }
           block=block+  '" min="1" max="'+pageList[i].stock+'">'+
             '<span class="input-group-btn data-up">'+
             '   <button  type="button" class="btn btn-default btn-info" data-dir="up" ';
-            
+
             if(check ==false) {
 block =block+'disabled';
 }
@@ -202,11 +202,11 @@ block =block+'><span class="glyphicon glyphicon-plus"></span></button>'+
             '</div>'+
             '</div> <p > reviews</p>'+
             '<input type="number" class="rating" id="test" name="rate" data-min="1" data-max="5" value="'+pageList[i].rating+'">';
-               
+
             if(check ==true) {
             block =block +'<a href="#" onclick="document.getElementById('+i+').submit();" ><span>add to Cart</span></a>';
             }
-            
+
          else {
           block=block+'<span>out Of Stock</span></a>';
           }
@@ -218,7 +218,7 @@ block =block+'disabled';
 block =block+'></div>';
 
  if(pageList[i].categories){
- 
+
              block = block+ '<div>search tags:<br> ';
               for(var j=0;j< pageList[i].categories.length; j++){
 
