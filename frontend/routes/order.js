@@ -21,7 +21,7 @@ function isAuthenticated (req, res, next) {
     }
 
     // if the user is not authenticated then redirect him to the login page
-    return res.redirect('/welcome');
+    return res.redirect('/');
 };
 
 //Register the authentication middleware
@@ -34,7 +34,7 @@ router.route('/rate').post(function(req, response, next) {
 	 var pageNumber;
 	if(!sess.authorised){
 		console.log("Not authorized user");
-        response.redirect('/welcome');
+        response.redirect('/');
 	}else{
 
 		var url_parts = url.parse(req.url, true);
@@ -125,7 +125,7 @@ router.route('/orderhis').get(function(req, response, next) {
 	var query = url_parts.query;
 		if(!sess.authorised){
 			console.log("Not authorized user");
-	        response.redirect('/welcome');
+	        response.redirect('/');
 		}else{
 			if(query.p){
 				pageNumber = query.p;

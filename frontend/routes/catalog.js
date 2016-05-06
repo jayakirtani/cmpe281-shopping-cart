@@ -21,7 +21,7 @@ function isAuthenticated (req, res, next) {
     }
 
     // if the user is not authenticated then redirect him to the login page
-    return res.redirect('/welcome');
+    return res.redirect('/');
 };
 
 //Register the authentication middleware
@@ -31,7 +31,7 @@ router.route('/').get(function(req, response, next) {
 	 var sess = req.session;
 		if(!sess.authorised){
 			console.log("Not authorized user");
-	        response.redirect('/welcome');
+	        response.redirect('/');
 		}else{
     //TODO: rest get call for products array
 	var pageNumber = 1;
@@ -88,7 +88,7 @@ router.route('/addToCart').post(function(req, response, next) {
 	var sess = req.session;
 	if(!sess.authorised){
 		console.log("Not authorized user");
-        response.redirect('/welcome');
+        response.redirect('/');
 	}else{
 	var url = require('url');
 	var pageNumber = 1;
@@ -252,7 +252,7 @@ router.route('/pay').get(function(req, response, next) {
  	 var sess = req.session;
  	if(!sess.authorised){
 		console.log("Not authorized user");
-        response.redirect('/welcome');
+        response.redirect('/');
 	}else{
 /*	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);

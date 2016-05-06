@@ -40,6 +40,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', welcome);
 app.use('/catalog', catalog);
+app.use('/', catalog);
 app.use('/cart', cart);
 app.use('/', order);
 //// Initialize Passport

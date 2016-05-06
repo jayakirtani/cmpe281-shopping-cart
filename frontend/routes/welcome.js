@@ -189,7 +189,7 @@ router.route('/search').post(function(req, response, next) {
 	 var sess = req.session;
 	if(!sess.authorised){
 		console.log("Not authorized user");
-        response.redirect('/welcome');
+        response.redirect('/');
 	}else{
 
     var serachInput =  req.body.searchInput;
@@ -217,7 +217,7 @@ router.route('/search').get(function(req, response, next) {
  	 var sess = req.session;
  	if(!sess.authorised){
 		console.log("Not authorized user");
-        response.redirect('/welcome');
+        response.redirect('/');
 	}else{
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
