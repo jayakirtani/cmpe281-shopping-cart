@@ -133,11 +133,13 @@ router.route('/addToCart').post(function(req, response, next) {
         res.setEncoding('utf8');
 
         res.on('data', function(chunk) {
-            var body = JSON.parse(chunk);
+            //var body = JSON.parse(chunk);
+            console.log(chunk);
+            var body = chunk;
             console.log('Response: ' + chunk);
             if (body ="Failure") {
-                console.log("\false add to cart  \n");
-                console.log("\false add to cart  \n", body);
+                console.log("false add to cart  \n");
+                console.log("false add to cart  \n", body);
                 response.render('catalog', {
                     products:  req.session.products,
                     p : pageNumber,
