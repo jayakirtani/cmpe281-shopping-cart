@@ -41,8 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', welcome);
 app.use('/catalog', catalog);
 app.use('/cart', cart);
-app.use('/rate', order);
-//app.use('/orderHis', order);
+app.use('/', order);
 //// Initialize Passport
 var initPassport = require('./passport-init');
 initPassport(passport);

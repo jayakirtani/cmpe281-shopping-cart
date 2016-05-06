@@ -28,7 +28,7 @@ function isAuthenticated (req, res, next) {
 //router.use('/catalog', isAuthenticated);
 
 
-router.route('/').post(function(req, response, next) {
+router.route('/rate').post(function(req, response, next) {
 	console.log("in rate");
 	 var sess = req.session;
 	 var pageNumber;
@@ -118,7 +118,7 @@ router.route('/').post(function(req, response, next) {
 	}
 })
 
-router.route('/orderHis').get(function(req, response, next) {
+router.route('/orderhis').get(function(req, response, next) {
 	 var sess = req.session;
 	 var pageNumber;
 	 var url_parts = url.parse(req.url, true);

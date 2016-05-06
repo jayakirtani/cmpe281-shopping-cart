@@ -18,7 +18,7 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="includes/css/styles.css">
 	<link rel="stylesheet" href="includes/css/orderstyles.css">
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="includes/js/doRate.js"></script>
 
 </head>
@@ -36,7 +36,7 @@
 				<div class="nav-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
 						<li class="">
-							<a href="/" >signup</a>
+							<a href="/catalog" >catalog</a>
 						</li>
 					</ul>
 					
@@ -93,23 +93,23 @@
 function nextPage() {
 console.log("here Next");
 currentPage += 1;
-var theUrl = "/orderHis"+"?p="+currentPage;
+var theUrl = "/orderhis"+"?p="+currentPage;
 window.location=theUrl;
 
 }
 function previousPage() {
 currentPage = 1;
-var theUrl = "/orderHis"+"?p="+currentPage;
+var theUrl = "/orderhis"+"?p="+currentPage;
 window.location=theUrl;
 }
 function firstPage() {
 currentPage = 1;
-var theUrl = "/orderHis"+"?p="+currentPage;
+var theUrl = "/orderhis"+"?p="+currentPage;
 window.location=theUrl;
 }
 function lastPage() {
 currentPage = numberOfPages;
-var theUrl = "/orderHis"+"?p="+currentPage;
+var theUrl = "/orderhis"+"?p="+currentPage;
 window.location=theUrl;
 }
 function loadList() {
@@ -159,7 +159,9 @@ document.getElementById("last").disabled = currentPage == numberOfPages ? true :
     '<tr>'+
      ' <td>#'+(j+1)+'</td>'+
       '<td>'+pageList[i].products[j].productname+ '</td>'+
-      '<td><div class="col-md-1"><img src="http://bootdey.com/img/Content/user_3.jpg" class="media-object img-thumbnail"></div></td>'+
+      '<td><div class="col-md-1"><img src="http://www.petsmart.com/gsi/static/WFS/PETNA-PETUS-Site/-/PETNA-PETUS/en_US/2016/May/Supermenus/050216-NAVTILE-CAT-SuperMenu.jpg" class="media-object img-thumbnail"></div></td>'+
+      
+      //<img src="http://bootdey.com/img/Content/user_3.jpg" class="media-object img-thumbnail"></div></td>'+
      ' <td>'+
         '<i> Quantity :'+ pageList[i].products[j].quantity +'</i>'+
         '<i> Price: '+pageList[i].products[j].price +'$</i>'+
