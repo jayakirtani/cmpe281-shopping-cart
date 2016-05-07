@@ -181,9 +181,9 @@ router.route('/').get(function (req, res) {
 });
 
 
-router.route('/createOrder').post(function (req, res) {
+router.route('/createOrder').post(function (req, resm) {
     if (!req.session.authorised) {
-        res.redirect('/');
+        resm.redirect('/');
         return;
     }
     console.log("/cart create order post");
@@ -212,10 +212,12 @@ router.route('/createOrder').post(function (req, res) {
         url: SigninURL + "/createOrder",
         form: postData
     }, function (error, response, body) {
+        console.log(error);
+        console.log(body);
         if (body.success == true) {
-            res.redirect('/catalog', {orderplaced: 1})
+            resm.redirect('/catalog');
         } else {
-            res.redirect('/catalog', {orderplaced: 0});
+            resm.redirect('/catalog');
         }
     });
 });
