@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var request = require("request");
+var url = require('url');
+
 //Used for routes that must be authenticated.
 function isAuthenticated(req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -24,32 +26,6 @@ function isAuthenticated(req, res, next) {
 //Register the authentication middleware
 //router.use('/cart', isAuthenticated);
 var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com/";
-
-router.route('/removeitem').get(function (req, res) {
-    if (!req.session.authorised) {
-        res.redirect('/');
-        return;
-    }
-    console.log("/cart/removeitem get");
-
-    var email = req.session.email;
-    var productID = req.params['p'];
-
-    request.post({
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        url: SigninURL + "/removeItem",
-        form: {
-            "userId": email,
-            "cartInfo": [{
-                "productId": productID,
-            },],
-        },
-    }, function (error, response, body) {
-        res.redirect('/cart');
-    });
-});
 
 router.route('/').get(function (req, res) {
     if (!req.session.authorised) {
@@ -181,6 +157,38 @@ router.route('/').get(function (req, res) {
 });
 
 
+router.route('/removeitem').post(function (req, res) {
+    if (!req.session.authorised) {
+        res.redirect('/');
+        return;
+    }
+    console.log("/cart/removeitem get");
+
+    var email = req.session.email;
+    // var url_parts = url.parse(req.url, true);
+    // console.log(url_parts);
+    // var query = url_parts.query;
+    // console.log(query);
+    // var productID = query.p;
+    var productID = req.body.p;
+    console.log("product ID " + productID);
+    request.post({
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        url: SigninURL + "/removeItem",
+        form: {
+            "userId": email,
+            "cartInfo": [{
+                "productId": productID,
+            },],
+        },
+    }, function (error, response, body) {
+        res.redirect('/cart');
+    });
+});
+
+
 router.route('/createOrder').post(function (req, resm) {
     if (!req.session.authorised) {
         resm.redirect('/');
@@ -204,7 +212,7 @@ router.route('/createOrder').post(function (req, resm) {
         "country": ""
     };
 
-    console.log(JSON.stringify(postData));
+    console.log("data sent: " + JSON.stringify(postData));
     request.post({
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -212,13 +220,14 @@ router.route('/createOrder').post(function (req, resm) {
         url: SigninURL + "/createOrder",
         form: postData
     }, function (error, response, body) {
-        console.log(error);
-        console.log(body);
-        if (body.success == true) {
-            resm.redirect('/catalog');
-        } else {
-            resm.redirect('/catalog');
-        }
+        console.log("response error:" + error);
+        console.log("response body:" + body);
+        resm.redirect('/catalog');
+        // if (body.success == true) {
+        //     resm.redirect('/catalog');
+        // } else {
+        //     resm.redirect('/catalog');
+        // }
     });
 });
 
