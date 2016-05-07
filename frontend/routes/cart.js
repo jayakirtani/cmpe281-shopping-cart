@@ -236,6 +236,7 @@ router.route('/createOrder').post(function (req, resm) {
     }, function (error, response, body) {
         console.log("response error:" + error);
         console.log("response body:" + body);
+        body =JSON.parse(body);
         if (body.success == true) {
             console.log("success");
             resm.render('catalog', {

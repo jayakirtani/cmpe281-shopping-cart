@@ -187,9 +187,7 @@
                 <td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total $<%= cartItems.totalprice %></strong></td>
-                <button class="btn btn-primary tn-success btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
-                    Checkout
-                </button>
+            
                 </td>
             </tr>
             </tfoot>
@@ -243,24 +241,7 @@
 </div> <!-- main container div end -->
 
 
-<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close"
-                        data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Make a Payment
-                </h4>
-            </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
 
                 <form role="form" id="payment-form" method="POST" action="createOrder">
                     <div class="Make Payment">
@@ -408,10 +389,7 @@
 
                 </form>
 
-            </div>
-
-        </div>
-    </div>
+  
 </div>
 
 
