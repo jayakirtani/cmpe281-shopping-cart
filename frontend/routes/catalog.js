@@ -133,15 +133,15 @@ router.route('/addToCart').post(function(req, response, next) {
     var data = {
 	userId:	req.session.email,
 	cartInfo: [{
-		productId:req.body._id,
-		productQuantity: req.body.qty,
-		productName : req.body.title,
-		productCost : req.body.price,
-		productImage :req.body.imageUrl
-
-	}
-		]
-
+		productid:req.body._id,
+		quantity: req.body.qty,
+		productname : req.body.title,
+		price:req.body.price,
+		productimage :req.body.imageUrl,
+        productrating:req.body.rating,
+        productQuantity: req.body.qty,
+        productId:req.body._id,
+	}]
     };
 
     var post_data = JSON.stringify(data);
@@ -155,7 +155,7 @@ router.route('/addToCart').post(function(req, response, next) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-           'Accept' : 'application/json'
+            'Accept': 'application/json'
         }
     };
         console.log(post_options);

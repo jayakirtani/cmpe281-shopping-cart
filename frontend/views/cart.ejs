@@ -146,27 +146,27 @@
             console.log("Number of items in cart: " + cartItems.length);
             for(var i = 0; i < cartItems.length; ++i) {
                 console.log(cartItems[i]);
-                cartItems[i].subtotal = cartItems[i].productCost * cartItems[i].productQuantity;
+                cartItems[i].subtotal = cartItems[i].price * cartItems[i].quantity;
                 cartItems.totalprice += cartItems[i].subtotal; %>
             <tr>
                 <td data-th="Product">
                     <div class="row">
                         <div class="col-sm-2 hidden-xs">
-                            <img src="<%= cartItems[i].productImage %>" alt="Thumbnail for <%= cartItems[i].productName %>"
+                            <img src="<%= cartItems[i].productimage %>" alt="Thumbnail for <%= cartItems[i].productname %>"
                                  class="img-responsive"/>
                         </div>
                     </div>
                 </td>
-                <td data-th="Namece"><%= cartItems[i].productName %></td>
-                <td data-th="Price">$<%= cartItems[i].productCost %></td>
-                <td data-th="Quantity"><%= cartItems[i].productQuantity %></td>
+                <td data-th="Namece"><%= cartItems[i].productname %></td>
+                <td data-th="Price">$<%= cartItems[i].price %></td>
+                <td data-th="Quantity"><%= cartItems[i].quantity %></td>
                 <td data-th="Subtotal" class="text-center">
                     <%= cartItems[i].subtotal %>
                 </td>
                 <td class="actions" data-th="">
                     <!--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>-->
                     <form method="post" action="/cart/removeitem">
-                        <input type="hidden" value="<%= cartItems[i].productId %>" name="p" id="p">
+                        <input type="hidden" value="<%= cartItems[i].productid %>" name="p" id="p">
                         <!--<button  type="button" class="btn btn-default btn-info" data-dir="dwn"><i class="fa fa-trash-o"></i></button>-->
                         <button class="btn btn-danger btn-sm "><i class="fa fa-trash-o"></i></button>
                         </form>

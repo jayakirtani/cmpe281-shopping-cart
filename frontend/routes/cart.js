@@ -197,17 +197,28 @@ router.route('/createOrder').post(function (req, resm) {
     console.log("/cart create order post");
     var postData = {};
     var products = JSON.parse(req.body["cartdetails"]);
+    postData.products = [];
+    postData.totalamount = 0;
+    for(var i = 0; i< products.length; ++i){
+        postData.products[i] = {
+            productid : products[i].productid,
+            productname : products[i].productname,
+            productrating : products[i].productrating,
+            quantity : products[i].quantity,
+            price :products[i].price
+        };
+        postData.totalamount += products[i].quantity * products[i].price;
+    }
     postData.customerid = req.session.email;
-    postData.totalamount = products.length;
-    postData.products = JSON.parse(req.body["cartdetails"]);
-    postData.totalamount = postData.products.length;
+    //postData.totalamount = products.length;
+    //postData.products = JSON.parse(req.body["cartdetails"]);
     postData.paymentdetails = {};
     postData.paymentdetails.nameoncard = req.body["card-holder-name"];
     postData.paymentdetails.cardnumber = req.body["card-number"];
     postData.paymentdetails.cvv = req.body["cvv"];
     postData.paymentdetails.expirydate = req.body["expiry-month"] + "/" + req.body["expiry-year"];
-    postData.billingaddress = {
-        "addresline1": req.body["addrline1"],
+    postData.paymentdetails.billingaddress = {
+        "addrline1": req.body["addrline1"],
         "addrline2": req.body["addrline2"],
         "city": req.body["city"],
         "state": req.body["state"],
@@ -226,6 +237,7 @@ router.route('/createOrder').post(function (req, resm) {
         console.log("response error:" + error);
         console.log("response body:" + body);
         if (body.success == true) {
+            console.log("success");
             resm.render('catalog', {
                 products: req.session.products,
                 p : 1,
@@ -233,6 +245,7 @@ router.route('/createOrder').post(function (req, resm) {
                 orderCreate :1
             });
         } else {
+            console.log("failure");
             resm.render('catalog', {
                 products: req.session.products,
                 p : 1,
