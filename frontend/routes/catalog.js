@@ -154,6 +154,7 @@ router.route('/addToCart').post(function(req, response, next) {
            'Accept' : 'application/json'
         }
     };
+        console.log(post_options);
     // Set up the request
     var post_req = http.request(post_options, function(res) {
         res.setEncoding('utf8');
@@ -189,15 +190,16 @@ router.route('/addToCart').post(function(req, response, next) {
             addtoCart:0
         });
     });
-    post_req.setTimeout( 10000, function( ) {console.log("false add to cart  \n");
 
-    response.render('catalog', {
-        products:  req.session.products,
-        p : pageNumber,
-        addtoCart:0
-    });
-        
-    });
+    //post_req.setTimeout( 10000, function( ) {console.log("false add to cart  \n");
+    //
+    // response.render('catalog', {
+    //     products:  req.session.products,
+    //     p : pageNumber,
+    //     addtoCart:0
+    // });
+    //
+    // });
     
         console.log("now posting");
     // post the data
