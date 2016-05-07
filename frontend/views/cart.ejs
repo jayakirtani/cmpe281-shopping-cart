@@ -133,7 +133,8 @@
         <table id="cart" class="table table-hover table-condensed">
             <thead>
             <tr>
-                <th style="width:50%">Product</th>
+                <th style="width:30%">Product</th>
+                <th style="width:20%">Name</th>
                 <th style="width:10%">Price</th>
                 <th style="width:8%">Quantity</th>
                 <th style="width:22%" class="text-center">Subtotal</th>
@@ -151,11 +152,12 @@
                 <td data-th="Product">
                     <div class="row">
                         <div class="col-sm-2 hidden-xs">
-                            <img src="<%= cartItems[i].imageURL %>" alt="Thumbnail for <%= cartItems[i].productName %>"
+                            <img src="<%= cartItems[i].productImage %>" alt="Thumbnail for <%= cartItems[i].productName %>"
                                  class="img-responsive"/>
                         </div>
                     </div>
                 </td>
+                <td data-th="Namece"><%= cartItems[i].productName %></td>
                 <td data-th="Price">$<%= cartItems[i].productCost %></td>
                 <td data-th="Quantity"><%= cartItems[i].productQuantity %></td>
                 <td data-th="Subtotal" class="text-center">
@@ -163,7 +165,7 @@
                 </td>
                 <td class="actions" data-th="">
                     <!--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>-->
-                    <form method="get" action="/cart/removeitem">
+                    <form method="post" action="/cart/removeitem">
                         <input type="hidden" value="<%= cartItems[i].productId %>" name="p" id="p">
                         <!--<button  type="button" class="btn btn-default btn-info" data-dir="dwn"><i class="fa fa-trash-o"></i></button>-->
                         <button class="btn btn-danger btn-sm "><i class="fa fa-trash-o"></i></button>
