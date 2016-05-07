@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var request = require("request");
-var url = require('url');
-
 //Used for routes that must be authenticated.
 function isAuthenticated(req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -27,7 +25,33 @@ function isAuthenticated(req, res, next) {
 //router.use('/cart', isAuthenticated);
 var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com/";
 
-router.route('/').get(function (req, res) {
+router.route('/removeitem').get(function (req, res) {
+    if (!req.session.authorised) {
+        res.redirect('/');
+        return;
+    }
+    console.log("/cart/removeitem get");
+
+    var email = req.session.email;
+    var productID = req.params['p'];
+
+    request.post({
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        url: SigninURL + "/removeItem",
+        form: {
+            "userId": email,
+            "cartInfo": [{
+                "productId": productID,
+            },],
+        },
+    }, function (error, response, body) {
+        res.redirect('/cart');
+    });
+});
+
+router.route('/cart').get(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/');
         return;
@@ -56,6 +80,7 @@ router.route('/').get(function (req, res) {
                 console.log("successful");
                 res.render('cart', {
                     cartItems: parse.cartInfo,
+               
                 });
             } else {
                 console.log("error in fetching data ");
@@ -66,42 +91,6 @@ router.route('/').get(function (req, res) {
         }
     });
 })
-// .post(function (req, res) {
-//     if (!req.session.authorised) {
-//         res.redirect('/');
-//         return;
-//     }
-//     console.log("/cart post");
-//     var email = req.session.email;
-//     var productID = req.body.productID;
-//     var quantity = req.body.quantity;
-//     var productName = req.body.productName;
-//     var productCost = req.body.productCost;
-//     var productImage = req.body.productImage;
-//
-//     request.post({
-//         headers: {
-//             'content-type': 'application/x-www-form-urlencoded'
-//         },
-//         url: SigninURL + "/addToCart",
-//         form: {
-//             "userId": email,
-//             "cartInfo": [{
-//                 "productId": productID,
-//                 "productQuantity": quantity,
-//                 "productName": productName,
-//                 "productCost": productCost,
-//                 "productImage": productImage,
-//             },],
-//         },
-//     }, function (error, response, body) {
-//         if (body == "Success") {
-//             res.redirect('/catalog')
-//         } else {
-//             res.redirect('/catalog', {errorMsg: "Could not add product to cart. Please try again."});
-//         }
-//     });
-// })
 .delete(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/');
@@ -124,7 +113,7 @@ router.route('/').get(function (req, res) {
                 },],
             },
         }, function (error, response, body) {
-            res.redirect('/cart');
+            res.redirect('');
             // if (body.status == "Success") {
             //     res.redirect('/cart')
             // } else {
@@ -157,48 +146,17 @@ router.route('/').get(function (req, res) {
 });
 
 
-router.route('/removeitem').post(function (req, res) {
-    if (!req.session.authorised) {
-        res.redirect('/');
-        return;
-    }
-    console.log("/cart/removeitem get");
-
-    var email = req.session.email;
-    // var url_parts = url.parse(req.url, true);
-    // console.log(url_parts);
-    // var query = url_parts.query;
-    // console.log(query);
-    // var productID = query.p;
-    var productID = req.body.p;
-    console.log("product ID " + productID);
-    request.post({
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        url: SigninURL + "/removeItem",
-        form: {
-            "userId": email,
-            "cartInfo": [{
-                "productId": productID,
-            },],
-        },
-    }, function (error, response, body) {
-        res.redirect('/cart');
-    });
-});
-
-
 router.route('/createOrder').post(function (req, resm) {
     if (!req.session.authorised) {
         resm.redirect('/');
         return;
     }
     console.log("/cart create order post");
+    var products = JSON.parse(req.body["cartdetails"]);
     var postData = {};
     postData.customerid = req.session.email;
     postData.totalamount =products.length;
-    postData.products = JSON.parse(req.body["cartdetails"]);
+    postData.products = products;
     postData.paymentdetails = {};
     postData.paymentdetails.nameoncard = req.body["card-holder-name"];
     postData.paymentdetails.cardnumber = req.body["card-number"];
@@ -212,31 +170,31 @@ router.route('/createOrder').post(function (req, resm) {
         "zip": req.body["zip"],
         "country": req.body["country"]
     };
-
-    console.log("data sent: " + JSON.stringify(postData));
+    console.log(JSON.stringify(postData));
     request.post({
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
-        url: "http://52.5.167.238/createOrder",
+      //  url: SigninURL this is not the create order  + "/createOrder",
+        url : "http://52.5.167.238:8080/createOrder",
         form: postData
     }, function (error, response, body) {
-        console.log("response error:" + error);
-        console.log("response body:" + body);
+        console.log("Error" ,error);
+        console.log("Body " ,body);
         if (body.success == true) {
-            resm.render('catalog', {
-                products: req.session.products,
-                p : 1,
-                addtoCart:2,
-                orderCreate :1
-            });
+        	resm.render('catalog', {
+ 	            products: req.session.products,
+ 	            p : 1,
+ 	            addtoCart:2,
+ 	            orderCreate :1
+ 	        });
         } else {
-            resm.render('catalog', {
-                products: req.session.products,
-                p : 1,
-                addtoCart:2,
-                orderCreate :0
-            });
+        	resm.render('catalog', {
+ 	            products: req.session.products,
+ 	            p : 1,
+ 	            addtoCart:2,
+ 	           orderCreate :0
+ 	        });
         }
     });
 });

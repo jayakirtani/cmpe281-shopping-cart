@@ -116,6 +116,8 @@
     <strong>Error!</strong>There was an Error in adding the Item to Cart, please try again!
 </div>
 
+
+
 <div id="orderCreate" class="alert alert-success alert-block fade in ">
 
     <span class="glyphicon glyphicon-ok"/> Order was Successfully Places!
@@ -126,6 +128,9 @@
 
     <strong>Error!</strong>There was an Error in Placing your order, please try again!
 </div>
+
+
+
 <script>
     $("#notAddedToCart").fadeTo(2000, 500).slideUp(3000, function () {
         $("#notAddedToCart").alert('close');
@@ -134,13 +139,15 @@
     $("#addedToCart").fadeTo(2000, 500).slideUp(3000, function () {
         $("#addedToCart").alert('close');
     });
-    $("#orderCreate").fadeTo(2000, 500).slideUp(3000, function () {
+    
+     $("#orderCreate").fadeTo(2000, 500).slideUp(3000, function () {
         $("#orderCreate").alert('close');
     });
-
-    $("#orderNotCreate").fadeTo(2000, 500).slideUp(3000, function () {
+    
+     $("#orderNotCreate").fadeTo(2000, 500).slideUp(3000, function () {
         $("#orderNotCreate").alert('close');
     });
+
 
 </script>
 
@@ -174,9 +181,10 @@
         document.getElementById("notAddedToCart").style.display = 'none';
 
     }
-    if (<%-  orderCreate %> == 1)
-    {
+     if (<%-  orderCreate %> == 1)
+      {
         document.getElementById("orderCreate").style.display = 'block';
+
     }
     else
     {
@@ -191,6 +199,8 @@
         document.getElementById("orderNotCreate").style.display = 'none';
 
     }
+    
+   
     if (list.length == 0) {
         document.getElementById("NoSearch").style.display = 'block';
     } else {

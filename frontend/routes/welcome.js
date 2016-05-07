@@ -104,7 +104,7 @@ router.route('/').get(function(req, res, next) {
     else {
         res.redirect('/catalog');
     }
-
+    
 });
 
 router.route('/signup').post(function(req, response, next) {
