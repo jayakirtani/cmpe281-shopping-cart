@@ -84,6 +84,32 @@ router.route('/').get(function(req, response, next) {
 
 
 })
+
+router.route('/addToCart').get(function(req, response, next) {
+	var sess = req.session;
+	if(!sess.authorised){
+		console.log("Not authorized user");
+        response.redirect('/');
+	}else{
+	var url = require('url');
+	var pageNumber = 1;
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	console.log("url paramters ", query.p)
+	if(query.p){
+		pageNumber = query.p;
+	}
+	response.render('catalog', {
+        products: req.session.products,
+        p : pageNumber,
+        addtoCart:2
+    });
+	}
+})
+
+	
+	
+
 router.route('/addToCart').post(function(req, response, next) {
 	var sess = req.session;
 	if(!sess.authorised){
@@ -163,6 +189,16 @@ router.route('/addToCart').post(function(req, response, next) {
             addtoCart:0
         });
     });
+    post_req.setTimeout( 10000, function( ) {console.log("false add to cart  \n");
+
+    response.render('catalog', {
+        products:  req.session.products,
+        p : pageNumber,
+        addtoCart:0
+    });
+        
+    });
+    
         console.log("now posting");
     // post the data
     post_req.write(post_data);
