@@ -1,4 +1,4 @@
 module.exports = {
   'secret': 'alkjuirtywioquythgfdtcbsjshfjhgfkjcbmhc',
-  'database': 'mongodb://52.207.208.117:27017/shoppingCart'
+  'database': 'mongodb://52.91.84.172:27017/shoppingCart'
 };
