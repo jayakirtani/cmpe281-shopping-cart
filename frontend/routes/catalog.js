@@ -44,7 +44,8 @@ router.route('/').get(function(req, response, next) {
 		 response.render('catalog', {
 	            products: req.session.products,
 	            p : pageNumber,
-	            addtoCart:2
+	            addtoCart:2,
+             orderCreate:2,
 	        });
 
 	}else{
@@ -52,7 +53,8 @@ router.route('/').get(function(req, response, next) {
 		 response.render('catalog', {
             products: req.session.products,
             p : pageNumber,
-            addtoCart:2
+            addtoCart:2,
+             orderCreate:2,
         });
 	}else {
 	var fbResponse = [];
@@ -70,7 +72,8 @@ router.route('/').get(function(req, response, next) {
             response.render('catalog', {
                 products: req.session.products,
                 p : pageNumber,
-                addtoCart:2
+                addtoCart:2,
+                orderCreate:2,
             });
         });
     }).on('error', function(e) {
@@ -102,7 +105,8 @@ router.route('/addToCart').get(function(req, response, next) {
 	response.render('catalog', {
         products: req.session.products,
         p : pageNumber,
-        addtoCart:2
+        addtoCart:2,
+        orderCreate:2,
     });
 	}
 })
@@ -170,14 +174,16 @@ router.route('/addToCart').post(function(req, response, next) {
                 response.render('catalog', {
                     products:  req.session.products,
                     p : pageNumber,
-                    addtoCart:0
+                    addtoCart:0,
+                    orderCreate:2,
                 });
             } else if (body.status=="Success") {
                 console.log("successful add to cart ",body);
                 response.render('catalog', {
                     products: req.session.products,
                     p : pageNumber,
-                    addtoCart:1
+                    addtoCart:1,
+                    orderCreate:2,
                 });
             }
         });
@@ -187,7 +193,8 @@ router.route('/addToCart').post(function(req, response, next) {
         response.render('catalog', {
             products: req.session.products,
             p : pageNumber,
-            addtoCart:0
+            addtoCart:0,
+            orderCreate:2,
         });
     });
 
