@@ -197,8 +197,8 @@ router.route('/createOrder').post(function (req, resm) {
     console.log("/cart create order post");
     var postData = {};
     postData.customerid = req.session.email;
-    postData.totalamount =products.length;
     postData.products = JSON.parse(req.body["cartdetails"]);
+    postData.totalamount = postData.products.length;
     postData.paymentdetails = {};
     postData.paymentdetails.nameoncard = req.body["card-holder-name"];
     postData.paymentdetails.cardnumber = req.body["card-number"];
@@ -218,7 +218,7 @@ router.route('/createOrder').post(function (req, resm) {
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
-        url: "http://52.5.167.238/createOrder",
+        url: "http://52.5.167.238:8080/createOrder",
         form: postData
     }, function (error, response, body) {
         console.log("response error:" + error);
