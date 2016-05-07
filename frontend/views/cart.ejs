@@ -184,6 +184,9 @@
                 <td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total $<%= cartItems.totalprice %></strong></td>
+                <button class="btn btn-primary tn-success btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+                    Checkout
+                </button>
                 </td>
             </tr>
             </tfoot>
@@ -193,9 +196,6 @@
         <div class="col-md-11">
             <h3>Your cart is empty. Add items to cart</h3>
             <a href="/catalog" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-            <button class="btn btn-primary tn-success btn-lg fa" data-toggle="modal" data-target="#myModalHorizontal">
-                Checkout
-            </button>
         </div>
         <% } %>
     </div>
