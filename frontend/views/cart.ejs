@@ -40,81 +40,96 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
+            <h2 class="pull-left">Pet Inc</h2>
             <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Your Logo"></a>
-
-            <div class="nav-collapse collapse navbar-responsive-collapse">
+            <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <strong
-                                    class="caret"></strong></a>
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Web Design</a>
-                            </li>
-
-                            <li>
-                                <a href="#">Web Development</a>
-                            </li>
-
-                            <li>
-                                <a href="#">SEO</a>
-                            </li>
-
-                            <li class="divider"></li>
-
-                            <li class="dropdown-header">More Services</li>
-
-                            <li>
-                                <a href="#">Content Creation</a>
-                            </li>
-
-                            <li>
-                                <a href="#">Social Media Marketing</a>
-                            </li>
-                        </ul><!-- end dropdown-menu -->
+                    <li class="">
+                        <a href="/logout">Logout</a>
                     </li>
+
                 </ul>
-
-                <form class="navbar-form pull-left">
-                    <input type="text" class="form-control" placeholder="Search this site..." id="searchInput">
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </form><!-- end navbar-form -->
-
-                <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                    class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Profile</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><span class="glyphicon glyphicon-briefcase"></span> Billing</a>
-                            </li>
-
-                            <li class="divider"></li>
-
-                            <li>
-                                <a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a>
-                            </li>
-                        </ul>
+            </div>
+            <div class="nav-collapse collapse navbar-responsive-collapse pull-right">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="/orderhis">Order History</a>
                     </li>
-                </ul><!-- end nav pull-right -->
-            </div><!-- end nav-collapse -->
+
+                </ul>
+            </div>
+            <!--<div class="nav-collapse collapse navbar-responsive-collapse">-->
+            <!--<ul class="nav navbar-nav">-->
+            <!--<li class="dropdown">-->
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <strong-->
+            <!--class="caret"></strong></a>-->
+
+            <!--<ul class="dropdown-menu">-->
+            <!--<li>-->
+            <!--<a href="#">Web Design</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+            <!--<a href="#">Web Development</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+            <!--<a href="#">SEO</a>-->
+            <!--</li>-->
+
+            <!--<li class="divider"></li>-->
+
+            <!--<li class="dropdown-header">More Services</li>-->
+
+            <!--<li>-->
+            <!--<a href="#">Content Creation</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+            <!--<a href="#">Social Media Marketing</a>-->
+            <!--</li>-->
+            <!--</ul>&lt;!&ndash; end dropdown-menu &ndash;&gt;-->
+            <!--</li>-->
+            <!--</ul>-->
+
+            <!--<form class="navbar-form pull-left">-->
+            <!--<input type="text" class="form-control" placeholder="Search this site..." id="searchInput">-->
+            <!--<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>-->
+            <!--</button>-->
+            <!--</form>&lt;!&ndash; end navbar-form &ndash;&gt;-->
+
+            <!--<ul class="nav navbar-nav pull-right">-->
+            <!--<li class="dropdown">-->
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span-->
+            <!--class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>-->
+
+            <!--<ul class="dropdown-menu">-->
+            <!--<li>-->
+            <!--<a href="#"><span class="glyphicon glyphicon-wrench"></span> Settings</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+            <!--<a href="#"><span class="glyphicon glyphicon-refresh"></span> Update Profile</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+            <!--<a href="#"><span class="glyphicon glyphicon-briefcase"></span> Billing</a>-->
+            <!--</li>-->
+
+            <!--<li class="divider"></li>-->
+
+            <!--<li>-->
+            <!--<a href="#"><span class="glyphicon glyphicon-off"></span> Sign out</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+            <!--</ul>&lt;!&ndash; end nav pull-right &ndash;&gt;-->
+            <!--</div>&lt;!&ndash; end nav-collapse &ndash;&gt;-->
 
         </div><!-- end container -->
     </div><!-- end navbar -->
 
-    <div class="spacer30"></div>
+    <!--<div class="spacer30"></div>-->
     <div class="row">
         <div class="span4">
             <!-- empty, but using spacer to prevent collapse -->
@@ -126,6 +141,16 @@
         <div class="span4">
             <p>Some text...</p>
         </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <!-- empty, but using spacer to prevent collapse -->
+            <div class="spacer10"></div>
+        </div>
+        <div class="span4">
+            <p></p>
+        </div>
+
     </div>
 
     <div class="container">
@@ -143,7 +168,7 @@
             </thead>
             <tbody>
             <% cartItems.totalprice = 0;
-            console.log("Number of items in cart: " + cartItems.length);
+                console.log("Number of items in cart: " + cartItems.length);
             for(var i = 0; i < cartItems.length; ++i) {
                 console.log(cartItems[i]);
                 cartItems[i].subtotal = cartItems[i].price * cartItems[i].quantity;
@@ -152,7 +177,8 @@
                 <td data-th="Product">
                     <div class="row">
                         <div class="col-sm-2 hidden-xs">
-                            <img src="<%= cartItems[i].productimage %>" alt="Thumbnail for <%= cartItems[i].productname %>"
+                            <img src="<%= cartItems[i].productimage %>"
+                                 alt="Thumbnail for <%= cartItems[i].productname %>"
                                  class="img-responsive"/>
                         </div>
                     </div>
@@ -169,7 +195,7 @@
                         <input type="hidden" value="<%= cartItems[i].productid %>" name="p" id="p">
                         <!--<button  type="button" class="btn btn-default btn-info" data-dir="dwn"><i class="fa fa-trash-o"></i></button>-->
                         <button class="btn btn-danger btn-sm "><i class="fa fa-trash-o"></i></button>
-                        </form>
+                    </form>
                 </td>
             </tr>
             <% } %>
@@ -183,13 +209,9 @@
                     <a href="/catalog" class="btn btn-warning">
                         <i class="fa fa-angle-left"></i> Continue Shopping</a>
                 </td>
-
-                <td>
-                <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total $<%= cartItems.totalprice %></strong></td>
-                <button class="btn btn-primary tn-success btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
-                    Checkout
-                </button>
+                <td colspan="4" class="hidden-xs text-right"><strong><pre>Total      $<%= cartItems.totalprice %></pre></strong></td>
+                <td class="hidden-xs text-center pull-right">
+                    <button class="btn btn-primary tn-success btn-lg pull-right" data-toggle="modal" data-target="#myModalHorizontal">             Checkout</button>
                 </td>
             </tr>
             </tfoot>
@@ -203,7 +225,7 @@
         <% } %>
     </div>
     <footer>
-        <div class="container">
+        <div class="container modal-footer">
             <div class="row">
                 <div class="col-sm-4">
                     <h6>About Us</h6>
@@ -235,7 +257,7 @@
                 </div><!-- end col-sm-2 -->
 
                 <div class="col-sm-2">
-                    <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Brad</h6>
+                    <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by `Team#3`</h6>
                 </div><!-- end col-sm-2 -->
             </div><!-- end row -->
         </div><!-- end container -->
@@ -277,7 +299,7 @@
                             <div class="panel-body">
 
                                 <div class="row">
-                                    <input type="hidden" name="cartdetails" value="<%= JSON.stringify(cartItems);%>">
+                                    <input type="hidden" name="cartdetails" value="<%= JSON.stringify(cartItems); %>">
                                     <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="card-holder-name"
@@ -344,25 +366,26 @@
                                 </div>
 
 
-
                                 <label class="control-label">Address Line 1</label>
                                 <div class="controls">
                                     <input id="addrline1" name="addrline1" type="text" placeholder="address line 1"
-                                           class="input-xlarge" required />
+                                           class="input-xlarge" required/>
 
                                 </div>
 
 
                                 <label class="control-label">Address Line 2</label>
                                 <div class="controls">
-                                    <input id="addrline2" name="addrline2" type="text" placeholder="address line 2" class="input-xlarge"
+                                    <input id="addrline2" name="addrline2" type="text" placeholder="address line 2"
+                                           class="input-xlarge"
                                     />
 
                                 </div>
 
                                 <label class="control-label">City / Town</label>
                                 <div class="controls">
-                                    <input id="city" name="city" type="text" placeholder="city" class="input-large" required
+                                    <input id="city" name="city" type="text" placeholder="city" class="input-large"
+                                           required
                                     />
                                     <p class="help-block"></p>
                                 </div>
@@ -376,18 +399,17 @@
                                 <label class="control-label">Zip / Postal Code</label>
                                 <div class="controls">
                                     <input id="zip" name="zip" type="text" placeholder="zip or postal code"
-                                           class="input-medium" required />
+                                           class="input-medium" required/>
 
                                 </div>
                                 <label class="control-label"> Country</label>
-                                <td>      <select id="country" name="country" class="input-xlarge">
+                                <td><select id="country" name="country" class="input-xlarge">
                                         <option value="" selected="selected">(please select a country)</option>
-                                        <option value="US" selected >United States</option>
+                                        <option value="US" selected>United States</option>
                                         <option value="CA">Canada</option>
                                         <option value="ME">Mexico</option>
                                     </select>
                                 </td>
-
 
 
                                 <div class="row">
