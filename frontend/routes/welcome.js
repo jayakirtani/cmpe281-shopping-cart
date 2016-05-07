@@ -94,11 +94,17 @@ router.route('/login').get(function(req, res, next) {
     });
 });
 router.route('/').get(function(req, res, next) {
-    res.render('welcomePage', {
-        signup: true,
-        emailexist: false,
-        data: null
-    });
+    if (!req.session.authorised) {
+        res.render('welcomePage', {
+            signup: true,
+            emailexist: false,
+            data: null
+        });
+    }
+    else {
+        res.redirect('/catalog');
+    }
+
 });
 
 router.route('/signup').post(function(req, response, next) {
