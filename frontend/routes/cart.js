@@ -27,7 +27,7 @@ function isAuthenticated(req, res, next) {
 //router.use('/cart', isAuthenticated);
 var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.amazonaws.com/";
 
-router.route('/').get(function (req, res) {
+router.route('/cart').get(function (req, res) {
     if (!req.session.authorised) {
         res.redirect('/');
         return;
@@ -196,8 +196,9 @@ router.route('/createOrder').post(function (req, resm) {
     }
     console.log("/cart create order post");
     var postData = {};
+    var products = JSON.parse(req.body["cartdetails"]);
     postData.customerid = req.session.email;
-    postData.totalamount =products.length;
+    postData.totalamount = products.length;
     postData.products = JSON.parse(req.body["cartdetails"]);
     postData.paymentdetails = {};
     postData.paymentdetails.nameoncard = req.body["card-holder-name"];
@@ -218,7 +219,7 @@ router.route('/createOrder').post(function (req, resm) {
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
-        url: "http://52.5.167.238/createOrder",
+        url: "http://52.5.167.238:8080/createOrder",
         form: postData
     }, function (error, response, body) {
         console.log("response error:" + error);
