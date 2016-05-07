@@ -200,6 +200,7 @@ router.route('/createOrder').post(function (req, resm) {
     postData.customerid = req.session.email;
     postData.totalamount = products.length;
     postData.products = JSON.parse(req.body["cartdetails"]);
+    postData.totalamount = postData.products.length;
     postData.paymentdetails = {};
     postData.paymentdetails.nameoncard = req.body["card-holder-name"];
     postData.paymentdetails.cardnumber = req.body["card-number"];
