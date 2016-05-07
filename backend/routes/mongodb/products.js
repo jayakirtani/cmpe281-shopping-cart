@@ -1,11 +1,10 @@
-//var mongoose    = require('mongoose');
 var config      = require('../../config/mongoConnect'); // get db config file
 var products    = require('../../mongo-models/product.model');
-
-//mongoose.createConnection(config.database);
+var mongoose    = require('mongoose');
 
 var productRouter = function(app) {
 
+    //Get All the products
     app.get("/products", function(req, res) {
         //res.send("Hello Customer");
         products.find({}, function(err, docs) {
@@ -15,18 +14,18 @@ var productRouter = function(app) {
                 console.log('error :' +err);
                 return res.status(400).json({success: false, msg: 'Could not fetch products from database'});
             }
-            //return res.end(JSON.stringify(product));
             res.send(JSON.parse(JSON.stringify(docs)));
         });
 
     });
 
+    //Search product catalogue based on the word
     app.get("/search/:term", function (req,res) {
         products.find({ $text: { $search: req.params.term }})
             .exec(function(err, results){
                 if(err)
                 {
-                    return res.status(400).json({success: false, msg: 'search query failed'});
+                    return res.status(400).json({success: false, msg: 'Search query failed'});
                 }
                 console.log(results);
                 res.send(JSON.parse(JSON.stringify(results)));
@@ -34,6 +33,25 @@ var productRouter = function(app) {
 
     });
 
+    //Get Product based on its id
+    app.get("/products/:id", function(req, res) {
+        try {
+            var _id = mongoose.Types.ObjectId(req.params.id);
+            products.findById(_id, function (err, docs) {
+                if (err) {
+                    console.log('error :' + err);
+                    return res.status(400).json({success: false, msg: 'Could not fetch the product from database'});
+                }
+                else {
+                    res.send(JSON.parse(JSON.stringify(docs)));
+                }
+            });
+        }catch (err){return res.status(400).json({success: false, msg: 'Could not fetch the product, check the id'});}
+
+    });
+
+
+    //Update the ratings
     app.put("/rating/:id",function(req,res){
 
        var conditions = {_id:req.params.id};
@@ -44,24 +62,48 @@ var productRouter = function(app) {
         var query = products.findOne({'_id':req.params.id}).select('rating');
 
           query.exec(function (err, doc) {
-            if (err) return next(err);
-            //res.send(someValue);
-            newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
-            console.log(newRating);
-
+              if(err)
+                  return res.status(400).json({success: false, msg: 'Fetch failed for updating the rating'});
+              newRating =  (Number(doc.rating)+ Number(req.body.rating))/2;
               var update = { $set: { rating: Math.round(newRating)}};
 
               products.update(conditions,update,options,function(err, results){
                   if(err)
-                      return res.status(400).json({success: false, msg: 'update failed'});
+                      return res.status(400).json({success: false, msg: 'Update for ratings failed'});
                   res.send(JSON.parse(JSON.stringify(results)));
               });
 
-        });
-
-
+            });
 
         });
+
+
+    //update the stock after order purchase
+    app.put("/stock",function(req,res){
+
+        var conditions = {_id:req.body._id};
+        var options = { upsert: true };
+
+        //first get the ratings field
+        var newStock = 0;
+        var query = products.findOne({'_id':req.body._id}).select('stock');
+
+        query.exec(function (err, doc) {
+            if(err)
+                return res.status(400).json({success: false, msg: 'Fetch failed for updating the stock'});
+            newStock =  (Number(doc.stock) - Number(req.body.stock));
+            var update = { $set: { stock: Math.round(newStock)}};
+
+            products.update(conditions,update,options,function(err, results){
+                if(err)
+                    return res.status(400).json({success: false, msg: 'Update for stock failed'});
+                res.send(JSON.parse(JSON.stringify(results)));
+            });
+
+        });
+
+    });
+
 };
 
 module.exports = productRouter;

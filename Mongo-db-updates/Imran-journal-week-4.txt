@@ -1,0 +1,26 @@
+Week #4
+
+1) Changed the REST api calls to include the proper messages.
+          a) When there is error in fetching of the data from mongo send proper message along with the status code.
+          b) Send other errors specific to the server with proper status code.
+  
+
+2)Tested the replication for the mongo three node cluster.
+          a)Migrated the products data on the mongo cluster.
+          b)Tested the mongo cluster for the replication of the data among the three nodes.
+          
+
+3)Seeding more dummy products to the database so that the pagination on the frontend can be tested.
+          a) In order to test the scrolling on the page and the layout for the page on the frontend.
+          b) Added amlost 20 more products which will be added on the starting of the server
+
+
+4)Exposed a GET api for the products based on product id.
+         a) Implemented a REST GET api for the frontend to call based on the product id given.
+         b) It returns the JSON of the product specific to that product id.
+         
+         
+         
+5)Implementaion to be done:
+        Expose a function so that the orders api can call internally whenever a new order is placed. 
+        This function will decrement the product 'stock' count by the number of orders placed for that product.
