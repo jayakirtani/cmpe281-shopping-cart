@@ -68,7 +68,7 @@ router.route('/rate').post(function(req, response, next) {
 				    console.log("success");
 		        	
 				    
-					var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/Sara@test.com';//+req.session.email;
+					var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/'+req.session.email;
 				    http.get(orderHisUrl, function(res) {
 				        var body = '';
 				        res.on('data', function(chunk) {
@@ -133,16 +133,15 @@ router.route('/orderhis').get(function(req, response, next) {
 
 			} else{
 				pageNumber = 1;
-
-			var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/Sara@test.com';//+req.session.email;
+			console.log("get Orders  for user "+req.session.email);
+			var orderHisUrl = 'http://52.5.167.238:8080/getOrderHistory/'+req.session.email;
 		    http.get(orderHisUrl, function(res) {
 		        var body = '';
 		        res.on('data', function(chunk) {
 		            body += chunk;
-
 		        });
 		        res.on('end', function() {
-		        	console.log("body ", body);
+		        	console.log("Orders", body);
 		        	 req.session.orders = JSON.parse(body);
 		        	response.render('orderHistory',{orders:req.session.orders, p:pageNumber});
 		        	//response.render('test');
