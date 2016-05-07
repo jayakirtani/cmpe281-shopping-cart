@@ -133,11 +133,11 @@ router.route('/addToCart').post(function(req, response, next) {
         res.setEncoding('utf8');
 
         res.on('data', function(chunk) {
-            //var body = JSON.parse(chunk);
+            var body = JSON.parse(chunk);
             console.log(chunk);
-            var body = chunk;
+            //var body = chunk;
             console.log('Response: ' + chunk);
-            if (body ="Failure") {
+            if (body.status == "Failure") {
                 console.log("false add to cart  \n");
                 console.log("false add to cart  \n", body);
                 response.render('catalog', {
@@ -145,7 +145,7 @@ router.route('/addToCart').post(function(req, response, next) {
                     p : pageNumber,
                     addtoCart:0
                 });
-            } else if (res.statusCode == 200 && body=="Success") {
+            } else if (body.status=="Success") {
                 console.log("successful add to cart ",body);
                 response.render('catalog', {
                     products: req.session.products,
@@ -163,11 +163,14 @@ router.route('/addToCart').post(function(req, response, next) {
             addtoCart:0
         });
     });
+        console.log("now posting");
     // post the data
     post_req.write(post_data);
+        console.log("now posted");
     post_req.end();
+        console.log("now end");
 	}
-})
+});
 
 
 /*
@@ -287,8 +290,6 @@ router.route('/pay').get(function(req, response, next) {
 
 		response.render('payment');
 	}
-})
-
-
+});
 
 module.exports = router;

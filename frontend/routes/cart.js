@@ -18,7 +18,7 @@ function isAuthenticated(req, res, next) {
     //     return next();
     // }
     // if the user is not authenticated then redirect him to the login page
-    return res.redirect('/welcome');
+    return res.redirect('/');
 }
 
 //Register the authentication middleware
@@ -27,7 +27,7 @@ var SigninURL = "http://spring16-team3-riakcluster-elb-888977027.us-east-1.elb.a
 
 router.route('/removeitem').get(function (req, res) {
     if (!req.session.authorised) {
-        res.redirect('/welcome');
+        res.redirect('/');
         return;
     }
     console.log("/cart/removeitem get");
@@ -47,17 +47,13 @@ router.route('/removeitem').get(function (req, res) {
             },],
         },
     }, function (error, response, body) {
-        if (body == "Success") {
-            res.redirect('/cart')
-        } else {
-            res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
-        }
+        res.redirect('/cart');
     });
 });
 
 router.route('/').get(function (req, res) {
     if (!req.session.authorised) {
-        res.redirect('/welcome');
+        res.redirect('/');
         return;
     }
     console.log("/cart get");
@@ -87,50 +83,52 @@ router.route('/').get(function (req, res) {
                 });
             } else {
                 console.log("error in fetching data ");
-                res.redirect('/welcome');
+                res.redirect('/');
             }
         } else {
             res.redirect('/catalog');
         }
     });
-}).post(function (req, res) {
+})
+// .post(function (req, res) {
+//     if (!req.session.authorised) {
+//         res.redirect('/');
+//         return;
+//     }
+//     console.log("/cart post");
+//     var email = req.session.email;
+//     var productID = req.body.productID;
+//     var quantity = req.body.quantity;
+//     var productName = req.body.productName;
+//     var productCost = req.body.productCost;
+//     var productImage = req.body.productImage;
+//
+//     request.post({
+//         headers: {
+//             'content-type': 'application/x-www-form-urlencoded'
+//         },
+//         url: SigninURL + "/addToCart",
+//         form: {
+//             "userId": email,
+//             "cartInfo": [{
+//                 "productId": productID,
+//                 "productQuantity": quantity,
+//                 "productName": productName,
+//                 "productCost": productCost,
+//                 "productImage": productImage,
+//             },],
+//         },
+//     }, function (error, response, body) {
+//         if (body == "Success") {
+//             res.redirect('/catalog')
+//         } else {
+//             res.redirect('/catalog', {errorMsg: "Could not add product to cart. Please try again."});
+//         }
+//     });
+// })
+.delete(function (req, res) {
     if (!req.session.authorised) {
-        res.redirect('/welcome');
-        return;
-    }
-    console.log("/cart post");
-    var email = req.session.email;
-    var productID = req.body.productID;
-    var quantity = req.body.quantity;
-    var productName = req.body.productName;
-    var productCost = req.body.productCost;
-    var productImage = req.body.productImage;
-
-    request.post({
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        url: SigninURL + "/addToCart",
-        form: {
-            "userId": email,
-            "cartInfo": [{
-                "productId": productID,
-                "productQuantity": quantity,
-                "productName": productName,
-                "productCost": productCost,
-                "productImage": productImage,
-            },],
-        },
-    }, function (error, response, body) {
-        if (body == "Success") {
-            res.redirect('/catalog')
-        } else {
-            res.redirect('/catalog', {errorMsg: "Could not add product to cart. Please try again."});
-        }
-    });
-}).delete(function (req, res) {
-    if (!req.session.authorised) {
-        res.redirect('/welcome');
+        res.redirect('/');
         return;
     }
     var email = req.session.email;
@@ -150,11 +148,12 @@ router.route('/').get(function (req, res) {
                 },],
             },
         }, function (error, response, body) {
-            if (body == "Success") {
-                res.redirect('/cart')
-            } else {
-                res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
-            }
+            res.redirect('/cart');
+            // if (body.status == "Success") {
+            //     res.redirect('/cart')
+            // } else {
+            //     res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
+            // }
         });
     }
     else {
@@ -171,89 +170,54 @@ router.route('/').get(function (req, res) {
                 },],
             },
         }, function (error, response, body) {
-            if (body == "Success") {
-                res.redirect('/cart')
-            } else {
-                res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
-            }
+            res.redirect('/cart');
+            // if (body == "Success") {
+            //     res.redirect('/cart')
+            // } else {
+            //     res.redirect('/cart', {errorMsg: "Could not add product to cart. Please try again."});
+            // }
         });
     }
 });
 
 
-router.route('/').get(function (req, res) {
+router.route('/createOrder').post(function (req, res) {
     if (!req.session.authorised) {
-        res.redirect('/welcome');
+        res.redirect('/');
         return;
     }
-    console.log("/cart get");
+    console.log("/cart create order post");
+    var postData = {};
+    postData.customerid = req.session.email;
+    postData.products = JSON.parse(req.body["cartdetails"]);
+    postData.paymentdetails = {};
+    postData.paymentdetails.nameoncard = req.body["card-holder-name"];
+    postData.paymentdetails.cardnumber = req.body["card-number"];
+    postData.paymentdetails.cvv = req.body["cvv"];
+    postData.paymentdetails.expirydate = req.body["expiry-month"] + "/" + req.body["expiry-year"];
+    postData.billingaddress = {
+        "addresline1": "",
+        "addrline2": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+    };
 
-    var email = req.session.email;
-    request.get({
-        url: SigninURL + "/getCart?userId=" + email,
-    }, function (error, response, body) {
-        if (response.statusCode == 200 || response.statusCode == 400) {
-            try {
-                console.log(body);
-                var parse = JSON.parse(body);
-            } catch (e) {
-                console.log("error in parsing json");
-                //error in parsing json
-                console.log(e);
-                res.redirect('/catalog');
-                return;
-            }
-            console.log(parse);
-            console.log(email);
-            //error in fetching data
-            if (parse.userId === email) {
-                console.log("successful");
-                res.render('cart', {
-                    cartItems: parse.cartInfo,
-                });
-            } else {
-                console.log("error in fetching data ");
-                res.redirect('/welcome');
-            }
-        } else {
-            res.redirect('/catalog');
-        }
-    });
-}).post(function (req, res) {
-    if (!req.session.authorised) {
-        res.redirect('/welcome');
-        return;
-    }
-    console.log("/cart post");
-    var email = req.session.email;
-    var productID = req.body.productID;
-    var quantity = req.body.quantity;
-    var productName = req.body.productName;
-    var productCost = req.body.productCost;
-    var productImage = req.body.productImage;
-
+    console.log(JSON.stringify(postData));
     request.post({
         headers: {
             'content-type': 'application/x-www-form-urlencoded'
         },
-        url: SigninURL + "/addToCart",
-        form: {
-            "userId": email,
-            "cartInfo": [{
-                "productId": productID,
-                "productQuantity": quantity,
-                "productName": productName,
-                "productCost": productCost,
-                "productImage": productImage,
-            },],
-        },
+        url: SigninURL + "/createOrder",
+        form: postData
     }, function (error, response, body) {
-        if (body == "Success") {
-            res.redirect('/catalog')
+        if (body.success == true) {
+            res.redirect('/catalog', {orderplaced: 1})
         } else {
-            res.redirect('/catalog', {errorMsg: "Could not add product to cart. Please try again."});
+            res.redirect('/catalog', {orderplaced: 0});
         }
     });
-})
+});
 
 module.exports = router;
