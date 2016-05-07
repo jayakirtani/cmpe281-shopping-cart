@@ -18,7 +18,7 @@ var OrderSchema = new Schema({
     products : [
                 {   productid : {type : String , required : true} , 
                     productname : {type: String ,required : true},
-                    productrating : {type : Number , required :true},
+                    productrating : {type : Number },
                     quantity : {type : Number , required : true},
                     price : {type : Number ,required : true }
                 }
