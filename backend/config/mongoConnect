@@ -1,4 +1,13 @@
 module.exports = {
   'secret': 'alkjuirtywioquythgfdtcbsjshfjhgfkjcbmhc',
-  'database': 'mongodb://52.91.84.172:27017/shoppingCart'
+  'database': 'mongodb://52.91.208.197:27017,54.209.112.46:27017,54.210.239.0:27017/shoppingCart',
+  'options': {
+         "replset": { "rs_name": "rc0" },
+         "server": {
+             "poolSize": 3,
+             "socketOptions": {
+                 "keepAlive": 1
+             }
+         }
+      }
 };

@@ -8,7 +8,7 @@ var seedDB = false; //for populating the database with data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Connect to Mongo Instance
-mongoose.connect(config.database);
+mongoose.connect(config.database,config.options);
  
 var mongodb = require("./routes/mongodb.js")(app);
 var riakdb = require("./routes/riakdb.js")(app);
